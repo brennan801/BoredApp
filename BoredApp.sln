@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31402.337
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BoredWebApp", "BoredWebApp\BoredWebApp.csproj", "{BD6FF23D-7894-471B-BFE7-67CECED22FB4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoredAppTests", "BoredAppTests\BoredAppTests.csproj", "{DC323EC9-B986-43C2-9109-106B8BE494F0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BD6FF23D-7894-471B-BFE7-67CECED22FB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD6FF23D-7894-471B-BFE7-67CECED22FB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD6FF23D-7894-471B-BFE7-67CECED22FB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD6FF23D-7894-471B-BFE7-67CECED22FB4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC323EC9-B986-43C2-9109-106B8BE494F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC323EC9-B986-43C2-9109-106B8BE494F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC323EC9-B986-43C2-9109-106B8BE494F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC323EC9-B986-43C2-9109-106B8BE494F0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F3BE247D-872A-43D7-91EF-A7FD266EB6A8}
+	EndGlobalSection
+EndGlobal
