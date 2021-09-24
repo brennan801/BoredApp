@@ -5,9 +5,15 @@ VisualStudioVersion = 16.0.31402.337
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BoredWebApp", "BoredWebApp\BoredWebApp.csproj", "{BD6FF23D-7894-471B-BFE7-67CECED22FB4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoredAppTests", "BoredAppTests\BoredAppTests.csproj", "{DC323EC9-B986-43C2-9109-106B8BE494F0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BoredAppTests", "BoredAppTests\BoredAppTests.csproj", "{DC323EC9-B986-43C2-9109-106B8BE494F0}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "BoredShared", "BoredShared\BoredShared.shproj", "{0F87BC94-63FF-40F7-897A-339511693AF1}"
 EndProject
 Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		BoredShared\BoredShared.projitems*{0f87bc94-63ff-40f7-897a-339511693af1}*SharedItemsImports = 13
+		BoredShared\BoredShared.projitems*{bd6ff23d-7894-471b-bfe7-67ceced22fb4}*SharedItemsImports = 5
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU

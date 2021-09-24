@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using BoredShared.Models;
+using BoredWebApp.Services;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using System;
@@ -10,16 +12,24 @@ namespace BoredWebApp.Pages
 {
     public class IndexModel : PageModel
     {
-        private readonly ILogger<IndexModel> _logger;
+        private readonly IBoredAPIService boredAPIService;
+        public ActivityModel Activity { get; set; }
 
-        public IndexModel(ILogger<IndexModel> logger)
+        public IndexModel(IBoredAPIService boredAPIService)
         {
-            _logger = logger;
+            this.boredAPIService = boredAPIService;
+            Activity = new ActivityModel();
+            Activity.Activity = "";
         }
 
         public void OnGet()
         {
 
+        }
+
+        public async Task OnPost()
+        {
+            Activity = await boredAPIService.GetRandomActivity();
         }
     }
 }
