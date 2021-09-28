@@ -6,8 +6,24 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-    <form method="post"><button>I'm bored!</button></form>
+    <form method="get"><button>I'm bored!</button></form>
+    <form method="post">
+        <select name="type">
+            <option value="social">social</option>
+            <option value="cooking">cooking</option>
+            <option value="busywork">busywork</option>
+            <option value="busywork">relaxation</option>
+            <option value="music">music</option>
+        </select>
+        <input type="number" name="participants" value="1"/>
+        <input type="range" name="price" min="0" max="100" value="50"/>
+        <button>GetRandomActivity</button>
+    </form>
     <h1>@Model.Activity.Activity</h1>
+    <p>Type = @Model.Activity.Type</p>
+    <p>Number of participants = @Model.Activity.Participants</p>
+    <p>Price = @Model.Activity.Price</p>
+    <p>Accessibility = @Model.Activity.Accessibility</p>
+
+
 </div>

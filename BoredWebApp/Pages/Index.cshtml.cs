@@ -18,18 +18,41 @@ namespace BoredWebApp.Pages
         public IndexModel(IBoredAPIService boredAPIService)
         {
             this.boredAPIService = boredAPIService;
-            Activity = new ActivityModel();
-            Activity.Activity = "";
+            Activity = new ActivityModel
+            {
+                Activity = "",
+                Type = ""
+            };
         }
 
-        public void OnGet()
-        {
-
-        }
-
-        public async Task OnPost()
+        public async Task OnGet()
         {
             Activity = await boredAPIService.GetRandomActivity();
+        }
+
+        public async Task OnPost(ActivityModel activity)
+        {
+            string type;
+            if (Request.Form["type"] == "")
+            {
+                type = "";
+            }
+            else type = Request.Form["type"];
+
+            int? participants;
+            if(Request.Form["participants"] == "null")
+            {
+                participants = null;
+            }
+            else participants = Int32.Parse(Request.Form["participants"]);
+
+            double? price;
+            if (Request.Form["price"] == "null")
+            {
+                price = null;
+            }
+            price = Double.Parse(Request.Form["price"]) / 100;
+            Activity = await boredAPIService.GetSpecificActivity(activity.Type, activity.Participants, activity.Price);
         }
     }
 }
