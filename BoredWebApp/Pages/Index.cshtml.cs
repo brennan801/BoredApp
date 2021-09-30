@@ -15,6 +15,9 @@ namespace BoredWebApp.Pages
         private readonly IBoredAPIService boredAPIService;
         public ActivityModel Activity { get; set; }
 
+        [BindProperty]
+        public ActivityFormRequest ActivityFormRequest { get; set; }
+
         public IndexModel(IBoredAPIService boredAPIService)
         {
             this.boredAPIService = boredAPIService;
@@ -30,29 +33,37 @@ namespace BoredWebApp.Pages
             Activity = await boredAPIService.GetRandomActivity();
         }
 
-        public async Task OnPost(ActivityModel activity)
+        public async Task OnPost()
         {
-            string type;
-            if (Request.Form["type"] == "")
-            {
-                type = "";
-            }
-            else type = Request.Form["type"];
+            var minandMaxPrice = computeMinAndMaxPrice(ActivityFormRequest.Price);
+            var minPrice = minandMaxPrice[0];
+            var maxPrice = minandMaxPrice[1];
+            Activity = await boredAPIService.GetSpecificActivity(
+                ActivityFormRequest.Type,
+                ActivityFormRequest.Participants,
+                minPrice, maxPrice);
+        }
 
-            int? participants;
-            if(Request.Form["participants"] == "null")
+        public double[] computeMinAndMaxPrice(string price)
+        {
+            double minPrice;
+            double maxPrice;
+            switch (price)
             {
-                participants = null;
+                case "high":
+                    minPrice = 0.7;
+                    maxPrice = 1;
+                    break;
+                case "medium":
+                    minPrice = 0.4;
+                    maxPrice = 0.7;
+                    break;
+                default:
+                    minPrice = 0;
+                    maxPrice = .4;
+                    break;
             }
-            else participants = Int32.Parse(Request.Form["participants"]);
-
-            double? price;
-            if (Request.Form["price"] == "null")
-            {
-                price = null;
-            }
-            price = Double.Parse(Request.Form["price"]) / 100;
-            Activity = await boredAPIService.GetSpecificActivity(activity.Type, activity.Participants, activity.Price);
+            return new[] { minPrice, maxPrice };
         }
     }
 }

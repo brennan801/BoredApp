@@ -9,6 +9,6 @@ namespace BoredWebApp.Services
     public interface IBoredAPIService
     {
         Task<ActivityModel> GetRandomActivity();
-        Task<ActivityModel> GetSpecificActivity(string Type, int? participants, double? price);
+        Task<ActivityModel> GetSpecificActivity(string Type, int? participants, double? minPrice, double? maxPrice);
     }
 }

@@ -31,9 +31,9 @@ namespace BoredWebApp.Services
             return activityResult;
         }
 
-        public async Task<ActivityModel> GetSpecificActivity(string type, int? participants, double? price)
+        public async Task<ActivityModel> GetSpecificActivity(string type, int? participants, double? minPrice, double? maxPrice)
         {
-            var uri = $"http://www.boredapi.com/api/activity?type={type}&participants={participants}&price={price}";
+            var uri = $"http://www.boredapi.com/api/activity?type={type}&participants={participants}&minprice={minPrice}&maxPrice={maxPrice}";
             var httpClient = new HttpClient();
             var result = await httpClient.GetStringAsync(uri);
             var data = JsonConvert.DeserializeObject<ActivityModel>(result);

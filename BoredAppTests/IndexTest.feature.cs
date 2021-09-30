@@ -117,20 +117,21 @@ this.ScenarioInitialize(scenarioInfo);
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Different calls are sent to bored api")]
-        [NUnit.Framework.TestCaseAttribute("educational", "null", "null", "educational", "null", "null", null)]
-        [NUnit.Framework.TestCaseAttribute("", "4", "null", "", "4", "null", null)]
-        [NUnit.Framework.TestCaseAttribute("", "null", ".05", "", "null", ".05", null)]
-        [NUnit.Framework.TestCaseAttribute("social", "2", ".2", "social", "2", ".2", null)]
-        public virtual void DifferentCallsAreSentToBoredApi(string type, string participants, string price, string sentType, string sentParticipants, string sentPrice, string[] exampleTags)
+        [NUnit.Framework.TestCaseAttribute("cooking", "1", "low", "cooking", "1", "0", "0.4", null)]
+        [NUnit.Framework.TestCaseAttribute("diy", "4", "medium", "diy", "4", "0.4", "0.7", null)]
+        [NUnit.Framework.TestCaseAttribute("relaxation", "8", "high", "relaxation", "8", "0.7", "1", null)]
+        [NUnit.Framework.TestCaseAttribute("social", "2", "low", "social", "2", "0", "0.4", null)]
+        public virtual void DifferentCallsAreSentToBoredApi(string type, string participants, string price, string returnedType, string returnedParticipants, string returnedMinPrice, string returnedMaxPrice, string[] exampleTags)
         {
             string[] tagsOfScenario = exampleTags;
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             argumentsOfScenario.Add("type", type);
             argumentsOfScenario.Add("participants", participants);
             argumentsOfScenario.Add("price", price);
-            argumentsOfScenario.Add("sentType", sentType);
-            argumentsOfScenario.Add("sentParticipants", sentParticipants);
-            argumentsOfScenario.Add("sentPrice", sentPrice);
+            argumentsOfScenario.Add("returnedType", returnedType);
+            argumentsOfScenario.Add("returnedParticipants", returnedParticipants);
+            argumentsOfScenario.Add("returnedMinPrice", returnedMinPrice);
+            argumentsOfScenario.Add("returnedMaxPrice", returnedMaxPrice);
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Different calls are sent to bored api", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
 #line 10
 this.ScenarioInitialize(scenarioInfo);
@@ -168,7 +169,54 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.When("the specifed button is clicked", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 16
- testRunner.Then(string.Format("I should send a request with: {0} , {1}, and {2}", sentType, sentParticipants, sentPrice), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then(string.Format("I should get a response with type of {0}, participants of {1}, minPrice of {2}, a" +
+                            "nd maxPrice of {3}", returnedType, returnedParticipants, returnedMinPrice, returnedMaxPrice), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("A price is selected")]
+        [NUnit.Framework.TestCaseAttribute("low", "0", ".4", null)]
+        [NUnit.Framework.TestCaseAttribute("medium", ".4", ".7", null)]
+        [NUnit.Framework.TestCaseAttribute("high", ".7", "1", null)]
+        public virtual void APriceIsSelected(string price, string minPrice, string maxPrice, string[] exampleTags)
+        {
+            string[] tagsOfScenario = exampleTags;
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            argumentsOfScenario.Add("price", price);
+            argumentsOfScenario.Add("minPrice", minPrice);
+            argumentsOfScenario.Add("maxPrice", maxPrice);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("A price is selected", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+#line 25
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 26
+ testRunner.Given(string.Format("The selected price is {0}", price), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 27
+ testRunner.When("the minPrice and maxPrice are computed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 28
+ testRunner.Then(string.Format("the minPrice and maxPrice should be {0}, and {1}", minPrice, maxPrice), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
