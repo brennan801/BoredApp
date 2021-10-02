@@ -1,3 +1,37 @@
-﻿#main-button{
+﻿#main-button {
+    border-radius: 5px;
+    background-color: #A7258F;
+    border: solid;
+    border-color: #141414;
+    border-width: medium;
+}
 
+    #main-button:hover {
+        border-color: #DDCECD;
+    }
+
+    #main-button:active {
+        background-color: #E58BD6
+    }
+
+body {
+    background-color: #141414;
+    color: white;
+}
+
+.activity-card {
+    border-radius: 10px;
+    background-color: #999999;
+    border: solid;
+    border-color: #141414;
+    border-width: medium;
+    color: black;
+}
+
+.spacer-500{
+    height: 500px;
+}
+
+#activity-name {
+    color: #541248;
 }

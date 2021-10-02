@@ -7,33 +7,47 @@
 <head>
     <link rel="stylesheet" href="~/css/index.css" />
 </head>
-<div class="container">
+<div class="container ">
     <div class="text-center">
-        <div class="mb-3">
-            <form method="get"><button id="main-button">I'm bored!</button></form>
+        <div class="row justify-content-center mt-5 mb-5">
+            <div class="activity-card pl-5 pr-5 pt-2 pb-2">
+                <h1 id="activity-name">@Model.Activity.Activity</h1>
+                <div class="text-left">
+                    <h4>Type: @Model.Activity.Type</h4>
+                    <h4>Number of participants: @Model.Activity.Participants</h4>
+                    <h4>Price: @Model.Activity.Price</h4>
+                    <h4>Accessibility: @Model.Activity.Accessibility</h4>
+                </div>
+            </div>
         </div>
-        <form method="post">
-            <select name="type" asp-for="ActivityFormRequest.Type">
-                <option value="social">social</option>
-                <option value="cooking">cooking</option>
-                <option value="busywork">busywork</option>
-                <option value="relaxation">relaxation</option>
-                <option value="music">music</option>
-            </select>
-            <input type="number" name="participants" value="1" asp-for="ActivityFormRequest.Participants"/>
-            <select name="price" asp-for="ActivityFormRequest.Price">
-                <option value="low">low</option>
-                <option value="medium">medium</option>
-                <option value="high">high</option>
-            </select>
-            <button>GetRandomActivity</button>
-        </form>
-        <h1>@Model.Activity.Activity</h1>
-        <p>Type = @Model.Activity.Type</p>
-        <p>Number of participants = @Model.Activity.Participants</p>
-        <p>Price = @Model.Activity.Price</p>
-        <p>Accessibility = @Model.Activity.Accessibility</p>
 
+        <div>
+            <h3>Still Bored?</h3>
+            <form method="get">
+                <button id="main-button">Get New Activity!</button>
+            </form>
+        </div>
+        <div class="spacer-500">
+
+        </div>
+        <div>
+            <form method="post">
+                <select name="type" asp-for="ActivityFormRequest.Type">
+                    <option value="social">social</option>
+                    <option value="cooking">cooking</option>
+                    <option value="busywork">busywork</option>
+                    <option value="relaxation">relaxation</option>
+                    <option value="music">music</option>
+                </select>
+                <input type="number" name="participants" value="1" asp-for="ActivityFormRequest.Participants" />
+                <select name="price" asp-for="ActivityFormRequest.Price">
+                    <option value="low">low</option>
+                    <option value="medium">medium</option>
+                    <option value="high">high</option>
+                </select>
+                <button>GetRandomActivity</button>
+            </form>
+        </div>
 
     </div>
 </div>
