@@ -128,10 +128,10 @@ namespace BoredAppTests
             double expectedMaxPrice)
         {
             var pageModel = scenarioContext.Get<IndexModel>("pageModel");
-            pageModel.Activity.Type.Should().Be(expectedType);
-            pageModel.Activity.Participants.Should().Be(expectedParticipants);
-            pageModel.Activity.Price.Should().BeGreaterOrEqualTo(expectedMinPrice);
-            pageModel.Activity.Price.Should().BeLessOrEqualTo(expectedMaxPrice);
+            pageModel.SpecificActivity.Type.Should().Be(expectedType);
+            pageModel.SpecificActivity.Participants.Should().Be(expectedParticipants);
+            pageModel.SpecificActivity.Price.Should().BeGreaterOrEqualTo(expectedMinPrice);
+            pageModel.SpecificActivity.Price.Should().BeLessOrEqualTo(expectedMaxPrice);
         }
 
 
@@ -163,6 +163,39 @@ namespace BoredAppTests
             actualMaxPrice.Should().Be(expectedMax);
         }
 
+        [Given(@"the user makes a specified call where the activity doesn't exist")]
+        public void GivenTheUserMakesASpecifiedCallWhereTheActivityDoesntExist()
+        {
+            var errorActivity = new ActivityModel();
+            errorActivity.Error = "Endpoint not found";
+            var mockService = new Mock<IBoredAPIService>();
+            mockService.Setup(m => m.GetSpecificActivity(
+                It.IsAny<string>(),
+                It.IsAny<int>(),
+                It.IsAny<double>(),
+                It.IsAny<double>()))
+                .Returns(Task.FromResult(errorActivity));
+            var pageModel = new IndexModel(mockService.Object);
+            pageModel.ActivityFormRequest.Price = "low";
+            scenarioContext.Add("pageModel", pageModel);
+        }
+
+        [When(@"the call is made")]
+        public async Task WhenTheCallIsMade()
+        {
+            var pageModel = scenarioContext.Get<IndexModel>("pageModel");
+            await pageModel.OnPost();
+            scenarioContext.Remove("pageModel");
+            scenarioContext.Add("pageModel", pageModel);
+        }
+
+        [Then(@"the returned activity name should be ""(.*)""")]
+        public void ThenTheReturnedActivityNameShouldBe(string expectedName)
+        {
+            var pageModel = scenarioContext.Get<IndexModel>("pageModel");
+            var actualName = pageModel.SpecificActivity.Activity;
+            actualName.Should().Be(expectedName);
+        }
 
     }
 }

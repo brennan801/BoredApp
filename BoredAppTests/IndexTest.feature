@@ -33,3 +33,7 @@ Scenario Outline: A price is selected
 	| medium | .4       | .7       |
 	| high   | .7       | 1        |
 
+Scenario: Requested activity doesn't exist
+	Given the user makes a specified call where the activity doesn't exist
+	When the call is made
+	Then the returned activity name should be "No Activity Found"

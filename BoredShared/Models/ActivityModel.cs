@@ -13,5 +13,6 @@ namespace BoredShared.Models
         public string Link { get; set; }
         public int Key { get; set; }
         public double? Accessibility { get; set; }
+        public string Error { get; set; }
     }
 }

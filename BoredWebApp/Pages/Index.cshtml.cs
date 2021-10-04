@@ -14,6 +14,7 @@ namespace BoredWebApp.Pages
     {
         private readonly IBoredAPIService boredAPIService;
         public ActivityModel Activity { get; set; }
+        public ActivityModel SpecificActivity { get; set; }
 
         [BindProperty]
         public ActivityFormRequest ActivityFormRequest { get; set; }
@@ -21,11 +22,10 @@ namespace BoredWebApp.Pages
         public IndexModel(IBoredAPIService boredAPIService)
         {
             this.boredAPIService = boredAPIService;
-            Activity = new ActivityModel
-            {
-                Activity = "",
-                Type = ""
-            };
+            Activity = new ActivityModel();
+            SpecificActivity = new ActivityModel();
+            SpecificActivity.Activity = "Generate New Activity With Form ->";
+            ActivityFormRequest = new ActivityFormRequest();
         }
 
         public async Task OnGet()
@@ -38,10 +38,15 @@ namespace BoredWebApp.Pages
             var minandMaxPrice = computeMinAndMaxPrice(ActivityFormRequest.Price);
             var minPrice = minandMaxPrice[0];
             var maxPrice = minandMaxPrice[1];
-            Activity = await boredAPIService.GetSpecificActivity(
+            var responce = await boredAPIService.GetSpecificActivity(
                 ActivityFormRequest.Type,
                 ActivityFormRequest.Participants,
                 minPrice, maxPrice);
+            if (responce.Error is not null)
+            {
+                SpecificActivity.Activity = "No Activity Found";
+            }
+            else SpecificActivity = responce;
         }
 
         public double[] computeMinAndMaxPrice(string price)

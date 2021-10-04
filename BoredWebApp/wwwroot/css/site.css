@@ -1,6 +1,10 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
 
+html{
+    scroll-behavior: smooth;
+}
+
 a.navbar-brand {
   white-space: normal;
   text-align: center;
@@ -69,3 +73,35 @@ body {
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
 }
+.navbar{
+    background-color: #333333;
+    color: white;
+}
+
+input[type=number], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-color: lightgray;
+}
+
+.spacer-100{
+    height: 100px;
+}
+.spacer-50 {
+    height: 50px;
+}
+
+a{
+    color: inherit;
+    text-decoration: none;
+}
+
+    a:hover {
+        color: inherit;
+        text-decoration: none;
+    }

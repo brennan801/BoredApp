@@ -1,16 +1,18 @@
-﻿#main-button {
+﻿.main-button, a .main-button {
     border-radius: 5px;
     background-color: #A7258F;
     border: solid;
     border-color: #141414;
     border-width: medium;
+    color: black;
 }
 
-    #main-button:hover {
+    .main-button:hover {
         border-color: #DDCECD;
+        color: black;
     }
 
-    #main-button:active {
+    .main-button:active {
         background-color: #E58BD6
     }
 
@@ -28,10 +30,24 @@ body {
     color: black;
 }
 
-.spacer-500{
-    height: 500px;
+.spacer-400{
+    height: 400px;
 }
 
 #activity-name {
     color: #541248;
+}
+
+.down-button {
+    font-size: 300%;
+    color: #999999 !important;
+    text-decoration: none !important;
+}
+    .down-button:hover{
+        color: #707070 !important;
+        text-decoration: none !important;
+    }
+
+.button-tag {
+    color: #999999;
 }
