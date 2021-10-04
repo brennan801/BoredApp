@@ -78,10 +78,15 @@ body {
     color: white;
 }
 
+label {
+    color: #999999;
+    font-size: larger;
+}
+
 input[type=number], select {
     width: 100%;
     padding: 12px 20px;
-    margin: 8px 0;
+    margin-bottom: 25px;
     display: inline-block;
     border: 1px solid #ccc;
     border-radius: 4px;

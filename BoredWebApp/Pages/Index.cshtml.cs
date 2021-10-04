@@ -24,7 +24,7 @@ namespace BoredWebApp.Pages
             this.boredAPIService = boredAPIService;
             Activity = new ActivityModel();
             SpecificActivity = new ActivityModel();
-            SpecificActivity.Activity = "Generate New Activity With Form ->";
+            SpecificActivity.Activity = "Generate New Activity With Form";
             ActivityFormRequest = new ActivityFormRequest();
         }
 

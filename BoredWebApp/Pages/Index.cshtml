@@ -30,13 +30,40 @@
             <a class="fas fa-chevron-down down-button" href="#specific-activity"></a>
         </div>
         <div class="spacer-400"></div>
+
         <div id="specific-activity"></div>
         <div class="m-3">
             <a class="fas fa-chevron-up down-button" href="#top"></a>
             <h4 class="button-tag">Random Activity</h4>
         </div>
         <div class="spacer-50"></div>
-        <div class="row justify-content-center mt-5 mb-5" >
+
+        <div class="row justify-content-center mt-5 mb-5">
+
+            <div class="col">
+                <form method="post">
+                    <label for="type">Select Desired Type</label>
+                    <select name="type" asp-for="ActivityFormRequest.Type">
+                        <option value="social">social</option>
+                        <option value="cooking">cooking</option>
+                        <option value="busywork">busywork</option>
+                        <option value="relaxation">relaxation</option>
+                        <option value="music">music</option>
+                    </select>
+
+                    <label for="participants">Select Desired Number Of Participants</label>
+                    <input type="number" name="participants" value="1" asp-for="ActivityFormRequest.Participants" />
+
+                    <label for="price">Select Desired Price Range</label>
+                    <select name="price" asp-for="ActivityFormRequest.Price">
+                        <option value="low">low</option>
+                        <option value="medium">medium</option>
+                        <option value="high">high</option>
+                    </select>
+                    <button class="main-button p-2" href="#specific-activity">Generate Activity</button>
+                </form>
+            </div>
+
             <div class="col activity-card pl-5 pr-5 pt-2 pb-2">
                 <h1 id="activity-name">@Model.SpecificActivity.Activity</h1>
                 <div class="text-left">
@@ -45,25 +72,6 @@
                     <h4>Price: @Model.SpecificActivity.Price</h4>
                     <h4>Accessibility: @Model.SpecificActivity.Accessibility</h4>
                 </div>
-            </div>
-        
-            <div class="col">
-                <form method="post">
-                    <select name="type" asp-for="ActivityFormRequest.Type"k>
-                        <option value="social">social</option>
-                        <option value="cooking">cooking</option>
-                        <option value="busywork">busywork</option>
-                        <option value="relaxation">relaxation</option>
-                        <option value="music">music</option>
-                    </select>
-                    <input type="number" name="participants" value="1" asp-for="ActivityFormRequest.Participants" />
-                    <select name="price" asp-for="ActivityFormRequest.Price">
-                        <option value="low">low</option>
-                        <option value="medium">medium</option>
-                        <option value="high">high</option>
-                    </select>
-                    <button class="main-button p-2" href="#specific-activity">Generate Activity</button>
-                </form>
             </div>
         </div>
         <div class="spacer-400"></div>
