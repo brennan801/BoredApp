@@ -70,8 +70,9 @@ namespace BoredAppTests
             var responce = scenarioContext.Get<ActivityModel>("responce");
             pageModel.ActivityFormRequest.Type = type;
             responce.Type = type;
-            scenarioContext.Remove("pageModel");
-            scenarioContext.Add("pageModel", pageModel);
+            scenarioContext.Set<IndexModel>(pageModel, "pageModel");
+            /*scenarioContext.Remove("pageModel");
+            scenarioContext.Add("pageModel", pageModel);*/
             scenarioContext.Remove("responce");
             scenarioContext.Add("responce", responce);
         }

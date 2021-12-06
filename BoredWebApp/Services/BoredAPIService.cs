@@ -46,7 +46,8 @@ namespace BoredWebApp.Services
                 Participants = data.Participants,
                 Price = data.Price,
                 Link = data.Link,
-                Key = data.Key
+                Key = data.Key,
+                Error = data.Error
             };
             return activityResult;
         }
