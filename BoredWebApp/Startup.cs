@@ -26,6 +26,7 @@ namespace BoredWebApp
         {
             services.AddRazorPages();
             services.AddSingleton<IBoredAPIService, BoredAPIService>();
+            services.AddSingleton<IDBService, DummyDbService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

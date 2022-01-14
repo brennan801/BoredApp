@@ -18,6 +18,11 @@
                     <h4>Price: @Model.Activity.Price</h4>
                     <h4>Accessibility: @Model.Activity.Accessibility</h4>
                 </div>
+                <div class="my-3 text-left">
+                    <form asp-page-handler="save" method="post">
+                        <button class="main-button p-2">Save Activity</button>
+                    </form>
+                </div>
             </div>
         </div>
 

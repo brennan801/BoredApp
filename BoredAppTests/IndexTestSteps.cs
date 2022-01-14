@@ -23,6 +23,7 @@ namespace BoredAppTests
         public void GivenIMakeAGenericCall()
         {
             var boredServiceMock = new Mock<IBoredAPIService>();
+            var dbMock = new Mock<IDBService>();
             boredServiceMock.Setup(m => m.GetRandomActivity()).Returns(
                 Task.FromResult(
                     new ActivityModel
@@ -30,7 +31,7 @@ namespace BoredAppTests
                         Activity = "bogus activity",
                         Accessibility = .5
                     }));
-            var pageModel = new IndexModel(boredServiceMock.Object);
+            var pageModel = new IndexModel(boredServiceMock.Object, dbMock.Object);
             scenarioContext.Add("pageModel", pageModel);
         }
 
@@ -55,7 +56,8 @@ namespace BoredAppTests
         public void GivenIMakeASpecifiedCall()
         {
             var boredServiceMock = new Mock<IBoredAPIService>();
-            var pageModel = new IndexModel(boredServiceMock.Object);
+            var dbMock = new Mock<IDBService>();
+            var pageModel = new IndexModel(boredServiceMock.Object, dbMock.Object);
             pageModel.ActivityFormRequest = new ActivityFormRequest();
             ActivityModel responce = new ActivityModel();
             scenarioContext.Add("pageModel", pageModel);
@@ -140,7 +142,8 @@ namespace BoredAppTests
         public void GivenTheSelectedPriceIs___(string price)
         {
             var boredServiceMock = new Mock<IBoredAPIService>();
-            var pageModel = new IndexModel(boredServiceMock.Object);
+            var dbMock = new Mock<IDBService>();
+            var pageModel = new IndexModel(boredServiceMock.Object, dbMock.Object);
             scenarioContext.Add("pageModel", pageModel);
             scenarioContext.Add("price", price);
         }
@@ -168,6 +171,7 @@ namespace BoredAppTests
         public void GivenTheUserMakesASpecifiedCallWhereTheActivityDoesntExist()
         {
             var errorActivity = new ActivityModel();
+            var dbMock = new Mock<IDBService>();
             errorActivity.Error = "Endpoint not found";
             var mockService = new Mock<IBoredAPIService>();
             mockService.Setup(m => m.GetSpecificActivity(
@@ -176,7 +180,7 @@ namespace BoredAppTests
                 It.IsAny<double>(),
                 It.IsAny<double>()))
                 .Returns(Task.FromResult(errorActivity));
-            var pageModel = new IndexModel(mockService.Object);
+            var pageModel = new IndexModel(mockService.Object, dbMock.Object);
             pageModel.ActivityFormRequest.Price = "low";
             scenarioContext.Add("pageModel", pageModel);
         }
