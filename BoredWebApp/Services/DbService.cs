@@ -10,33 +10,57 @@ namespace BoredWebApp.Services
 {
     public class DbService : IDBService
     {
-        private readonly NpgsqlConnection connection;
         public DbService()
         {
-            connection = new NpgsqlConnection("User ID=admin;Password=admin1234;Host=localhost;Port=5432;Database=boredWebApp;");
+            var connection = new NpgsqlConnection("User ID=admin;Password=password;Host=pgsql_db;Port=5432;Database=boredWebApp;");
+            using (connection)
+            {
+                connection.Execute(
+                    "CREATE TABLE IF NOT EXISTS SavedActivities(" +
+                    "activity VARCHAR(128)," +
+                    "type VARCHAR(32)," +
+                    "participants INTEGER," +
+                    "price FLOAT," +
+                    "link VARCHAR(256)," +
+                    "key VARCHAR(256)," +
+                    "accessibility FLOAT," +
+                    "error VARCHAR(256))"
+                    );
+            }
         }
         public List<ActivityModel> getSavedActivities()
         {
-            List<ActivityModel> savedActivities = new();
+            var connection = new NpgsqlConnection("User ID=admin;Password=password;Host=pgsql_db;Port=5432;Database=boredWebApp;");
+
+            //List<ActivityModel> savedActivities = new();
             using (connection)
             {
-                savedActivities = (List<ActivityModel>)connection.Query<List<ActivityModel>>(
+                var savedActivities =  connection.Query<ActivityModel>(
                     "SELECT * FROM SavedActivities"
                     );
+                return (List<ActivityModel>)savedActivities;
             }
-            return savedActivities;
         }
 
         public void SaveActivity(ActivityModel activity)
         {
+            ActivityModel fakeActivity = new ActivityModel()
+            {
+                Activity = "Here is a fake one for the database",
+                Type = "Fake",
+                Participants = 0,
+                Price = 0
+            };
+            var connection = new NpgsqlConnection("User ID=admin;Password=password;Host=pgsql_db;Port=5432;Database=boredWebApp;");
+
             try
             {
                 using (connection)
                 {
                     connection.Execute(
-                        "INSERT INTO SavedActivities" +
-                        "VALUES (@activity, @type, @participants, @price, @link, @key, @accessibility, @error);",
-                        activity
+                        "INSERT INTO SavedActivities " +
+                        "VALUES (@Activity, @Type, @Participants, @Price, @Link, @Key, @Accessibility, @Error);",
+                        fakeActivity
                         );
                 }
             }
