@@ -1,26 +1,45 @@
 ﻿version: "3.7"
 
 services:
+    api_db:
+        image: postgres
+        container_name: pgsql_db
+        environment:
+            - POSTGRES_USER=admin
+            - POSTGRES_PASSWORD=password
+            - POSTGRES_DB=boredWebApp
+        restart: always
+        volumes:
+            - database-data:/var/lib/postgresql/data/
 
-  api_db:
-    image: postgres
-    container_name: pgsql_db
-    environment:
-        - POSTGRES_USER=admin
-        - POSTGRES_PASSWORD=password
-        - POSTGRES_DB=boredWebApp
-    restart: always
-    volumes:
-        - database-data:/var/lib/postgresql/data/
+    web_app:
+        build:
+            context: ..
+            dockerfile: BoredWebApp/Dockerfile
+        restart: always
+        ports:
+            - "80:80"
+            - "443:443"
 
-  web_app:
-    build:
-        context: ..
-        dockerfile: BoredWebApp/Dockerfile
-    restart: always
-    ports:
-        - "80:80"
-        - "443:443"
+    swag:
+        image: ghcr.io/linuxserver/swag
+        container_name: swag
+        cap_add:
+          - NET_ADMIN
+        environment:
+          - PUID=1000
+          - PGID=1000
+          - TZ=Europe/London
+          - URL=imbored.duckdns.org
+          - SUBDOMAINS=wildcard
+          - VALIDATION=duckdns
+          - DUCKDNSTOKEN=6fe0f9a6-f0a8-46fe-a26e-a2d35e954272 
+        volumes:
+          - </path/to/appdata/config>:/config
+        ports:
+          - 443:443
+          - 80:80 #optional
+        restart: unless-stopped
 
 volumes:
     database-data:
