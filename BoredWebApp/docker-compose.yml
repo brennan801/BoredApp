@@ -17,9 +17,9 @@ services:
             context: ..
             dockerfile: BoredWebApp/Dockerfile
         restart: always
-        ports:
-            - "80:80"
-            - "443:443"
+        #ports:
+            #- "80:80"
+            #- "443:443"
 
     swag:
         image: ghcr.io/linuxserver/swag
@@ -36,6 +36,7 @@ services:
           - DUCKDNSTOKEN=6fe0f9a6-f0a8-46fe-a26e-a2d35e954272 
           - STAGING=true
         volumes:
+          - 
           - ./default.conf:/config
         ports:
           - 443:443
