@@ -34,8 +34,9 @@ services:
           - SUBDOMAINS=wildcard
           - VALIDATION=duckdns
           - DUCKDNSTOKEN=6fe0f9a6-f0a8-46fe-a26e-a2d35e954272 
+          - STAGING=true
         volumes:
-          - </path/to/appdata/config>:/config
+          - ./default.conf:/config
         ports:
           - 443:443
           - 80:80 #optional
