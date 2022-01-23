@@ -18,6 +18,12 @@ services:
             dockerfile: BoredWebApp/Dockerfile
         restart: always
 
+    admin_site:
+        build:
+            context: ..
+            dockerfile: BoredWebAppAdmin/Dockerfile
+        restart: always
+
     swag:
         image: ghcr.io/linuxserver/swag
         container_name: swag
