@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BoredAppTests", "BoredAppTe
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "BoredShared", "BoredShared\BoredShared.shproj", "{0F87BC94-63FF-40F7-897A-339511693AF1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoredWebAppAdmin", "BoredWebAppAdmin\BoredWebAppAdmin.csproj", "{B2205888-8C7D-4F72-8533-163B297AEFE1}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		BoredShared\BoredShared.projitems*{0f87bc94-63ff-40f7-897a-339511693af1}*SharedItemsImports = 13
@@ -27,6 +29,10 @@ Global
 		{DC323EC9-B986-43C2-9109-106B8BE494F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DC323EC9-B986-43C2-9109-106B8BE494F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DC323EC9-B986-43C2-9109-106B8BE494F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2205888-8C7D-4F72-8533-163B297AEFE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2205888-8C7D-4F72-8533-163B297AEFE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2205888-8C7D-4F72-8533-163B297AEFE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2205888-8C7D-4F72-8533-163B297AEFE1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

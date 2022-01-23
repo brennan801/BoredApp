@@ -1,0 +1,27 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<form method="post">
+    <label for="name">Client Name</label>
+    <input type="text" name="name" asp-for="ClientInformationFormRequest.ClientName" />
+
+    <label for="ip">IP Address</label>
+    <input type="text" name="ip" asp-for="ClientInformationFormRequest.IPAddress" />
+
+    <label for="date">Date Added</label>
+    <input type="datetime" name="date" asp-for="ClientInformationFormRequest.DateAdded" />
+
+    <label for="range">Allowed IP Range</label>
+    <input type="text" name="range" asp-for="ClientInformationFormRequest.AllowedIPRange" />
+
+    <label for="public key">Client Public Key</label>
+    <input type="text" name="public key" asp-for="ClientInformationFormRequest.ClientPublicKey" />
+
+    <label for="private key">Client Private Key</label>
+    <input type="text" name="private key" asp-for="ClientInformationFormRequest.ClientPrivateKey" />
+
+    <button class="p-2">Save</button>
+</form>
