@@ -19,7 +19,7 @@ namespace BoredWebAppAdmin.Services
                     "CREATE TABLE IF NOT EXISTS Clients(" +
                     "client VARCHAR(128)," +
                     "ipAddress VARCHAR(128)," +
-                    "dateAdded DATE," +
+                    "dateAdded VARCHAR(128)," +
                     "allowedIpRange VARCHAR(128)," +
                     "clientPublicKey VARCHAR(128)," +
                     "clientPrivateKey VARCHAR(128))"

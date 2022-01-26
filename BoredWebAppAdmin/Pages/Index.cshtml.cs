@@ -33,12 +33,12 @@ namespace BoredWebAppAdmin.Pages
         {
             ClientInformation client = new()
             {
-                ClientName = ClientInformationFormRequest.ClientName,
-                IPAddress = ClientInformationFormRequest.IPAddress,
-                DateAdded = ClientInformationFormRequest.DateAdded,
-                AllowedIPRange = ClientInformationFormRequest.AllowedIPRange,
-                ClientPublicKey = ClientInformationFormRequest.ClientPublicKey,
-                ClientPrivateKey = ClientInformationFormRequest.ClientPrivateKey
+                ClientName = Request.Form["name"],
+                IPAddress = Request.Form["ip"],
+                DateAdded = Request.Form["date"],
+                AllowedIPRange = Request.Form["range"],
+                ClientPublicKey = Request.Form["public key"],
+                ClientPrivateKey = Request.Form["private key"],
             };
             databaseService.SaveClientInformation(client);
         }
