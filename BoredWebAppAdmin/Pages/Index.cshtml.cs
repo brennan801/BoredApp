@@ -31,7 +31,16 @@ namespace BoredWebAppAdmin.Pages
 
         public void OnPost()
         {
-            databaseService.SaveClientInformation(ClientInformationFormRequest);
+            ClientInformation client = new()
+            {
+                ClientName = ClientInformationFormRequest.ClientName,
+                IPAddress = ClientInformationFormRequest.IPAddress,
+                DateAdded = ClientInformationFormRequest.DateAdded,
+                AllowedIPRange = ClientInformationFormRequest.AllowedIPRange,
+                ClientPublicKey = ClientInformationFormRequest.ClientPublicKey,
+                ClientPrivateKey = ClientInformationFormRequest.ClientPrivateKey
+            };
+            databaseService.SaveClientInformation(client);
         }
     }
 }
