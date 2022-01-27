@@ -14,14 +14,19 @@ namespace BoredWebAppAdmin.Pages
     {
         private readonly ILogger<IndexModel> _logger;
         private readonly IDatabaseService databaseService;
+        private readonly IAdminApiService adminApiService;
 
         [BindProperty]
         public ClientInformation ClientInformationFormRequest { get; set; }
 
-        public IndexModel(ILogger<IndexModel> logger, IDatabaseService databaseService)
+        public string Result { get; set; }
+
+        public IndexModel(ILogger<IndexModel> logger, IDatabaseService databaseService, IAdminApiService adminApiService)
         {
             _logger = logger;
             this.databaseService = databaseService;
+            this.adminApiService = adminApiService;
+            Result = "";
         }
 
         public void OnGet()
@@ -41,6 +46,11 @@ namespace BoredWebAppAdmin.Pages
                 ClientPrivateKey = Request.Form["private key"],
             };
             databaseService.SaveClientInformation(client);
+        }
+
+        public void OnPostWireguard()
+        {
+            Result = adminApiService.RestartWireguardAsync().Result;
         }
     }
 }
