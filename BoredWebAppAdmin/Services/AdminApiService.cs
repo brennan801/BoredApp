@@ -11,7 +11,7 @@ namespace BoredWebAppAdmin.Services
     {
         public async Task<string> RestartWireguardAsync()
         {
-            var uri = $"localhost:5000/api/wireguard";
+            var uri = $"http://localhost:5000/api/wireguard";
             var httpClient = new HttpClient();
             var result = await httpClient.GetStringAsync(uri);
             var data = JsonConvert.DeserializeObject<string>(result);
