@@ -1,7 +1,5 @@
 [Unit]
 Description=Service in .NET
-# Requires=xyz.service
-# After=xyz.service
 
 [Service]
 Type=simple
