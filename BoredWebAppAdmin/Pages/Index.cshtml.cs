@@ -49,9 +49,9 @@ namespace BoredWebAppAdmin.Pages
             databaseService.SaveClientInformation(client);
         }
 
-        public void OnPostWireguard()
+        public async Task OnPostWireguard()
         {
-            Result = adminApiService.RestartWireguardAsync().Result;
+            Result = await adminApiService.RestartWireguardAsync();
         }
     }
 }
