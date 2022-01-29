@@ -2,6 +2,7 @@ using BoredWebAppAdmin.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -27,7 +28,7 @@ namespace BoredWebAppAdmin
             services.AddRazorPages();
             services.AddSingleton<IDatabaseService, DatabaseService>();
             services.AddSingleton<IAdminApiService, AdminApiService>();
-            services.AddAntiforgery(options => { options.Cookie.Expiration = TimeSpan.Zero; });
+            services.AddMvc().AddRazorPagesOptions(options => { options.Conventions.ConfigureFilter(new IgnoreAntiforgeryTokenAttribute()); });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
