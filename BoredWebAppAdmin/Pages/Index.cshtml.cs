@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace BoredWebAppAdmin.Pages
 {
+    [IgnoreAntiforgeryToken(Order = 2000)]
     public class IndexModel : PageModel
     {
         private readonly ILogger<IndexModel> _logger;
