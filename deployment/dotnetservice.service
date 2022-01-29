@@ -1,0 +1,11 @@
+[Unit]
+Description=Service in .NET
+# Requires=xyz.service
+# After=xyz.service
+
+[Service]
+Type=simple
+ExecStart=dotnet /root/bwa/BoredApp/AdminAPI/bin/Debug/net5.0/AdminAPI.dll
+
+[Install]
+WantedBy=multi-user.target

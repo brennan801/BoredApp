@@ -1,0 +1,20 @@
+name: Deploy Dotnet Service
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+    
+jobs:
+  run-dotnet-service:
+    runs-on: self-hosted
+    steps:
+      - name: checkout repo
+        uses: actions/checkout@v2
+
+      - name: run dotnet from systemd
+        run: |
+          cp deployment/dotnetservice.service /lib/systemd/system/dotnetservice.service
+          systemctl daemon-reload
+          systemctl restart dotnetservice.service
+          systemctl status dotnetservice.service
