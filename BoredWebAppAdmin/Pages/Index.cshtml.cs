@@ -21,6 +21,7 @@ namespace BoredWebAppAdmin.Pages
         public ClientInformation ClientInformationFormRequest { get; set; }
 
         public string Result { get; set; }
+        public string WireguardStatus { get; set; }
 
         public IndexModel(ILogger<IndexModel> logger, IDatabaseService databaseService, IAdminApiService adminApiService)
         {
@@ -28,11 +29,12 @@ namespace BoredWebAppAdmin.Pages
             this.databaseService = databaseService;
             this.adminApiService = adminApiService;
             Result = "";
+            WireguardStatus = "Not Loaded";
         }
 
-        public void OnGet()
+        public async Task OnGet()
         {
-
+            WireguardStatus = await adminApiService.ShowWireguardStatusAsync();
         }
 
         public void OnPost()

@@ -15,17 +15,26 @@ namespace AdminAPI.Controllers
     {
         // GET: api/<WireGuardController>
         [HttpGet]
-        public void Get()
+        public string Get()
         {
             var process = new Process()
             {
                 StartInfo = new()
                 {
-                    FileName = "systemctl restart wg-quick@wg0"
+                    FileName = "sudo systemctl status wg-quick@wg0",
+                    RedirectStandardOutput = true,
+                    RedirectStandardError = true,
+                    UseShellExecute = false,
+                    CreateNoWindow = true,
                 }
             };
             process.Start();
+            string output = process.StandardOutput.ReadToEnd();
+            string error = process.StandardError.ReadToEnd();
             process.WaitForExit();
+
+            if (string.IsNullOrEmpty(error)) { return output; }
+            else { return error; }
         }
 
         // GET api/<WireGuardController>/5
