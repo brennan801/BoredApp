@@ -20,7 +20,10 @@ namespace BoredWebAppAdmin.Services
         {
             var uri = $"http://host.docker.internal:5000/api/wireguard";
             var httpClient = new HttpClient();
-            return await httpClient.GetStringAsync(uri);
+            var result = await httpClient.GetStringAsync(uri);
+            var data = JsonConvert.DeserializeObject<String>(result);
+            return data;
+
         }
     }
 }
