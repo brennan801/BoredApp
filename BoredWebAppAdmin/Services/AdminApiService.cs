@@ -9,13 +9,11 @@ namespace BoredWebAppAdmin.Services
 {
     public class AdminApiService : IAdminApiService
     {
-        public async Task<string> RestartWireguardAsync()
+        public async Task RestartWireguardAsync()
         {
             var uri = $"http://host.docker.internal:5000/api/wireguard";
             var httpClient = new HttpClient();
-            var result = await httpClient.GetStringAsync(uri);
-            var data = JsonConvert.DeserializeObject<string>(result);
-            return data;
+            await httpClient.GetStringAsync(uri);
         }
     }
 }

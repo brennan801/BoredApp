@@ -7,6 +7,6 @@ namespace BoredWebAppAdmin.Services
 {
     public interface IAdminApiService
     {
-        public Task<string> RestartWireguardAsync();
+        public Task RestartWireguardAsync();
     }
 }

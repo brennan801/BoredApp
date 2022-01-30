@@ -15,7 +15,7 @@ namespace AdminAPI.Controllers
     {
         // GET: api/<WireGuardController>
         [HttpGet]
-        public string Get()
+        public void Get()
         {
             var process = new Process()
             {
@@ -26,8 +26,6 @@ namespace AdminAPI.Controllers
             };
             process.Start();
             process.WaitForExit();
-            return "i wish";
-
         }
 
         // GET api/<WireGuardController>/5

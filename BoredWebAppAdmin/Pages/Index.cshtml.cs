@@ -52,7 +52,7 @@ namespace BoredWebAppAdmin.Pages
         public async Task OnPostWireguard()
         {
             Console.WriteLine("Hit the post request");
-            Result = await adminApiService.RestartWireguardAsync();
+            await adminApiService.RestartWireguardAsync();
             Console.WriteLine("after the post request");
         }
     }
