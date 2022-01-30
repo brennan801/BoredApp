@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -16,7 +17,17 @@ namespace AdminAPI.Controllers
         [HttpGet]
         public string Get()
         {
-            return "no";
+            var process = new Process()
+            {
+                StartInfo = new()
+                {
+                    FileName = "systemctl restart wg-quick@wg0"
+                }
+            };
+            process.Start();
+            process.WaitForExit();
+            return "i wish";
+
         }
 
         // GET api/<WireGuardController>/5
