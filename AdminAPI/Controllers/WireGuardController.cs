@@ -24,7 +24,8 @@ namespace AdminAPI.Controllers
                 {
                     StartInfo = new()
                     {
-                        FileName = "sudo systemctl status wg-quick@wg0",
+                        FileName = "sudo",
+                        Arguments = "systemctl status wg-quick@wg0",
                         RedirectStandardOutput = true,
                         RedirectStandardError = true,
                         UseShellExecute = false,
