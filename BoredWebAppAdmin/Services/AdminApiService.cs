@@ -11,9 +11,9 @@ namespace BoredWebAppAdmin.Services
     {
         public async Task RestartWireguardAsync()
         {
-            /*var uri = $"http://host.docker.internal:5000/api/wireguard";
+            var uri = $"http://host.docker.internal:5000/api/wireguard/restart";
             var httpClient = new HttpClient();
-            await httpClient.PostAsync(uri,"idk");*/
+            await httpClient.GetAsync(uri);
         }
 
         public async Task<string> ShowWireguardStatusAsync()

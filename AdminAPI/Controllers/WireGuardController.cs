@@ -45,30 +45,42 @@ namespace AdminAPI.Controllers
                 return e.ToString();
             }
         }
-
-        // GET api/<WireGuardController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+    }
+    [Route("api/wireguard/restart")]
+    [ApiController]
+    public class WireguardRestartController : ControllerBase
+    {
+        // GET: api/wireguard/restart
+        [HttpGet]
+        public string Get()
         {
-            return "value";
-        }
 
-        // POST api/<WireGuardController>
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
-        }
+            try
+            {
+                var process = new Process()
+                {
+                    StartInfo = new()
+                    {
+                        FileName = "sudo",
+                        Arguments = "systemctl status wg-quick@wg0",
+                        RedirectStandardOutput = true,
+                        RedirectStandardError = true,
+                        UseShellExecute = false,
+                        CreateNoWindow = true,
+                    }
+                };
+                process.Start();
+                string output = process.StandardOutput.ReadToEnd();
+                string error = process.StandardError.ReadToEnd();
+                process.WaitForExit();
 
-        // PUT api/<WireGuardController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<WireGuardController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
+                if (string.IsNullOrEmpty(error)) { return output; }
+                else { return error; }
+            }
+            catch (Exception e)
+            {
+                return e.ToString();
+            }
         }
     }
 }
