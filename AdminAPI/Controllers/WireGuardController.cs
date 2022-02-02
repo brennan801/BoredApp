@@ -62,7 +62,7 @@ namespace AdminAPI.Controllers
                     StartInfo = new()
                     {
                         FileName = "sudo",
-                        Arguments = "systemctl status wg-quick@wg0",
+                        Arguments = "systemctl restart wg-quick@wg0",
                         RedirectStandardOutput = true,
                         RedirectStandardError = true,
                         UseShellExecute = false,
