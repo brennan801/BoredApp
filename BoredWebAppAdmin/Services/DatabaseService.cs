@@ -28,7 +28,7 @@ namespace BoredWebAppAdmin.Services
         }
         public void SaveClientInformation(ClientInformation clientInformation)
         {
-            var connection = new NpgsqlConnection("User ID=admin;Password=password;Host=pgsql_db;Port=5432;Database=boredWebApp;");
+            var connection = new NpgsqlConnection("User ID=wgadmin;Password=wgadmin;Host=pgsql_db;Port=5432;Database=boredWebApp;");
 
             try
             {
