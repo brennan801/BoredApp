@@ -43,6 +43,7 @@ namespace BoredWebAppAdmin.Pages
             int id = databaseService.GetLargestId() + 1;
             ClientInformation newClient = await adminApiService.AddWireguardClientAsync(id, clientName);
             databaseService.SaveClientInformation(newClient);
+            await adminApiService.RestartWireguardAsync();
             
         }
 
