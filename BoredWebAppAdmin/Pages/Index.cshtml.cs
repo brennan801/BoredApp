@@ -37,18 +37,13 @@ namespace BoredWebAppAdmin.Pages
             WireguardStatus = await adminApiService.ShowWireguardStatusAsync();
         }
 
-        public void OnPost()
+        public async Task OnPost()
         {
-            ClientInformation client = new()
-            {
-                ClientName = Request.Form["name"],
-                IPAddress = Request.Form["ip"],
-                DateAdded = Request.Form["date"],
-                AllowedIPRange = Request.Form["range"],
-                ClientPublicKey = Request.Form["public key"],
-                ClientPrivateKey = Request.Form["private key"],
-            };
-            databaseService.SaveClientInformation(client);
+            var clientName = Request.Form["name"];
+            int id = databaseService.GetLargestId() + 1;
+            ClientInformation newClient = await adminApiService.AddWireguardClientAsync(id, clientName);
+            databaseService.SaveClientInformation(newClient);
+            
         }
 
         public async Task OnPostWireguard()

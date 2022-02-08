@@ -9,5 +9,6 @@ namespace BoredWebAppAdmin.Services
     public interface IDatabaseService
     {
         public void SaveClientInformation(ClientInformation clientInformation);
+        public int GetLargestId();
     }
 }
