@@ -17,7 +17,7 @@ namespace BoredWebAppAdmin.Services
             {
                 connection.Execute(
                     "CREATE TABLE IF NOT EXISTS Clients(" +
-                    "id INT,",
+                    "id int,",
                     "client VARCHAR(128)," +
                     "ipAddress VARCHAR(128)," +
                     "dateAdded VARCHAR(128)," +
