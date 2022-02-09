@@ -36,7 +36,7 @@ namespace BoredWebAppAdmin.Services
             {
                 using (connection)
                 {
-                    id = connection.Query( "SELECT max(id) from Clients").First();
+                    id = (int)connection.Query( "SELECT max(id) from Clients").First();
                 }
             }
             catch (Npgsql.PostgresException e)
