@@ -10,6 +10,6 @@ namespace BoredWebAppAdmin.Services
     {
         public Task RestartWireguardAsync();
         public Task<String> ShowWireguardStatusAsync();
-        public Task<ClientInformation> AddWireguardClientAsync(int id, string name);
+        public Task<ClientInformation> AddWireguardClientAsync(ClientMessageInfo cmi);
     }
 }

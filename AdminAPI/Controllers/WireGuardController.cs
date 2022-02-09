@@ -30,18 +30,19 @@ namespace AdminAPI.Controllers
         }
 
         [HttpPost]
-        public ClientInformation Post((int id, string name) clientInfo)
+        public ClientInformation Post(ClientMessageInfo clientInfo)
         {
             try
             {
                 string privateKey = generatePrivateKey();
                 string publicKey = generatePublicKey(privateKey);
-                string addPeerResult = addNewPeer(publicKey, clientInfo.id);
+                string addPeerResult = addNewPeer(publicKey, clientInfo.Id);
+                string restartWireguardResult = restartWireguard();
                 ClientInformation newClient = new()
                 {
-                    ID = clientInfo.id,
-                    ClientName = clientInfo.name,
-                    IpAddress = $"10.200.20.{clientInfo.id}",
+                    ID = clientInfo.Id,
+                    ClientName = clientInfo.Name,
+                    IpAddress = $"10.200.20.{clientInfo.Id}",
                     DateAdded = System.DateTime.Now.ToString(),
                     AllowedIpRange = "10.200.20.*",
                     ClientPublicKey = publicKey,
@@ -83,8 +84,8 @@ namespace AdminAPI.Controllers
             {
                 StartInfo = new()
                 {
-                    FileName = $"echo",
-                    Arguments = $"{privateKey} | wg pubkey",
+                    FileName = $"bash",
+                    Arguments = $" -c \"echo {privateKey} | wg pubkey\"",
                     RedirectStandardOutput = true,
                     RedirectStandardError = true,
                     UseShellExecute = false,
@@ -145,7 +146,30 @@ namespace AdminAPI.Controllers
             if (string.IsNullOrEmpty(error)) { return output; }
             else { return error; }
         }
+        private static string restartWireguard()
+        {
+            var process = new Process()
+            {
+                StartInfo = new()
+                {
+                    FileName = "sudo",
+                    Arguments = "systemctl restart wg-quick@wg0",
+                    RedirectStandardOutput = true,
+                    RedirectStandardError = true,
+                    UseShellExecute = false,
+                    CreateNoWindow = true
+                }
+            };
+            process.Start();
+            string output = process.StandardOutput.ReadToEnd();
+            string error = process.StandardError.ReadToEnd();
+            process.WaitForExit();
+
+            if (string.IsNullOrEmpty(error)) { return output; }
+            else { return error; }
+        }
     }
+
     [Route("api/wireguard/restart")]
     [ApiController]
     public class WireguardRestartController : ControllerBase
@@ -157,7 +181,7 @@ namespace AdminAPI.Controllers
 
             try
             {
-                return retartWireguard();
+                return restartWireguard();
             }
             catch (Exception e)
             {
@@ -165,7 +189,7 @@ namespace AdminAPI.Controllers
             }
         }
 
-        private static string retartWireguard()
+        private static string restartWireguard()
         {
             var process = new Process()
             {

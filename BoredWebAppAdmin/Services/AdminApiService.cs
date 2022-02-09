@@ -11,11 +11,11 @@ namespace BoredWebAppAdmin.Services
 {
     public class AdminApiService : IAdminApiService
     {
-        public async Task<ClientInformation> AddWireguardClientAsync(int id, string name)
+        public async Task<ClientInformation> AddWireguardClientAsync(ClientMessageInfo cmi)
         {
             var uri = $"http://host.docker.internal:5000/api/wireguard";
             var httpClient = new HttpClient();
-            var json = JsonConvert.SerializeObject((id, name));
+            var json = JsonConvert.SerializeObject(cmi);
             var stringContent = new StringContent(json, UnicodeEncoding.UTF8, "application/json");
             var result = await httpClient.PostAsync(uri, stringContent);
             ClientInformation newClient = JsonConvert.DeserializeObject<ClientInformation>(await result.Content.ReadAsStringAsync());
