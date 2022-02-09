@@ -23,7 +23,7 @@ namespace BoredWebAppAdmin.Services
                     "dateAdded VARCHAR(128)," +
                     "allowedIpRange VARCHAR(128)," +
                     "clientPublicKey VARCHAR(128)," +
-                    "clientPrivateKey VARCHAR(128))"
+                    "clientPrivateKey VARCHAR(128));"
                     );
             }
         }
