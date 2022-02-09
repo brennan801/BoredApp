@@ -83,8 +83,8 @@ namespace AdminAPI.Controllers
             {
                 StartInfo = new()
                 {
-                    FileName = "echo",
-                    Arguments = $"{privateKey} | wg pubkey",
+                    FileName = $"echo {privateKey}",
+                    Arguments = $"| wg pubkey",
                     RedirectStandardOutput = true,
                     RedirectStandardError = true,
                     UseShellExecute = false,
