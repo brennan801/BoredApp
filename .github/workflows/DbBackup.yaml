@@ -1,0 +1,22 @@
+name: Backup Database
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+    
+jobs:
+  dump-database:
+    runs-on: linode
+    steps:
+      - name: dump-data
+        run: docker exec -t pgsql_db pg_dumpall -c -U admin > dumps/dump_`date +%d-%m-%Y"_"%H_%M_%S`.sql     
+
+  pull-dump:
+    runs-on: backup
+    steps:
+      - name: connect to wireguard
+        run: wg-quick up wgbrennan
+
+      - name: pull dump
+        run: scp root@23.239.0.107:dumps/dump_`date +%d-%m-%Y"_"%H_%M_%S`.sql dumps/dump_`date +%d-%m-%Y"_"%H_%M_%S`.sql
