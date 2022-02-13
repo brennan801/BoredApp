@@ -7,7 +7,6 @@ on:
     
 jobs:
   dump-database:
-    needs: run-dotnet-service
     runs-on: linode
     steps:
       - name: dump-data
