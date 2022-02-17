@@ -84,14 +84,15 @@ namespace AdminAPI.Controllers
             {
                 StartInfo = new()
                 {
-                    FileName = $"bash",
-                    Arguments = $" -c \"echo {privateKey} | wg pubkey\"",
+                    FileName = $"wg",
+                    Arguments = $"pubkey",
                     RedirectStandardOutput = true,
                     RedirectStandardError = true,
                     UseShellExecute = false,
                     CreateNoWindow = true
                 }
             };
+            process.StandardInput.Write($"{privateKey}");
             process.Start();
             string output = process.StandardOutput.ReadToEnd();
             string error = process.StandardError.ReadToEnd();
