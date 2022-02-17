@@ -84,7 +84,7 @@ namespace BoredWebAppAdmin.Services
                 using (connection)
                 {
                     connection.Execute(
-                        "INSERT INTO Clients " +
+                        "INSERT INTO Users " +
                         "VALUES (@UserName, @Salt, @Hashed);",
                         newUser
                         );
