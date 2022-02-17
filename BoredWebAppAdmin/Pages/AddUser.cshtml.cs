@@ -26,6 +26,7 @@ namespace BoredWebAppAdmin.Pages
         {
             var userName = Request.Form["userName"];
             var password = Request.Form["passowrd"];
+            Console.WriteLine(userName + " " + password);
             byte[] salt = new byte[128 / 8];
             using (var rngCsp = new RNGCryptoServiceProvider())
             {
