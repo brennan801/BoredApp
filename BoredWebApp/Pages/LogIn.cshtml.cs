@@ -35,7 +35,7 @@ namespace BoredWebApp.Pages
             };
 
             // Add the cookie to the response cookie collection
-            Response.Cookies.Append($"{userName} Cookie", "AllYourBaseAreBelongToUs", cookieOptions);
+            Response.Cookies.Append($"Cookie", "AllYourBaseAreBelongToUs", cookieOptions);
         }
     }
 }
