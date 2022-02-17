@@ -1,5 +1,6 @@
 ﻿using BoredWebAppAdmin.Models;
 using Dapper;
+using Microsoft.Extensions.Primitives;
 using Npgsql;
 using System;
 using System.Collections.Generic;
@@ -24,6 +25,13 @@ namespace BoredWebAppAdmin.Services
                     "allowedIpRange VARCHAR(128)," +
                     "clientPublicKey VARCHAR(128)," +
                     "clientPrivateKey VARCHAR(128));"
+                    );
+
+                connection.Execute(
+                    "CREATE TABLE IF NOT EXISTS Users(" +
+                    "userName VARCHAR(32)," +
+                    "salt VARCHAR(128)," +
+                    "hash VARCHAR(128));"
                     );
             }
         }
@@ -59,6 +67,26 @@ namespace BoredWebAppAdmin.Services
                         "INSERT INTO Clients " +
                         "VALUES (@ID, @ClientName, @IPAddress, @DateAdded, @AllowedIPRange, @ClientPublicKey, @ClientPrivateKey);",
                         clientInformation
+                        );
+                }
+            }
+            catch (Npgsql.PostgresException e)
+            {
+                throw new Exception("Error Saving Client Info: " + e.Message);
+            }
+        }
+
+        public void SaveNewUser(NewUser newUser)
+        {
+            var connection = new NpgsqlConnection("User ID=wgadmin;Password=wgadmin;Host=pgsql_db;Port=5432;Database=boredWebApp;");
+            try
+            {
+                using (connection)
+                {
+                    connection.Execute(
+                        "INSERT INTO Clients " +
+                        "VALUES (@UserName, @Salt, @Hashed);",
+                        newUser
                         );
                 }
             }

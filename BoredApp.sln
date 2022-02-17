@@ -11,7 +11,7 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "BoredShared", "BoredShared\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BoredWebAppAdmin", "BoredWebAppAdmin\BoredWebAppAdmin.csproj", "{B2205888-8C7D-4F72-8533-163B297AEFE1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdminAPI", "AdminAPI\AdminAPI.csproj", "{1AE90C65-3116-42F1-AA01-56C9A7EF53E5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdminAPI", "AdminAPI\AdminAPI.csproj", "{1AE90C65-3116-42F1-AA01-56C9A7EF53E5}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
