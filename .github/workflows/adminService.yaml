@@ -22,7 +22,7 @@ jobs:
 
       - name: run dotnet from systemd
         run: |
-          cp deployment/dotnetservice.service /lib/systemd/system/dotnetservice.service
+          sudo cp deployment/dotnetservice.service /lib/systemd/system/dotnetservice.service
           sudo systemctl daemon-reload
           sudo systemctl restart dotnetservice.service
           systemctl status dotnetservice.service
