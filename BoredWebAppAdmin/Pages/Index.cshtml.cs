@@ -51,8 +51,8 @@ namespace BoredWebAppAdmin.Pages
             ClientInformation newClient = await adminApiService.AddWireguardClientAsync(cmi);
             Console.WriteLine($"New Client {newClient.ID}");
             Console.WriteLine($"Client Public Key {newClient.ClientPublicKey}");
-            databaseService.SaveClientInformation(newClient);
-            await adminApiService.RestartWireguardAsync();
+            //databaseService.SaveClientInformation(newClient);
+            //await adminApiService.RestartWireguardAsync();
             
         }
 
