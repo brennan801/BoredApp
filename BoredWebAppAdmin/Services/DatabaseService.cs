@@ -30,7 +30,7 @@ namespace BoredWebAppAdmin.Services
                 connection.Execute(
                     "CREATE TABLE IF NOT EXISTS Users(" +
                     "userName VARCHAR(32)," +
-                    "salt VARCHAR(128)," +
+                    "salt VARBINARY(max)," +
                     "hash VARCHAR(128));"
                     );
             }
