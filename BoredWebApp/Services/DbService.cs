@@ -28,6 +28,35 @@ namespace BoredWebApp.Services
                     );
             }
         }
+
+        public string GetHash(string userName)
+        {
+            var connection = new NpgsqlConnection("User ID=admin;Password=password;Host=pgsql_db;Port=5432;Database=boredWebApp;");
+
+            using (connection)
+            {
+                var hashed = connection.Query<string>(
+                    "SELECT hash FROM Users" +
+                    "WHERE userName = @UserName;",
+                    userName);
+                return hashed.First();
+            }
+        }
+
+        public byte[] GetSalt(string userName)
+        {
+            var connection = new NpgsqlConnection("User ID=admin;Password=password;Host=pgsql_db;Port=5432;Database=boredWebApp;");
+
+            using (connection)
+            {
+                var salt = connection.Query<byte[]>(
+                    "SELECT salt FROM Users" +
+                    "WHERE userName = @UserName;",
+                    userName);
+                return salt.First();
+            }
+        }
+
         public List<ActivityModel> getSavedActivities()
         {
             var connection = new NpgsqlConnection("User ID=admin;Password=password;Host=pgsql_db;Port=5432;Database=boredWebApp;");
