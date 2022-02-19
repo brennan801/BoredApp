@@ -41,10 +41,10 @@ namespace BoredWebApp.Services
 
             using (connection)
             {
-                var hashed = connection.Query<string>(
+                var hashed = connection.QuerySingle<string>(
                     "SELECT hash FROM Users WHERE userName = @UserName;",
                     parameters);
-                return hashed.First();
+                return hashed;
             }
         }
 
@@ -60,10 +60,10 @@ namespace BoredWebApp.Services
 
             using (connection)
             {
-                var salt = connection.Query<byte[]>(
+                var salt = connection.QuerySingle<byte[]>(
                     "SELECT salt FROM Users WHERE userName = @UserName;",
                     parameters);
-                return salt.First();
+                return salt;
             }
         }
 
