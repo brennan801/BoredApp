@@ -39,6 +39,7 @@ namespace BoredWebAppAdmin.Pages
 
         public async Task OnPost()
         {
+            Console.WriteLine("hit post");
             var clientName = Request.Form["name"];
             int id = databaseService.GetLargestId() + 1;
             Console.WriteLine($"client Name: {clientName}, clientID: {id}");
