@@ -47,7 +47,7 @@ namespace BoredWebApp.Pages
             else
             {
                 Console.WriteLine("nope!");
-                Console.WriteLine($"newSalt: {bytesalt}, oldSalt: {salt}");
+                Console.WriteLine($"newSalt: {bytesalt.ToString()}, oldSalt: {salt}");
             }
 
             var cookieOptions = new CookieOptions
