@@ -41,6 +41,7 @@ namespace BoredWebAppAdmin.Pages
         {
             var clientName = Request.Form["name"];
             int id = databaseService.GetLargestId() + 1;
+            Console.WriteLine($"client Name: {clientName}, clientID: {id}");
             ClientMessageInfo cmi = new()
             {
                 Id = id,
