@@ -39,12 +39,19 @@ namespace BoredWebApp.Services
             };
             var parameters = new DynamicParameters(dictionary);
 
-            using (connection)
+            try
             {
-                var hashed = connection.QuerySingle<string>(
-                    "SELECT hash FROM Users WHERE userName = @UserName;",
-                    parameters);
-                return hashed;
+                using (connection)
+                {
+                    var hashed = connection.QuerySingle<string>(
+                        "SELECT hash FROM Users WHERE userName = @UserName;",
+                        parameters);
+                    return hashed;
+                }
+            }
+            catch (InvalidOperationException e)
+            {
+                throw new InvalidOperationException(e.Message);
             }
         }
 
@@ -58,12 +65,19 @@ namespace BoredWebApp.Services
             };
             var parameters = new DynamicParameters(dictionary);
 
-            using (connection)
+            try
             {
-                var salt = connection.QuerySingle<byte[]>(
-                    "SELECT salt FROM Users WHERE userName = @UserName;",
-                    parameters);
-                return salt;
+                using (connection)
+                {
+                    var salt = connection.QuerySingle<byte[]>(
+                        "SELECT salt FROM Users WHERE userName = @UserName;",
+                        parameters);
+                    return salt;
+                }
+            }
+            catch (InvalidOperationException e)
+            {
+                throw new InvalidOperationException(e.Message);
             }
         }
 

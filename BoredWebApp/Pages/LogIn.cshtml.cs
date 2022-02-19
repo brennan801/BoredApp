@@ -14,10 +14,12 @@ namespace BoredWebApp.Pages
     public class LogInModel : PageModel
     {
         private readonly IDBService dBService;
+        public string Message { get; set; }
 
         public LogInModel(IDBService dBService)
         {
             this.dBService = dBService;
+            Message = "";
         }
         public void OnGet()
         {
@@ -27,9 +29,18 @@ namespace BoredWebApp.Pages
         {
             var userName = Request.Form["userName"];
             var password = Request.Form["password"];
+            byte[] salt = Array.Empty<byte>();
+            string oldHashed = "";
 
-            var salt = dBService.GetSalt(userName);
-            var oldHashed = dBService.GetHash(userName);
+            try
+            {
+                salt = dBService.GetSalt(userName);
+                oldHashed = dBService.GetHash(userName);
+            }
+            catch(InvalidOperationException)
+            {
+                Message = "Incorrect Credentials! Please Try Again!";
+            }
 
             // derive a 256-bit subkey (use HMACSHA256 with 100,000 iterations)
             string newHashed = Convert.ToBase64String(KeyDerivation.Pbkdf2(
@@ -41,12 +52,11 @@ namespace BoredWebApp.Pages
 
             if (oldHashed == newHashed)
             {
-                Console.WriteLine("correct!");
+                Message = "You have been logged in!";
             }
             else
             {
-                Console.WriteLine("nope!");
-                Console.WriteLine($"newHash: {newHashed}, oldHash: {oldHashed}");
+                Message = "Incorrect Credentials! Please Try Again!";
             }
 
             var cookieOptions = new CookieOptions
