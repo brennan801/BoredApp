@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using BoredWebApp.Services;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
@@ -29,11 +30,12 @@ namespace BoredWebApp.Pages
 
             var salt = dBService.GetSalt(userName);
             var oldHashed = dBService.GetHash(userName);
+            var bytesalt = Encoding.ASCII.GetBytes(salt);
 
             // derive a 256-bit subkey (use HMACSHA256 with 100,000 iterations)
             string newHashed = Convert.ToBase64String(KeyDerivation.Pbkdf2(
                 password: password,
-                salt: salt,
+                salt: bytesalt,
                 prf: KeyDerivationPrf.HMACSHA256,
                 iterationCount: 100000,
                 numBytesRequested: 256 / 8));

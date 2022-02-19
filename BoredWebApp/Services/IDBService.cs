@@ -11,7 +11,7 @@ namespace BoredWebApp.Services
     {
         void SaveActivity(ActivityModel activity);
         List<ActivityModel> getSavedActivities();
-        byte[] GetSalt(string userName);
+        string GetSalt(string userName);
         string GetHash(string userName);
     }
 }

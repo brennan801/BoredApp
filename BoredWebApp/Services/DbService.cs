@@ -48,7 +48,7 @@ namespace BoredWebApp.Services
             }
         }
 
-        public byte[] GetSalt(string userName)
+        public string GetSalt(string userName)
         {
             var connection = new NpgsqlConnection("User ID=admin;Password=password;Host=pgsql_db;Port=5432;Database=boredWebApp;");
 
@@ -60,7 +60,7 @@ namespace BoredWebApp.Services
 
             using (connection)
             {
-                var salt = connection.QuerySingle<byte[]>(
+                var salt = connection.QuerySingle<string>(
                     "SELECT salt FROM Users WHERE userName = @UserName;",
                     parameters);
                 return salt;
