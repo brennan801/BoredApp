@@ -92,8 +92,9 @@ namespace AdminAPI.Controllers
                     CreateNoWindow = true
                 }
             };
-            process.StandardInput.Write($"{privateKey}");
+            
             process.Start();
+            process.StandardInput.Write($"{privateKey}");
             string output = process.StandardOutput.ReadToEnd();
             string error = process.StandardError.ReadToEnd();
             process.WaitForExit();
