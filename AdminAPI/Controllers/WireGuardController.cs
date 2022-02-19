@@ -52,7 +52,7 @@ namespace AdminAPI.Controllers
             }
             catch (Exception e)
             {
-                return new ClientInformation() { ClientName = e.Message };
+                throw new Exception(e.Message);
             }
         }
 
