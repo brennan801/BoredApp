@@ -47,6 +47,7 @@ namespace BoredWebAppAdmin.Pages
                 Name = clientName
             };
             ClientInformation newClient = await adminApiService.AddWireguardClientAsync(cmi);
+            Console.WriteLine($"New Client {newClient.ID}, {newClient.ClientName}, {newClient.ClientPublicKey}");
             databaseService.SaveClientInformation(newClient);
             await adminApiService.RestartWireguardAsync();
             
