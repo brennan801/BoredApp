@@ -33,11 +33,17 @@ namespace BoredWebApp.Services
         {
             var connection = new NpgsqlConnection("User ID=admin;Password=password;Host=pgsql_db;Port=5432;Database=boredWebApp;");
 
+            var dictionary = new Dictionary<string, object>
+            {
+                { "@UserName", userName }
+            };
+            var parameters = new DynamicParameters(dictionary);
+
             using (connection)
             {
                 var hashed = connection.Query<string>(
                     "SELECT hash FROM Users WHERE userName = @UserName;",
-                    userName);
+                    parameters);
                 return hashed.First();
             }
         }
@@ -46,11 +52,17 @@ namespace BoredWebApp.Services
         {
             var connection = new NpgsqlConnection("User ID=admin;Password=password;Host=pgsql_db;Port=5432;Database=boredWebApp;");
 
+            var dictionary = new Dictionary<string, object>
+            {
+                { "@UserName", userName }
+            };
+            var parameters = new DynamicParameters(dictionary);
+
             using (connection)
             {
                 var salt = connection.Query<byte[]>(
                     "SELECT salt FROM Users WHERE userName = @UserName;",
-                    userName);
+                    parameters);
                 return salt.First();
             }
         }
