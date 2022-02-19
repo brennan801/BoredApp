@@ -40,11 +40,15 @@ namespace BoredWebApp.Pages
                 iterationCount: 100000,
                 numBytesRequested: 256 / 8));
 
-            if(oldHashed == newHashed)
+            if (oldHashed == newHashed)
             {
                 Console.WriteLine("correct!");
             }
-            else Console.WriteLine("nope!");
+            else
+            {
+                Console.WriteLine("nope!");
+                Console.WriteLine($"newSalt: {bytesalt}, oldSalt: {salt}");
+            }
 
             var cookieOptions = new CookieOptions
             {
