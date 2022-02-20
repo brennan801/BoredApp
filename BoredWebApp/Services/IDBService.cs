@@ -1,4 +1,5 @@
 ﻿using BoredShared.Models;
+using BoredWebApp.Models;
 using Microsoft.Extensions.Primitives;
 using System;
 using System.Collections.Generic;
@@ -13,5 +14,6 @@ namespace BoredWebApp.Services
         List<ActivityModel> getSavedActivities();
         byte[] GetSalt(string userName);
         string GetHash(string userName);
+        void SaveCookie(UserCookie cookie);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using BoredShared.Models;
+using BoredWebApp.Models;
 using Dapper;
 using Npgsql;
 using System;
@@ -25,6 +26,14 @@ namespace BoredWebApp.Services
                     "key VARCHAR(256)," +
                     "accessibility FLOAT," +
                     "error VARCHAR(256))"
+                    );
+            }
+            using (connection)
+            {
+                connection.Execute(
+                    "CREATE TABLE IF NOT EXISTS UserCookies(" +
+                    "username VARCHAR(128)," +
+                    "cookie VARCHAR(32));" 
                     );
             }
         }
@@ -118,6 +127,26 @@ namespace BoredWebApp.Services
                 }
             }
             catch(Npgsql.PostgresException e)
+            {
+                throw new Exception("Error Saving Activity: " + e.Message);
+            }
+        }
+
+        public void SaveCookie(UserCookie userCookie)
+        {
+            var connection = new NpgsqlConnection("User ID=admin;Password=password;Host=pgsql_db;Port=5432;Database=boredWebApp;");
+            try
+            {
+                using (connection)
+                {
+                    connection.Execute(
+                        "INSERT INTO UserCookies " +
+                        "VALUES (@UserName, @Cookie);",
+                        userCookie
+                        );
+                }
+            }
+            catch (Npgsql.PostgresException e)
             {
                 throw new Exception("Error Saving Activity: " + e.Message);
             }

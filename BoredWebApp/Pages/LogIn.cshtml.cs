@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BoredWebApp.Models;
 using BoredWebApp.Services;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using Microsoft.AspNetCore.Http;
@@ -70,8 +71,14 @@ namespace BoredWebApp.Pages
                 };
 
                 // Add the cookie to the response cookie collection
-                Response.Cookies.Append($"Cookie", "AllYourBaseAreBelongToUs", cookieOptions);
-                Message = Request.Cookies["Cookie"];
+                Response.Cookies.Append($"{userName}Cookie", $"{userName}Value", cookieOptions);
+                UserCookie userCookie = new UserCookie()
+                {
+                    UserName = userName,
+                    Cookie = $"{userName}Value"
+                };
+                dBService.SaveCookie(userCookie);
+                RedirectToPage("Secure", userCookie);
             }
             else
             {
