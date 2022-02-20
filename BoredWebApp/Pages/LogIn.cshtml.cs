@@ -67,7 +67,9 @@ namespace BoredWebApp.Pages
                     // Add the SameSite attribute, this will emit the attribute with a value of none.
                     // To not emit the attribute at all set
                     // SameSite = (SameSiteMode)(-1)
-                    SameSite = SameSiteMode.None
+                    SameSite = SameSiteMode.None,
+
+                    Expires = DateTimeOffset.Now.AddHours(1)
                 };
 
                 // Add the cookie to the response cookie collection
