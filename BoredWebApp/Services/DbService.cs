@@ -27,13 +27,10 @@ namespace BoredWebApp.Services
                     "accessibility FLOAT," +
                     "error VARCHAR(256))"
                     );
-            }
-            using (connection)
-            {
                 connection.Execute(
                     "CREATE TABLE IF NOT EXISTS UserCookies(" +
                     "username VARCHAR(128)," +
-                    "cookie VARCHAR(32));" 
+                    "cookie VARCHAR(32));"
                     );
             }
         }
