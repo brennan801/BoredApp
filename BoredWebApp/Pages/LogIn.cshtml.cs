@@ -26,7 +26,7 @@ namespace BoredWebApp.Pages
         {
         }
 
-        public void OnPost()
+        public IActionResult OnPost()
         {
             var userName = Request.Form["userName"];
             var password = Request.Form["password"];
@@ -78,11 +78,11 @@ namespace BoredWebApp.Pages
                     Cookie = $"{userName}Value"
                 };
                 dBService.SaveCookie(userCookie);
-                RedirectToPage("Secure", userCookie);
+                return RedirectToPage("Secure", userCookie);
             }
             else
             {
-                Message = "Incorrect Credentials! Please Try Again!";
+                return Page();
             }
         }
     }
