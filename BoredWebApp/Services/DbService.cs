@@ -161,7 +161,7 @@ namespace BoredWebApp.Services
                 using (connection)
                 {
                     connection.Execute(
-                        "INSERT OR REPLACE INTO UserCookies " +
+                        "INSERT INTO UserCookies " +
                         "VALUES (@UserName, @Cookie) " +
                         "ON CONFLICT (username) DO UPDATE SET cookie = Excluded.cookie;",
                         userCookie
