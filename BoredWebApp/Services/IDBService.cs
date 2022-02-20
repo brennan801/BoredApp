@@ -15,5 +15,6 @@ namespace BoredWebApp.Services
         byte[] GetSalt(string userName);
         string GetHash(string userName);
         void SaveCookie(UserCookie cookie);
+        string GetCookieValue(string userName);
     }
 }

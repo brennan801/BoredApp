@@ -35,6 +35,30 @@ namespace BoredWebApp.Services
             }
         }
 
+        public string GetCookieValue(string userName)
+        {
+            var connection = new NpgsqlConnection("User ID=admin;Password=password;Host=pgsql_db;Port=5432;Database=boredWebApp;");
+            var dictionary = new Dictionary<string, object>
+            {
+                { "@UserName", userName }
+            };
+            var parameters = new DynamicParameters(dictionary);
+            try
+            {
+                using (connection)
+                {
+                    var cookie = connection.QuerySingle<string>(
+                        "SELECT cookie FROM UserCookies WHERE userName = @UserName;",
+                        parameters);
+                    return cookie;
+                }
+            }
+            catch (InvalidOperationException e)
+            {
+                throw new InvalidOperationException(e.Message);
+            }
+        }
+
         public string GetHash(string userName)
         {
             var connection = new NpgsqlConnection("User ID=admin;Password=password;Host=pgsql_db;Port=5432;Database=boredWebApp;");

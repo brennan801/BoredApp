@@ -14,9 +14,21 @@ namespace BoredWebApp.Pages
         }
         public string UserName { get; set; }
         public string Message { get; set; }
-        public void OnGet(string UserName)
+        public IActionResult OnGet(string UserName)
         {
-            Message = $"Welcome {UserName}";
+            string cookieValue = dBService.GetCookieValue(UserName);
+            string actualValue = Request.Cookies[$"{UserName}Cookie"];
+
+            if (cookieValue == actualValue)
+            {
+                return RedirectToPage("LogIn");
+            }
+            else
+            {
+                Message = $"Welcome {UserName}";
+                return Page();
+            }
+
         }
     }
 }
