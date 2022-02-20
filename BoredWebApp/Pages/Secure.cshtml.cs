@@ -14,6 +14,11 @@ namespace BoredWebApp.Pages
         }
         public string UserName { get; set; }
         public string Message { get; set; }
+
+        public void OnGet()
+        {
+
+        }
         public IActionResult OnGet(string UserName)
         {
             this.UserName = RouteData.Values[UserName].ToString();
