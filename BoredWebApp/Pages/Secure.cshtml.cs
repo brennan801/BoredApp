@@ -16,9 +16,9 @@ namespace BoredWebApp.Pages
         public string UserName { get; set; }
         public string Message { get; set; }
 
-        public void OnGet(string UserName)
+        public void OnGet()
         { 
-            this.UserName = RouteData.Values[UserName].ToString();
+            this.UserName = RouteData.Values["UserName"].ToString();
             string cookieValue = dBService.GetCookieValue(UserName);
             string actualValue = Request.Cookies[$"{UserName}Cookie"];
 
