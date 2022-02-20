@@ -7,11 +7,7 @@ namespace BoredWebApp.Pages
     {
         public string UserName { get; set; }
         public string Message { get; set; }
-        public SecureModel(string userName)
-        {
-            UserName = userName;
-        }
-        public void OnGet()
+        public void OnGet(string UserName)
         {
             Message = $"Welcome {UserName}";
         }
