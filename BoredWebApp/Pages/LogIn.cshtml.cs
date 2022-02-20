@@ -78,7 +78,7 @@ namespace BoredWebApp.Pages
                     Cookie = $"{userName}Value"
                 };
                 dBService.SaveCookie(userCookie);
-                return RedirectToPage("Secure", userName);
+                return RedirectToPage("Secure", new {UserName = userName });
             }
             else
             {
