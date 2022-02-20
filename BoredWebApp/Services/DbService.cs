@@ -29,7 +29,7 @@ namespace BoredWebApp.Services
                     );
                 connection.Execute(
                     "CREATE TABLE IF NOT EXISTS UserCookies(" +
-                    "username VARCHAR(128)," +
+                    "username VARCHAR(128) PRIMARY KEY," +
                     "cookie VARCHAR(32));"
                     );
             }
@@ -161,8 +161,9 @@ namespace BoredWebApp.Services
                 using (connection)
                 {
                     connection.Execute(
-                        "INSERT INTO UserCookies " +
-                        "VALUES (@UserName, @Cookie);",
+                        "INSERT OR REPLACE INTO UserCookies " +
+                        "VALUES (@UserName, @Cookie) " +
+                        "ON CONFLICT (username) DO UPDATE SET cookie = Excluded.cookie;",
                         userCookie
                         );
                 }
