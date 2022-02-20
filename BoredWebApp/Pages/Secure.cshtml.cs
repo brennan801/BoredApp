@@ -11,6 +11,7 @@ namespace BoredWebApp.Pages
         public SecureModel(IDBService dBService)
         {
             this.dBService = dBService;
+            UserName = "";
         }
         public string UserName { get; set; }
         public string Message { get; set; }
