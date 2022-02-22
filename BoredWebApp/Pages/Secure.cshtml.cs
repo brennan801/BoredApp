@@ -38,18 +38,16 @@ namespace BoredWebApp.Pages
         }
         public IActionResult OnPost()
         {
-            try
-            {
                 string cookieValue = dBService.GetCookieValue(UserName);
                 Response.Cookies.Delete(cookieValue);
                 dBService.RemoveCookie(UserName);
                 return RedirectToPage("Index");
-            }
-            catch(Exception e)
+            
+           /* catch(Exception e)
             {
                 Console.WriteLine(e.Message);
                 return RedirectToPage("LogIn");
-            }
+            }*/
         }
     }
 }
