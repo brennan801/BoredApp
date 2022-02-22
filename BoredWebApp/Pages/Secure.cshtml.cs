@@ -1,6 +1,7 @@
 using BoredWebApp.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System;
 
 namespace BoredWebApp.Pages
 {
@@ -34,6 +35,20 @@ namespace BoredWebApp.Pages
                 return Page();
             }
 
+        }
+        public IActionResult OnPost()
+        {
+            try
+            {
+                string cookieValue = dBService.GetCookieValue(UserName);
+                Response.Cookies.Delete(cookieValue);
+                dBService.RemoveCookie(UserName);
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return RedirectToPage("LogIn");
+            }
         }
     }
 }

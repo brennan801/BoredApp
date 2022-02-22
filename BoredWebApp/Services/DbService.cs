@@ -125,6 +125,22 @@ namespace BoredWebApp.Services
             }
         }
 
+        public void RemoveCookie(string userName)
+        {
+            var connection = new NpgsqlConnection("User ID=admin;Password=password;Host=pgsql_db;Port=5432;Database=boredWebApp;");
+            
+            var dictionary = new Dictionary<string, object>
+            {
+                { "@UserName", userName }
+            };
+            var parameters = new DynamicParameters(dictionary);
+           
+            using (connection)
+            {
+                connection.Execute("UPDATE Users SET cookie = '' WHERE userName = @userName;", parameters);
+            }
+        }
+
         public void SaveActivity(ActivityModel activity)
         {
             ActivityModel fakeActivity = new ActivityModel()

@@ -16,5 +16,6 @@ namespace BoredWebApp.Services
         string GetHash(string userName);
         void SaveCookie(UserCookie cookie);
         string GetCookieValue(string userName);
+        void RemoveCookie(string userName);
     }
 }
