@@ -24,7 +24,7 @@ namespace BoredWebApp.Pages
             System.Console.WriteLine(cookieValue);
             System.Console.WriteLine(actualValue);
 
-            if (cookieValue == actualValue)
+            if (cookieValue != actualValue)
             {
                 return RedirectToPage("LogIn");
             }
