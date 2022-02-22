@@ -21,6 +21,8 @@ namespace BoredWebApp.Pages
             this.UserName = RouteData.Values["UserName"].ToString();
             string cookieValue = dBService.GetCookieValue(UserName);
             string actualValue = Request.Cookies[$"{UserName}Cookie"];
+            System.Console.WriteLine(cookieValue);
+            System.Console.WriteLine(actualValue);
 
             if (cookieValue == actualValue)
             {
