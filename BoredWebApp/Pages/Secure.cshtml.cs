@@ -43,6 +43,7 @@ namespace BoredWebApp.Pages
                 string cookieValue = dBService.GetCookieValue(UserName);
                 Response.Cookies.Delete(cookieValue);
                 dBService.RemoveCookie(UserName);
+                return RedirectToPage("Index");
             }
             catch(Exception e)
             {
