@@ -137,7 +137,7 @@ namespace BoredWebApp.Services
            
             using (connection)
             {
-                connection.Execute("UPDATE Users SET cookie = '' WHERE userName = @userName;", parameters);
+                connection.Execute("UPDATE UserCookies SET cookie = '' WHERE userName = @userName;", parameters);
             }
         }
 
