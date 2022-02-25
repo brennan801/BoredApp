@@ -12,6 +12,20 @@ jobs:
       - name: checkout repo
         uses: actions/checkout@v2
 
+      - name: set web app admin conn strings
+        with: 
+          files: '${{env.DOTNET_ROOT}}/BoredWebAppAdmin/appsettings.json'
+        env: 
+          ConnectionStrings.psqldb: ${{secrets.PSQLDB}}
+          ConnectionStrings.wgadmin: ${{secrets.WGADMIN}}
+
+      - name: set web app conn strings
+        with: 
+          files: '${{env.DOTNET_ROOT}}/BoredWebApp/appsettings.json'
+        env: 
+          ConnectionStrings.psqldb: ${{secrets.PSQLDB}}
+          ConnectionStrings.wgadmin: ${{secrets.WGADMIN}}
+
       - name: docker compose
         run: |
           cd BoredWebApp

@@ -1,5 +1,6 @@
 ﻿using BoredWebAppAdmin.Models;
 using Dapper;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Primitives;
 using Npgsql;
 using System;
@@ -11,9 +12,11 @@ namespace BoredWebAppAdmin.Services
 {
     public class DatabaseService : IDatabaseService
     {
-        public DatabaseService()
+        private readonly IConfiguration config;
+
+        public DatabaseService(IConfiguration config)
         {
-            var connection = new NpgsqlConnection("User ID=admin;Password=password;Host=pgsql_db;Port=5432;Database=boredWebApp;");
+            var connection = new NpgsqlConnection(config.GetConnectionString("psqldb"));
             using (connection)
             {
                 connection.Execute(
@@ -34,11 +37,13 @@ namespace BoredWebAppAdmin.Services
                     "hash VARCHAR(128));"
                     );
             }
+
+            this.config = config;
         }
 
         public int GetLargestId()
         {
-            var connection = new NpgsqlConnection("User ID=wgadmin;Password=wgadmin;Host=pgsql_db;Port=5432;Database=boredWebApp;");
+            var connection = new NpgsqlConnection(config.GetConnectionString("wgAdmin"));
             int id;
             try
             {
@@ -57,7 +62,7 @@ namespace BoredWebAppAdmin.Services
 
         public void SaveClientInformation(ClientInformation clientInformation)
         {
-            var connection = new NpgsqlConnection("User ID=wgadmin;Password=wgadmin;Host=pgsql_db;Port=5432;Database=boredWebApp;");
+            var connection = new NpgsqlConnection(config.GetConnectionString("wgAdmin"));
 
             try
             {
@@ -78,7 +83,7 @@ namespace BoredWebAppAdmin.Services
 
         public void SaveNewUser(NewUser newUser)
         {
-            var connection = new NpgsqlConnection("User ID=wgadmin;Password=wgadmin;Host=pgsql_db;Port=5432;Database=boredWebApp;");
+            var connection = new NpgsqlConnection(config.GetConnectionString("wgAdmin"));
             try
             {
                 using (connection)
