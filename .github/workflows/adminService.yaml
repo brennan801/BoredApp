@@ -13,6 +13,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: set web app admin conn strings
+        uses: actions/checkout@v2
         with: 
           files: '${{env.DOTNET_ROOT}}/BoredWebAppAdmin/appsettings.json'
         env: 
@@ -20,6 +21,7 @@ jobs:
           ConnectionStrings.wgadmin: ${{secrets.WGADMIN}}
 
       - name: set web app conn strings
+        uses: actions/checkout@v2
         with: 
           files: '${{env.DOTNET_ROOT}}/BoredWebApp/appsettings.json'
         env: 
