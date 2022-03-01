@@ -48,6 +48,7 @@ namespace AdminAPI.Controllers
                     ClientPublicKey = publicKey,
                     ClientPrivateKey = privateKey
                 };
+
                 return newClient;
             }
             catch (Exception e)
@@ -58,6 +59,7 @@ namespace AdminAPI.Controllers
 
         private string addNewPeer(string publicKey, int id)
         {
+            Console.WriteLine(publicKey);
             var process = new Process()
             {
                 StartInfo = new()
