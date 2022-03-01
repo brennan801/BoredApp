@@ -74,6 +74,7 @@ namespace AdminAPI.Controllers
             string output = process.StandardOutput.ReadToEnd();
             string error = process.StandardError.ReadToEnd();
             process.WaitForExit();
+            Console.WriteLine("should have done it!");
             if (string.IsNullOrEmpty(error)) { return output; }
             else { return error; }
         }
