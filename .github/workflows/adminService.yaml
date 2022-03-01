@@ -12,18 +12,6 @@ jobs:
       - name: checkout repo
         uses: actions/checkout@v2
 
-      - name: set web app admin conn strings
-        uses: actions/checkout@v2
-        env: 
-          psqldb: ${{secrets.PSQLDB}}
-          wgadmin: ${{secrets.WGADMIN}}
-
-      - name: set web app conn strings
-        uses: actions/checkout@v2
-        env: 
-          psqldb: ${{secrets.PSQLDB}}
-          wgadmin: ${{secrets.WGADMIN}}
-
       - name: docker compose
         run: |
           cd BoredWebApp
@@ -36,7 +24,7 @@ jobs:
       - name: run dotnet from systemd
         run: |
           cp deployment/dotnetservice.service /lib/systemd/system/dotnetservice.service
-          echo "wgadmin=${{secrets.WGADMIN}}" > AdminApi/.env
+          echo "wgadmin=${{secrets.WGADMIN}}" > AdminAPI/.env
           sudo systemctl daemon-reload
           sudo systemctl restart dotnetservice.service
           systemctl status dotnetservice.service
