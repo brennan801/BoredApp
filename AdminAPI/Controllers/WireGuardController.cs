@@ -48,6 +48,9 @@ namespace AdminAPI.Controllers
                     ClientPublicKey = publicKey,
                     ClientPrivateKey = privateKey
                 };
+                Console.WriteLine(newClient.ClientName);
+                Console.WriteLine(newClient.ClientPublicKey);
+                Console.WriteLine(newClient.ClientPrivateKey);
                 return newClient;
             }
             catch (Exception e)
