@@ -37,7 +37,7 @@ namespace AdminAPI.Controllers
                 string privateKey = generatePrivateKey();
                 string publicKey = generatePublicKey(privateKey);
                 string addPeerResult = addNewPeer(publicKey, clientInfo.Id);
-                string restartWireguardResult = restartWireguard();
+                //string restartWireguardResult = restartWireguard();
                 ClientInformation newClient = new()
                 {
                     ID = clientInfo.Id,
