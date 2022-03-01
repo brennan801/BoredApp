@@ -48,7 +48,7 @@ namespace AdminAPI.Controllers
                     ClientPublicKey = publicKey,
                     ClientPrivateKey = privateKey
                 };
-
+                addNewPeer(publicKey, clientInfo.Id);
                 return newClient;
             }
             catch (Exception e)
@@ -59,6 +59,7 @@ namespace AdminAPI.Controllers
 
         private string addNewPeer(string publicKey, int id)
         {
+            Console.WriteLine("pub key:");
             Console.WriteLine(publicKey);
             var process = new Process()
             {
