@@ -16,6 +16,7 @@ jobs:
         run: |
           cd BoredWebApp
           echo "psqldb=${{secrets.PSQLDB}}" > .env
+          echo "wgadmin=${{secrets.WGADMIN}}" >> .env
           docker-compose up --build -d
 
       - name: build api
