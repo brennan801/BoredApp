@@ -21,6 +21,12 @@ namespace BoredWebApp
 
         public IConfiguration Configuration { get; }
 
+        private string getAdminConnectionString() => 
+            Configuration["psqldb"] ?? Environment.GetEnvironmentVariable("psqldb");
+        private string getWGAdminConnectionString() => 
+            Configuration["wgadmin"] ?? Environment.GetEnvironmentVariable("wgadmin");
+
+
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
@@ -35,6 +41,7 @@ namespace BoredWebApp
                 options.Cookie.HttpOnly = true;
                 options.Cookie.IsEssential = true;
             });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

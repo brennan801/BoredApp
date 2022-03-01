@@ -16,7 +16,7 @@ namespace BoredWebAppAdmin.Services
 
         public DatabaseService(IConfiguration config)
         {
-            var connection = new NpgsqlConnection(config.GetConnectionString("psqldb"));
+            var connection = new NpgsqlConnection(config.GetValue<string>("psqldb"));
             using (connection)
             {
                 connection.Execute(
@@ -43,7 +43,7 @@ namespace BoredWebAppAdmin.Services
 
         public int GetLargestId()
         {
-            var connection = new NpgsqlConnection(config.GetConnectionString("wgAdmin"));
+            var connection = new NpgsqlConnection(config.GetValue<string>("wgadmin"));
             int id;
             try
             {
@@ -62,7 +62,7 @@ namespace BoredWebAppAdmin.Services
 
         public void SaveClientInformation(ClientInformation clientInformation)
         {
-            var connection = new NpgsqlConnection(config.GetConnectionString("wgAdmin"));
+            var connection = new NpgsqlConnection(config.GetValue<string>("wgadmin"));
 
             try
             {
@@ -83,7 +83,7 @@ namespace BoredWebAppAdmin.Services
 
         public void SaveNewUser(NewUser newUser)
         {
-            var connection = new NpgsqlConnection(config.GetConnectionString("wgAdmin"));
+            var connection = new NpgsqlConnection(config.GetValue<string>("wgadmin"));
             try
             {
                 using (connection)

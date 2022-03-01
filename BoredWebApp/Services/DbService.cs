@@ -16,7 +16,8 @@ namespace BoredWebApp.Services
 
         public DbService(IConfiguration config)
         {
-            var connection = new NpgsqlConnection(config.GetConnectionString("psqldb"));
+            //var connection = new NpgsqlConnection(config.GetConnectionString("psqldb"));
+            var connection = new NpgsqlConnection(config.GetValue<string>("psqldb"));
             using (connection)
             {
                 connection.Execute(
@@ -42,7 +43,7 @@ namespace BoredWebApp.Services
 
         public string GetCookieValue(string userName)
         {
-            var connection = new NpgsqlConnection(config.GetConnectionString("psqldb"));
+            var connection = new NpgsqlConnection(config.GetValue<string>("psqldb"));
             var dictionary = new Dictionary<string, object>
             {
                 { "@UserName", userName }
@@ -66,7 +67,7 @@ namespace BoredWebApp.Services
 
         public string GetHash(string userName)
         {
-            var connection = new NpgsqlConnection(config.GetConnectionString("psqldb"));
+            var connection = new NpgsqlConnection(config.GetValue<string>("psqldb"));
 
             var dictionary = new Dictionary<string, object>
             {
@@ -92,7 +93,7 @@ namespace BoredWebApp.Services
 
         public byte[] GetSalt(string userName)
         {
-            var connection = new NpgsqlConnection(config.GetConnectionString("psqldb"));
+            var connection = new NpgsqlConnection(config.GetValue<string>("psqldb"));
 
             var dictionary = new Dictionary<string, object>
             {
@@ -118,7 +119,7 @@ namespace BoredWebApp.Services
 
         public List<ActivityModel> getSavedActivities()
         {
-            var connection = new NpgsqlConnection(config.GetConnectionString("psqldb"));
+            var connection = new NpgsqlConnection(config.GetValue<string>("psqldb"));
 
             //List<ActivityModel> savedActivities = new();
             using (connection)
@@ -132,7 +133,7 @@ namespace BoredWebApp.Services
 
         public void RemoveCookie(string userName)
         {
-            var connection = new NpgsqlConnection(config.GetConnectionString("psqldb"));
+            var connection = new NpgsqlConnection(config.GetValue<string>("psqldb"));
 
             var dictionary = new Dictionary<string, object>
             {
@@ -155,7 +156,7 @@ namespace BoredWebApp.Services
                 Participants = 0,
                 Price = 0
             };
-            var connection = new NpgsqlConnection(config.GetConnectionString("psqldb"));
+            var connection = new NpgsqlConnection(config.GetValue<string>("psqldb"));
 
             try
             {
@@ -176,7 +177,7 @@ namespace BoredWebApp.Services
 
         public void SaveCookie(UserCookie userCookie)
         {
-            var connection = new NpgsqlConnection(config.GetConnectionString("psqldb"));
+            var connection = new NpgsqlConnection(config.GetValue<string>("psqldb"));
             try
             {
                 using (connection)
