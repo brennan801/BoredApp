@@ -80,13 +80,13 @@ namespace AdminAPI.Controllers
 
         private string generatePublicKey(string privateKey)
         {
+            var command = $"echo \"{privateKey}\" | wg pubkey";
             var process = new Process()
             {
                 StartInfo = new()
                 {
-                    FileName = $"wg",
-                    Arguments = $"pubkey",
-                    RedirectStandardInput = true,
+                    FileName = $"bash",
+                    Arguments = "-c \"" + command + "\"",
                     RedirectStandardOutput = true,
                     RedirectStandardError = true,
                     UseShellExecute = false,
@@ -96,7 +96,6 @@ namespace AdminAPI.Controllers
 
             
             process.Start();
-            process.StandardInput.WriteLine($"{privateKey}");
             string output = process.StandardOutput.ReadToEnd();
             string error = process.StandardError.ReadToEnd();
             process.WaitForExit();
