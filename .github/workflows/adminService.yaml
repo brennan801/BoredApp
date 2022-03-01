@@ -14,16 +14,12 @@ jobs:
 
       - name: set web app admin conn strings
         uses: actions/checkout@v2
-        with: 
-          files: '${{env.DOTNET_ROOT}}/BoredWebAppAdmin/appsettings.json'
         env: 
           psqldb: ${{secrets.PSQLDB}}
           wgadmin: ${{secrets.WGADMIN}}
 
       - name: set web app conn strings
         uses: actions/checkout@v2
-        with: 
-          files: '${{env.DOTNET_ROOT}}/BoredWebApp/appsettings.json'
         env: 
           psqldb: ${{secrets.PSQLDB}}
           wgadmin: ${{secrets.WGADMIN}}
@@ -31,6 +27,7 @@ jobs:
       - name: docker compose
         run: |
           cd BoredWebApp
+          echo "psqldb=${{secrets.PSQLDB}}" > .env
           docker-compose up --build -d
 
       - name: build api

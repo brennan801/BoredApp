@@ -16,6 +16,8 @@ services:
         build:
             context: ..
             dockerfile: BoredWebApp/Dockerfile
+        env_file:
+            - ./.env
         restart: always
 
     admin_site:
