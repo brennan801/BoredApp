@@ -86,6 +86,7 @@ namespace AdminAPI.Controllers
                 {
                     FileName = $"wg",
                     Arguments = $"pubkey",
+                    RedirectStandardInput = true,
                     RedirectStandardOutput = true,
                     RedirectStandardError = true,
                     UseShellExecute = false,
