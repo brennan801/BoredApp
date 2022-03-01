@@ -50,7 +50,6 @@ namespace BoredWebAppAdmin.Pages
             };
             ClientInformation newClient = await adminApiService.AddWireguardClientAsync(cmi);
             databaseService.SaveClientInformation(newClient);
-            await adminApiService.RestartWireguardAsync();
             
         }
 
