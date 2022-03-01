@@ -80,7 +80,7 @@ namespace AdminAPI.Controllers
 
         private string generatePublicKey(string privateKey)
         {
-            var command = $"echo \"{privateKey}\" | wg pubkey";
+            var command = $"echo '{privateKey}' | wg pubkey";
             var process = new Process()
             {
                 StartInfo = new()
