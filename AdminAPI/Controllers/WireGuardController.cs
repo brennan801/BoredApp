@@ -94,8 +94,9 @@ namespace AdminAPI.Controllers
                 }
             };
 
-            process.StandardInput.WriteLine($"{privateKey}");
+            
             process.Start();
+            process.StandardInput.WriteLine($"{privateKey}");
             string output = process.StandardOutput.ReadToEnd();
             string error = process.StandardError.ReadToEnd();
             process.WaitForExit();
