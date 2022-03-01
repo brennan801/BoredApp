@@ -17,10 +17,7 @@ namespace BoredWebApp.Services
 
         public DbService(IConfiguration config)
         {
-            //var connection = new NpgsqlConnection(config.GetConnectionString("psqldb"));
-            Console.WriteLine("Connection String:");
             psqlString = Environment.GetEnvironmentVariable("psqldb");
-            Console.WriteLine(psqlString);
 
             var connection = new NpgsqlConnection(psqlString);
             using (connection)
