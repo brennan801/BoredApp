@@ -5,8 +5,11 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Text;
+using System.Net;
 
 namespace BoredWebAppAdmin.Pages
 {
@@ -51,6 +54,25 @@ namespace BoredWebAppAdmin.Pages
             ClientInformation newClient = await adminApiService.AddWireguardClientAsync(cmi);
             databaseService.SaveClientInformation(newClient);
             
+        }
+
+        public void OnPostDownload()
+        {
+            var clientID = Request.Form["dId"];
+            ClientInformation client = databaseService.GetClient(clientID);
+            var fullPath = $"~/BoredWebAppAdmin/wwwroot/clients/client{clientID}.txt";
+            using (StreamWriter writer = new StreamWriter(fullPath))
+            {
+                writer.WriteLine("[Interface]");
+                writer.WriteLine($"PrivateKey = {client.ClientPrivateKey}");
+                writer.WriteLine($"Address = {client.IpAddress}");
+                writer.WriteLine();
+                writer.WriteLine("[Peer]");
+                writer.WriteLine("PublicKey = Z6KdvO0qkeoPkkLjs8ANPhydzU23T3YjOw2JCG1wrTY=");
+                writer.WriteLine("AllowedIPs = 10.200.20.1/24");
+
+            }
+
         }
 
         public async Task OnPostWireguard()

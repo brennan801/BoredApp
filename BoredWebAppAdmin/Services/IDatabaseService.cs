@@ -12,5 +12,6 @@ namespace BoredWebAppAdmin.Services
         public void SaveClientInformation(ClientInformation clientInformation);
         public int GetLargestId();
         public void SaveNewUser(NewUser newUser);
+        ClientInformation GetClient(StringValues clientID);
     }
 }

@@ -41,6 +41,23 @@ namespace BoredWebAppAdmin.Services
             this.config = config;
         }
 
+        public ClientInformation GetClient(StringValues clientID)
+        {
+            var connection = new NpgsqlConnection(config.GetValue<string>("wgadmin"));
+            var dictionary = new Dictionary<string, object>
+            {
+                { "@ID", clientID }
+            };
+            var parameters = new DynamicParameters(dictionary);
+            using (connection)
+            {
+                ClientInformation client = connection.QuerySingle<ClientInformation>(
+                    "SELECT * FROM Clients WHERE id = @ID",
+                    parameters);
+                return client;
+            }
+        }
+
         public int GetLargestId()
         {
             var connection = new NpgsqlConnection(config.GetValue<string>("wgadmin"));

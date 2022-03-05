@@ -11,6 +11,12 @@
     <button class="p-2">Save</button>
 </form>
 
+<form>
+    <label for="dId">Download Config For Client:</label>
+    <input type="number" name="dId" />
+    <button asp-page-handler="Download">Download File</button>
+</form>
+
 <form asp-antiforgery="false" method="post">
     <button asp-page-handler="Wireguard">Restart Wireguard</button>
 </form>
