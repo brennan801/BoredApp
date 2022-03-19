@@ -31,12 +31,12 @@ namespace BoredWebApp.Pages
             var userName = Request.Form["userName"];
             var password = Request.Form["password"];
             byte[] salt = Array.Empty<byte>();
-            string oldHashed = "";
+            string oldHash = "";
 
             try
             {
                 salt = dBService.GetSalt(userName);
-                oldHashed = dBService.GetHash(userName);
+                oldHash = dBService.GetHash(userName);
             }
             catch(InvalidOperationException)
             {
@@ -51,7 +51,7 @@ namespace BoredWebApp.Pages
                 iterationCount: 100000,
                 numBytesRequested: 256 / 8));
 
-            if (oldHashed == newHashed)
+            if (oldHash == newHashed)
             {
                 Message = "You have been logged in!";
                 var cookieOptions = new CookieOptions
@@ -77,7 +77,7 @@ namespace BoredWebApp.Pages
                 UserCookie userCookie = new UserCookie()
                 {
                     UserName = userName,
-                    Cookie = $"{userName}Value"
+                    Value = $"{userName}Value"
                 };
                 dBService.SaveCookie(userCookie);
                 return RedirectToPage("Secure", new {UserName = userName });
