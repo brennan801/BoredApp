@@ -1,8 +1,16 @@
-﻿namespace BoredWebApp.Models
+﻿using BoredShared.Models;
+
+namespace BoredWebApp.Models
 {
     public class UserCookie
     {
-        public string UserName { get; set; }
-        public string Value { get; set; }
+        public readonly UserName UserName;
+        public readonly UserCookieValue Value;
+
+        public UserCookie(string userName, string value)
+        {
+            this.UserName = new(userName);
+            this.Value = new(value);
+        }
     }
 }

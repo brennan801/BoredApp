@@ -17,4 +17,8 @@
     <Folder Include="wwwroot\clients\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\BoredWebApp\BoredWebApp.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -11,5 +11,6 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Models\ActivityModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\ActivityFormRequest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\DomainPrimitives.cs" />
   </ItemGroup>
 </Project>
