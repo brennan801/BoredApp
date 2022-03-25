@@ -16,7 +16,7 @@ namespace BoredShared.Models
         public string Value { get; private set; }
         public UserName(string value)
         {
-            if (!validChars.IsMatch(value) && value.Length >= maxLength && value.Length <= minLength && value.Contains(" "))
+            if (value.Length >= maxLength && value.Length <= minLength && !validChars.IsMatch(value) && value.Contains(" "))
             {
                 throw new ArgumentException("Invalid Username");
             }
@@ -33,9 +33,56 @@ namespace BoredShared.Models
         {
             if (value.Length >= maxLength && value.Length <= minLength && value.Contains(" "))
             {
-                throw new ArgumentException("Invalid Username");
+                throw new ArgumentException("Invalid Cookie");
             }
             else Value = value;
         }
+    }
+    public class Id
+    {
+        private readonly int min = 20;
+        private readonly int max = 300;
+        private readonly int value;
+
+        public Id(int value)
+        {
+            if (value < min && value > max)
+            {
+
+                this.value = value;
+            }
+            else throw new ArgumentOutOfRangeException("Invalid ID");
+        }
+    }
+
+    public class Password
+    {
+        private readonly int minLength = 4;
+        private readonly int maxLength = 100;
+        private readonly Regex validChars = new Regex("[!@#$%^&+= ()A-Za-z0-9_-]+");
+        private string _value;
+        public Password(string value)
+        {
+            if (value.Length >= maxLength && value.Length <= minLength && !validChars.IsMatch(value) && value.Contains(" "))
+            {
+                throw new ArgumentException("Invalid Password");
+            }
+            else _value = value;
+        }
+
+        public string getPassword()
+        {
+            if(_value is not null)
+            {
+                string tempPassword = _value;
+                _value = null;
+                return tempPassword;
+            }
+            else
+            {
+                throw new InvalidOperationException("Password already consumed!");
+            }
+        }
+
     }
 }

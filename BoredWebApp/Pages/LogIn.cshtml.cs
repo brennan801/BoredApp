@@ -74,11 +74,7 @@ namespace BoredWebApp.Pages
 
                 // Add the cookie to the response cookie collection
                 Response.Cookies.Append($"{userName}Cookie", $"{userName}Value", cookieOptions);
-                UserCookie userCookie = new UserCookie()
-                {
-                    UserName = userName,
-                    Value = $"{userName}Value"
-                };
+                UserCookie userCookie = new UserCookie(userName, $"{userName}Value");
                 dBService.SaveCookie(userCookie);
                 return RedirectToPage("Secure", new {UserName = userName });
             }
