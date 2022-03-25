@@ -38,16 +38,8 @@ namespace AdminAPI.Controllers
                 string publicKey = generatePublicKey(privateKey);
                 string addPeerResult = addNewPeer(publicKey, clientInfo.Id);
                 //string restartWireguardResult = restartWireguard();
-                ClientInformation newClient = new()
-                {
-                    ID = clientInfo.Id,
-                    ClientName = clientInfo.Name,
-                    IpAddress = $"10.200.20.{clientInfo.Id}",
-                    DateAdded = System.DateTime.Now.ToString(),
-                    AllowedIpRange = "10.200.20.*",
-                    ClientPublicKey = publicKey,
-                    ClientPrivateKey = privateKey
-                };
+                ClientInformation newClient = new(clientInfo.Id, clientInfo.Name, $"10.200.20.{clientInfo.Id}", System.DateTime.Now.ToString(),
+                    "10.200.20.*", publicKey, privateKey);
                 return newClient;
             }
             catch (Exception e)
@@ -56,7 +48,7 @@ namespace AdminAPI.Controllers
             }
         }
 
-        private string addNewPeer(string publicKey, int id)
+        private string addNewPeer(string publicKey, Id id)
         {
             var process = new Process()
             {

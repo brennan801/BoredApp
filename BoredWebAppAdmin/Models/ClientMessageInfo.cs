@@ -8,8 +8,13 @@ namespace BoredWebAppAdmin.Models
 {
     public class ClientMessageInfo
     {
-        public Id Id { get; set; }
-        public UserName Name { get; set; }
+        public ClientMessageInfo(int id, string name)
+        {
+            this.Id = new(id);
+            this.Name = new(name);
+        }
+        public Id Id { get; private set; }
+        public UserName Name { get; private set; }
     }
 
     public class Id

@@ -9,7 +9,27 @@ namespace BoredWebAppAdmin.Models
 {
     public class ClientInformation
     {
-        public int ID { get; set; }
+        public ClientInformation(int id, string clientName, string ipAddress, string dateAdded, string allowedIpRange, string clientPublicKey, string clientPrivateKey)
+        {
+            ID = new(id);
+            ClientName = new(clientName);
+            IpAddress = new(ipAddress);
+            DateAdded = dateAdded;
+            AllowedIpRange = allowedIpRange;
+            ClientPublicKey = clientPublicKey;
+            ClientPrivateKey = clientPrivateKey;
+        }
+        public ClientInformation(Id id, UserName clientName, string ipAddress, string dateAdded, string allowedIpRange, string clientPublicKey, string clientPrivateKey)
+        {
+            ID = id;
+            ClientName = clientName;
+            IpAddress = new(ipAddress);
+            DateAdded = dateAdded;
+            AllowedIpRange = allowedIpRange;
+            ClientPublicKey = clientPublicKey;
+            ClientPrivateKey = clientPrivateKey;
+        }
+        public Id ID { get; set; }
         public UserName ClientName { get; set; }
         public IPAddress IpAddress { get; set; }
         public string DateAdded { get; set; }

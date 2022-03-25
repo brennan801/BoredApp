@@ -33,18 +33,13 @@ namespace BoredWebAppAdmin.Pages
             }
 
             // derive a 256-bit subkey (use HMACSHA256 with 100,000 iterations)
-            string hashed = Convert.ToBase64String(KeyDerivation.Pbkdf2(
+            string hash = Convert.ToBase64String(KeyDerivation.Pbkdf2(
                 password: password,
                 salt: salt,
                 prf: KeyDerivationPrf.HMACSHA256,
                 iterationCount: 100000,
                 numBytesRequested: 256 / 8));
-            NewUser user = new()
-            {
-                UserName = userName,
-                Salt = salt,
-                Hashed = hashed
-            };
+            NewUser user = new(userName, salt, hash);
             databaseService.SaveNewUser(user);
         }
     }
