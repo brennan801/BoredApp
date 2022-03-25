@@ -81,10 +81,10 @@ namespace BoredWebApp.Services
             {
                 using (connection)
                 {
-                    var hashed = connection.QuerySingle<string>(
+                    var hash = connection.QuerySingle<string>(
                         "SELECT hash FROM Users WHERE userName = @UserName;",
                         parameters);
-                    return hashed;
+                    return hash;
                 }
             }
             catch (InvalidOperationException e)
@@ -180,13 +180,19 @@ namespace BoredWebApp.Services
         public void SaveCookie(UserCookie userCookie)
         {
             var connection = new NpgsqlConnection(config.GetValue<string>("psqldb"));
+            var dictionary = new Dictionary<string, object>
+            {
+                { "@UserName", userCookie.UserName.Value },
+                { "@Value",  userCookie.Value.Value }
+            };
+            var parameters = new DynamicParameters(dictionary);
             try
             {
                 using (connection)
                 {
                     connection.Execute(
                         "INSERT INTO UserCookies " +
-                        "VALUES (@UserName, @Cookie) " +
+                        "VALUES (@UserName, @Value) " +
                         "ON CONFLICT (username) DO UPDATE SET cookie = Excluded.cookie;",
                         userCookie
                         );

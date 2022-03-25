@@ -42,14 +42,14 @@ namespace BoredShared.Models
     {
         private readonly int min = 20;
         private readonly int max = 300;
-        private readonly int value;
+        public int Value { get; private set; }
 
         public Id(int value)
         {
             if (value < min && value > max)
             {
 
-                this.value = value;
+                this.Value = value;
             }
             else throw new ArgumentOutOfRangeException("Invalid ID");
         }

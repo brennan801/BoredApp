@@ -12,5 +12,14 @@ namespace BoredWebApp.Models
             this.UserName = new(userName);
             this.Value = new(value);
         }
+
+        public string GetUserName()
+        {
+            return this.UserName.Value;
+        }
+        public string GetCookie()
+        {
+            return this.Value.Value;
+        }
     }
 }

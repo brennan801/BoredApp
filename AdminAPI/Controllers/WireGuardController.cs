@@ -1,4 +1,5 @@
-﻿using BoredWebAppAdmin.Models;
+﻿using BoredShared.Models;
+using BoredWebAppAdmin.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;

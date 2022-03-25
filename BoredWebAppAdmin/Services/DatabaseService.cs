@@ -49,6 +49,7 @@ namespace BoredWebAppAdmin.Services
                 { "@ID", clientID }
             };
             var parameters = new DynamicParameters(dictionary);
+
             using (connection)
             {
                 ClientInformation client = connection.QuerySingle<ClientInformation>(
@@ -80,7 +81,17 @@ namespace BoredWebAppAdmin.Services
         public void SaveClientInformation(ClientInformation clientInformation)
         {
             var connection = new NpgsqlConnection(config.GetValue<string>("wgadmin"));
-
+            var dictionary = new Dictionary<string, object>
+            {
+                { "@ID", clientInformation.ID.Value },
+                { "@ClientName", clientInformation.ClientName.Value },
+                { "@IPAddress", clientInformation.IpAddress.Value },
+                { "@DateAdded", clientInformation.DateAdded },
+                { "@AllowedIPRange", clientInformation.AllowedIpRange },
+                { "@ClientPublicKey", clientInformation.ClientPublicKey },
+                { "@ClientPrivateKey", clientInformation.ClientPrivateKey }
+            };
+            var parameters = new DynamicParameters(dictionary);
             try
             {
                 using (connection)
@@ -88,7 +99,7 @@ namespace BoredWebAppAdmin.Services
                     connection.Execute(
                         "INSERT INTO Clients " +
                         "VALUES (@ID, @ClientName, @IPAddress, @DateAdded, @AllowedIPRange, @ClientPublicKey, @ClientPrivateKey);",
-                        clientInformation
+                        parameters
                         );
                 }
             }
@@ -101,6 +112,13 @@ namespace BoredWebAppAdmin.Services
         public void SaveNewUser(NewUser newUser)
         {
             var connection = new NpgsqlConnection(config.GetValue<string>("wgadmin"));
+            var dictionary = new Dictionary<string, object>
+            {
+                { "@UserName", newUser.UserName.Value },
+                { "@Salt",  newUser.Salt },
+                { "@Hash", newUser.Hash }
+            };
+            var parameters = new DynamicParameters(dictionary);
             try
             {
                 using (connection)
@@ -108,7 +126,7 @@ namespace BoredWebAppAdmin.Services
                     connection.Execute(
                         "INSERT INTO Users " +
                         "VALUES (@UserName, @Salt, @Hashed);",
-                        newUser
+                        parameters
                         );
                 }
             }
