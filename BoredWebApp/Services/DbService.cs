@@ -42,7 +42,7 @@ namespace BoredWebApp.Services
                    "CREATE TABLE IF NOT EXISTS UserFavorites(" +
                    "username VARCHAR(128) PRIMARY KEY," +
                    "hobbie VARCHAR(64)," +
-                   "group INTEGER," +
+                   "groupSize INTEGER," +
                    "animal VARCHAR(64));"
                    );
             }
