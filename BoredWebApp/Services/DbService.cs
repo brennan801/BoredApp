@@ -230,7 +230,9 @@ namespace BoredWebApp.Services
                 {
                     connection.Execute(
                         "INSERT INTO UserFavorites " +
-                        "VALUES (@UserName, @Hobbie, @GroupSize, @Birthday, @FaveAnimal);",
+                        "VALUES (@UserName, @Hobbie, @GroupSize, @Birthday, @FaveAnimal)" +
+                        "ON CONFLICT (username) DO UPDATE" +
+                        "SET hobbie = Excluded.hobbie, groupsize = Excluded.groupsize, birthday = Excluded.birthday, animal = Excluded.animal;",
                         parameters
                         );
                 }
