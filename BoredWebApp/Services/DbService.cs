@@ -194,7 +194,7 @@ namespace BoredWebApp.Services
                         "INSERT INTO UserCookies " +
                         "VALUES (@UserName, @Value) " +
                         "ON CONFLICT (UserName) DO UPDATE SET cookie = Excluded.cookie;",
-                        userCookie
+                        parameters
                         );
                 }
             }
