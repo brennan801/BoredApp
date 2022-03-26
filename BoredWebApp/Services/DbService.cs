@@ -43,6 +43,7 @@ namespace BoredWebApp.Services
                    "username VARCHAR(128) PRIMARY KEY," +
                    "hobbie VARCHAR(64)," +
                    "groupSize INTEGER," +
+                   "birthday VARCHAR(64)," +
                    "animal VARCHAR(64));"
                    );
             }
