@@ -38,6 +38,13 @@ namespace BoredWebApp.Services
                     "username VARCHAR(128) PRIMARY KEY," +
                     "cookie VARCHAR(32));"
                     );
+                connection.Execute(
+                   "CREATE TABLE IF NOT EXISTS UserFavorites(" +
+                   "username VARCHAR(128) PRIMARY KEY," +
+                   "hobbie VARCHAR(64)," +
+                   "group INTEGER," +
+                   "animal VARCHAR(64));"
+                   );
             }
 
             this.config = config;
@@ -200,7 +207,36 @@ namespace BoredWebApp.Services
             }
             catch (Npgsql.PostgresException e)
             {
-                throw new Exception("Error Saving Activity: " + e.Message);
+                throw new Exception("Error Saving UserCookie: " + e.Message);
+            }
+        }
+
+        public void SaveFavorites(UserFavorites userFavorites)
+        {
+            var connection = new NpgsqlConnection(config.GetValue<string>("psqldb"));
+            var dictionary = new Dictionary<string, object>
+            {
+                { "@UserName", userFavorites.UserName.Value },
+                { "@Hobbie",  userFavorites.Hobbie },
+                { "@GroupSize",  userFavorites.GroupSize },
+                { "@Birthday",  userFavorites.Birthday },
+                { "@FaveAnimal",  userFavorites.FaveAnimal },
+            };
+            var parameters = new DynamicParameters(dictionary);
+            try
+            {
+                using (connection)
+                {
+                    connection.Execute(
+                        "INSERT INTO UserFavorites " +
+                        "VALUES (@UserName, @Hobbie, @GroupSize, @Birthday, @FaveAnimal);",
+                        parameters
+                        );
+                }
+            }
+            catch (Npgsql.PostgresException e)
+            {
+                throw new Exception("Error Saving UserFavorites: " + e.Message);
             }
         }
     }

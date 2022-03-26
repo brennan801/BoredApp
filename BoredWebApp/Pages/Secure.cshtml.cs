@@ -1,3 +1,4 @@
+using BoredWebApp.Models;
 using BoredWebApp.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -52,6 +53,15 @@ namespace BoredWebApp.Pages
                 Console.WriteLine(e.Message);
                 return RedirectToPage("LogIn");
             }
+        }
+
+        public void OnPostSave()
+        {
+            UserFavorites userFavorites = new UserFavorites(
+                this.UserName, Request.Form["hobbie"], Int32.Parse(Request.Form["groupSize"].ToString()), 
+                Request.Form["birthday"], Request.Form["animal"]
+                ) ;
+            dBService.SaveFavorites(userFavorites);
         }
     }
 }

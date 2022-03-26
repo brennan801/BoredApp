@@ -17,5 +17,6 @@ namespace BoredWebApp.Services
         void SaveCookie(UserCookie cookie);
         string GetCookieValue(string userName);
         void RemoveCookie(string userName);
+        void SaveFavorites(UserFavorites userFavorites);
     }
 }

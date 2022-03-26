@@ -7,3 +7,15 @@
 <form method="POST">
     <button>Logout</button>
 </form>
+
+<form asp-page-handler="save" method="POST">
+    <label for="hobbie">What is your favorite hobby?</label>
+    <input name="hobbie" type="text" />
+    <label for="groupSize">What is your preferred group size?</label>
+    <input name="groupSize" type="number" />
+    <label for="birthday">What is your birthday?</label>
+    <input name="birthday" type="date"/>
+    <label for="animal">What is your favorite animal?</label>
+    <input name="animal" type="text"/>
+    <button>Save</button>
+</form>
