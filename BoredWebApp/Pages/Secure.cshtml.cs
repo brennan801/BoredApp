@@ -57,6 +57,7 @@ namespace BoredWebApp.Pages
 
         public void OnPostSave()
         {
+            this.UserName = RouteData.Values["UserName"].ToString();
             UserFavorites userFavorites = new UserFavorites(
                 this.UserName, Request.Form["hobbie"], Int32.Parse(Request.Form["groupSize"].ToString()), 
                 Request.Form["birthday"], Request.Form["animal"]
