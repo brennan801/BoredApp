@@ -22,7 +22,7 @@ namespace BoredWebAppAdmin.Pages
         public void OnGet()
         {
         }
-        public void OnPost()
+        /*public void OnPost()
         {
             var userName = Request.Form["userName"];
             var password = Request.Form["password"];
@@ -41,6 +41,6 @@ namespace BoredWebAppAdmin.Pages
                 numBytesRequested: 256 / 8));
             NewUser user = new(userName, salt, hash);
             databaseService.SaveNewUser(user);
-        }
+        }*/
     }
 }
