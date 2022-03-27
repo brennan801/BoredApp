@@ -1,8 +1,11 @@
 using BoredWebApp.Models;
 using BoredWebApp.Services;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System;
+using System.Threading.Tasks;
 
 namespace BoredWebApp.Pages
 {
@@ -18,9 +21,9 @@ namespace BoredWebApp.Pages
         public string UserName { get; set; }
         public string Message { get; set; }
 
-        public IActionResult OnGet()
-        { 
-            this.UserName = RouteData.Values["UserName"].ToString();
+        public async Task OnGet()
+        {
+            /*this.UserName = RouteData.Values["UserName"].ToString();
             string cookieValue = dBService.GetCookieValue(UserName);
             string actualValue = Request.Cookies[$"{UserName}Cookie"];
             System.Console.WriteLine(cookieValue);
@@ -34,12 +37,15 @@ namespace BoredWebApp.Pages
             {
                 Message = $"Welcome {UserName}";
                 return Page();
+            }*/
+            if (!User.Identity.IsAuthenticated)
+            {
+                await LogIn();
             }
-
         }
-        public IActionResult OnPost()
+        public async Task OnPost()
         {
-            try
+            /*try
             {
                 this.UserName = RouteData.Values["UserName"].ToString();
                 string cookieValue = dBService.GetCookieValue(UserName);
@@ -52,7 +58,8 @@ namespace BoredWebApp.Pages
             {
                 Console.WriteLine(e.Message);
                 return RedirectToPage("LogIn");
-            }
+            }*/
+            await LogOut();
         }
 
         public void OnPostSave()
@@ -63,6 +70,20 @@ namespace BoredWebApp.Pages
                 Request.Form["birthday"], Request.Form["animal"]
                 ) ;
             dBService.SaveFavorites(userFavorites);
+        }
+
+        public async Task LogIn(string reuturnUrl = "/")
+        {
+            await HttpContext.ChallengeAsync("Auth0", new AuthenticationProperties { RedirectUri = reuturnUrl } );
+        }
+
+        public async Task LogOut()
+        {
+            await HttpContext.SignOutAsync("Auth0", new AuthenticationProperties()
+            {
+                RedirectUri = Url.Action("Index", "Home")
+            });
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
         }
     }
 }
