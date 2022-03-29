@@ -13,6 +13,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BoredWebAppAdmin", "BoredWe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdminAPI", "AdminAPI\AdminAPI.csproj", "{1AE90C65-3116-42F1-AA01-56C9A7EF53E5}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8B7A5A2F-C311-4728-9E20-FA8951886DDC}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\adminService.yaml = .github\workflows\adminService.yaml
+		.github\workflows\DbBackup.yaml = .github\workflows\DbBackup.yaml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		BoredShared\BoredShared.projitems*{0f87bc94-63ff-40f7-897a-339511693af1}*SharedItemsImports = 13

@@ -7,7 +7,7 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY BoredWebApp/BoredWebApp.csproj BoredWebApp/
+COPY ["BoredWebApp/BoredWebApp.csproj", "BoredWebApp/"]
 RUN dotnet restore "BoredWebApp/BoredWebApp.csproj"
 COPY . .
 WORKDIR "/src/BoredWebApp"
