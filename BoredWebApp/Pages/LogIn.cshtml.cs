@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Auth0.AspNetCore.Authentication;
 using BoredWebApp.Models;
 using BoredWebApp.Services;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -26,7 +28,7 @@ namespace BoredWebApp.Pages
         {
         }
 
-        public IActionResult OnPost()
+        public async void OnPost()
         {
             /*var userName = Request.Form["userName"];
             var password = Request.Form["password"];
@@ -82,7 +84,22 @@ namespace BoredWebApp.Pages
             {
                 return Page();
             }*/
-            return RedirectToPage("Secure");
+            await Login();
+        }
+
+        public async Task Login(string returnUrl = "/")
+        {
+            var authenticationProperties = new LoginAuthenticationPropertiesBuilder()
+              // Indicate here where Auth0 should redirect the user after a login.
+              // Note that the resulting absolute Uri must be added to the
+              // **Allowed Callback URLs** settings for the app.
+              .WithRedirectUri(returnUrl)
+              .Build();
+
+            await HttpContext.ChallengeAsync(
+              Auth0Constants.AuthenticationScheme,
+              authenticationProperties
+            );
         }
     }
 }

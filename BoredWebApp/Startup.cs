@@ -1,3 +1,4 @@
+using Auth0.AspNetCore.Authentication;
 using BoredWebApp.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
@@ -32,31 +33,10 @@ namespace BoredWebApp
             services.AddSingleton<IBoredAPIService, BoredAPIService>();
             services.AddSingleton<IDBService, DbService>();
             services.AddDistributedMemoryCache();
-            services.AddAuthentication(options =>
-            {
-                options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-                options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-            }).AddCookie().AddOpenIdConnect("Auth0", options =>
-            {
-                options.Authority = $"https://{Configuration["Auth0:Domain"]}";
-                options.ClientId = Configuration["Auth0:ClientID"];
-                options.ClientSecret = Configuration["Auth0:ClientSecret"];
-                options.ResponseType = OpenIdConnectResponseType.Code;
-                options.Scope.Clear();
-                options.Scope.Add("openid");
-                options.CallbackPath = new Microsoft.AspNetCore.Http.PathString("/secure");
-                options.ClaimsIssuer = "Auth0";
-                /*options.Events = new OpenIdConnectEvents
-                {
-                    OnRedirectToIdentityProviderForSignOut = (context) =>
-                    {
-                        var logoutUri = $"https://{Configuration["Auth0:Domain"]}/v2/logout?client_id={Configuration["Auth0:ClientID"]}";
-                        var postLogoutUri = context.Properties.RedirectUri;
-
-                    }
-                }*/
-            });
+            services.AddAuth0WebAppAuthentication(options => {
+                 options.Domain = Configuration["Auth0:Domain"];
+                 options.ClientId = Configuration["Auth0:ClientId"];
+             });
 
             services.AddSession(options =>
             {
