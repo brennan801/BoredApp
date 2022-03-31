@@ -38,6 +38,11 @@ namespace BoredWebApp.Pages
             dBService.SaveActivity(Activity);
         }
 
+        public IActionResult OnPostLogin()
+        {
+            return Redirect("/account/login");
+        }
+
         public async Task OnGet()
         {
             Activity = await boredAPIService.GetRandomActivity();
