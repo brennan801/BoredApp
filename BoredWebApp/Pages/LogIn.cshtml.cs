@@ -87,7 +87,7 @@ namespace BoredWebApp.Pages
             await Login();
         }
 
-        public async Task Login(string returnUrl = "/")
+        public async Task Login(string returnUrl = "/secure")
         {
             var authenticationProperties = new LoginAuthenticationPropertiesBuilder()
               // Indicate here where Auth0 should redirect the user after a login.
