@@ -39,6 +39,8 @@ namespace BoredWebApp
                  options.ClientId = Configuration["Auth0:ClientId"];
              });
 
+            services.AddControllersWithViews();
+
             services.AddSession(options =>
             {
                 options.IdleTimeout = TimeSpan.FromSeconds(60);
