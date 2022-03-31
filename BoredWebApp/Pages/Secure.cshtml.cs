@@ -43,7 +43,7 @@ namespace BoredWebApp.Pages
                 await LogIn();
             }*/
         }
-        public async Task OnPost()
+        public IActionResult OnPost()
         {
             /*try
             {
@@ -59,7 +59,7 @@ namespace BoredWebApp.Pages
                 Console.WriteLine(e.Message);
                 return RedirectToPage("LogIn");
             }*/
-            await LogOut();
+            return Redirect("/account/logout");
         }
 
         public void OnPostSave()
