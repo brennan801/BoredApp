@@ -25,7 +25,7 @@
                             <a class="nav-link text-light" asp-area="" asp-page="/Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Account" asp-action="Login">LogIn</a>
+                            <form asp-controller="Account" asp-action="Login"><button type="submit" class="nav-link text-light" asp-area="" >LogIn</button></form>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-light" asp-page="/SavedActivities">Saved Activities</a>
