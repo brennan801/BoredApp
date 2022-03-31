@@ -38,10 +38,10 @@ namespace BoredWebApp.Pages
                 Message = $"Welcome {UserName}";
                 return Page();
             }*/
-            if (!User.Identity.IsAuthenticated)
+            /*if (!User.Identity.IsAuthenticated)
             {
                 await LogIn();
-            }
+            }*/
         }
         public async Task OnPost()
         {
