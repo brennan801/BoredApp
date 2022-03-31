@@ -28,7 +28,7 @@ namespace BoredWebApp.Pages
 
         public IActionResult OnPost()
         {
-            var userName = Request.Form["userName"];
+            /*var userName = Request.Form["userName"];
             var password = Request.Form["password"];
             byte[] salt = Array.Empty<byte>();
             string oldHash = "";
@@ -81,7 +81,8 @@ namespace BoredWebApp.Pages
             else
             {
                 return Page();
-            }
+            }*/
+            return RedirectToPage("Secure");
         }
     }
 }
