@@ -30,6 +30,7 @@ namespace BoredWebApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
+            services.AddMvc();
             services.AddSingleton<IBoredAPIService, BoredAPIService>();
             services.AddSingleton<IDBService, DbService>();
             services.AddDistributedMemoryCache();
@@ -74,6 +75,7 @@ namespace BoredWebApp
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();
+                endpoints.MapControllers();
             });
         }
     }

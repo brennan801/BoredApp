@@ -96,10 +96,10 @@ namespace BoredWebApp.Pages
               .WithRedirectUri(returnUrl)
               .Build();
 
-            await HttpContext.ChallengeAsync(
-              Auth0Constants.AuthenticationScheme,
-              authenticationProperties
-            );
+              await HttpContext.ChallengeAsync(
+                  Auth0Constants.AuthenticationScheme,
+                  authenticationProperties
+                );
         }
     }
 }

@@ -5,8 +5,11 @@ using System.Threading.Tasks;
 
 namespace BoredWebApp.Controllers
 {
+    [ApiController]
+    [Route("/[controller]")]
     public class AccountController : Controller
     {
+        [HttpGet("login")]
         public async Task Login(string returnUrl = "/Secure")
         {
             var authenticationProperties = new LoginAuthenticationPropertiesBuilder()
