@@ -20,6 +20,12 @@ namespace BoredWebAppAdmin
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
+                    webBuilder.ConfigureAppConfiguration((context, configBuilder) =>
+                    {
+                        string envName = context.HostingEnvironment.EnvironmentName;
+                        configBuilder.Sources.Clear();
+                        configBuilder.AddJsonFile("admin.appsettings.json", optional: false);
+                    });
                     webBuilder.UseStartup<Startup>();
                 });
     }

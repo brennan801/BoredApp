@@ -14,10 +14,10 @@ COPY . .
 WORKDIR "/src/BoredWebAppAdmin"
 RUN dotnet build "BoredWebAppAdmin.csproj" -c Release -o /app/build
 
-FROM build AS publish
-RUN dotnet publish "BoredWebAppAdmin.csproj" -c Release -o /app/publish
-
-FROM base AS final
-WORKDIR /app
-COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "BoredWebAppAdmin.dll"]
+#FROM build AS publish
+#RUN dotnet publish "BoredWebAppAdmin.csproj" -c Release -o /app/publish
+#
+#FROM base AS final
+#WORKDIR /app
+#COPY --from=publish /app/publish .
+#ENTRYPOINT ["dotnet", "BoredWebAppAdmin.dll"]
