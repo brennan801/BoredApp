@@ -10,7 +10,7 @@ namespace BoredWebApp.Controllers
     public class AccountController : Controller
     {
         [HttpGet("login")]
-        public async Task Login(string returnUrl = "/Secure")
+        public async Task Login(string returnUrl = "/")
         {
             var authenticationProperties = new LoginAuthenticationPropertiesBuilder()
               // Indicate here where Auth0 should redirect the user after a login.
