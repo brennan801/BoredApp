@@ -29,7 +29,7 @@ namespace BoredWebApp.Pages
         public async Task OnGet()
         {
             Name = User.Identity.Name;
-            EmailAddress = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
+            EmailAddress = User.Claims.FirstOrDefault(c => c.Type == "email")?.Value;
             System.Console.WriteLine($"Email Address: {EmailAddress}");
             ProfileImage = User.Claims.FirstOrDefault(c => c.Type == "picture")?.Value;
         }
