@@ -15,6 +15,7 @@ WORKDIR "/src/BoredWebAppAdmin"
 RUN dotnet build "BoredWebAppAdmin.csproj" -c Release -o /app/build
 
 FROM build AS publish
+RUN dotnet run --urls=http://0.0.0.0:80/
 RUN dotnet publish "BoredWebAppAdmin.csproj" -c Release -o /app/publish
 
 FROM base AS final
