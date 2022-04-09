@@ -22,7 +22,7 @@ namespace BoredWebApp.Pages
             this.dBService = dBService;
         }
         public string Name { get; private set; }
-        public object EmailAddress { get; private set; }
+        public string EmailAddress { get; private set; }
         public string ProfileImage { get; private set; }
         public string Message { get; set; }
 
