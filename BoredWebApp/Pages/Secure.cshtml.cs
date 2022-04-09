@@ -30,7 +30,8 @@ namespace BoredWebApp.Pages
         {
             Name = User.Identity.Name;
             EmailAddress = User.Claims.FirstOrDefault(c => c.Type == "email")?.Value;
-            System.Console.WriteLine($"Email Address: {EmailAddress}");
+            Console.WriteLine("Email Address: ");
+            System.Console.WriteLine(EmailAddress);
             ProfileImage = User.Claims.FirstOrDefault(c => c.Type == "picture")?.Value;
         }
         public IActionResult OnPost()
