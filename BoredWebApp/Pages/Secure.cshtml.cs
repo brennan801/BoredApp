@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System;
+using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace BoredWebApp.Pages
@@ -18,14 +20,17 @@ namespace BoredWebApp.Pages
         public SecureModel(IDBService dBService)
         {
             this.dBService = dBService;
-            UserName = "";
         }
-        public string UserName { get; set; }
+        public string Name { get; private set; }
+        public object EmailAddress { get; private set; }
+        public string ProfileImage { get; private set; }
         public string Message { get; set; }
 
         public async Task OnGet()
         {
-            
+            Name = User.Identity.Name;
+            EmailAddress = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
+            ProfileImage = User.Claims.FirstOrDefault(c => c.Type == "picture")?.Value;
         }
         public IActionResult OnPost()
         {
@@ -34,12 +39,6 @@ namespace BoredWebApp.Pages
 
         public void OnPostSave()
         {
-            this.UserName = RouteData.Values["UserName"].ToString();
-            UserFavorites userFavorites = new UserFavorites(
-                this.UserName, Request.Form["hobbie"], Int32.Parse(Request.Form["groupSize"].ToString()), 
-                Request.Form["birthday"], Request.Form["animal"]
-                ) ;
-            dBService.SaveFavorites(userFavorites);
         }
 
         public async Task LogIn(string reuturnUrl = "/")

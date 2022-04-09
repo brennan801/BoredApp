@@ -2,7 +2,13 @@
 @model BoredWebApp.Pages.SecureModel
 @{
 }
-<h1>Welcome @Model.UserName</h1>
+<h1>Welcome @Model.Name</h1>
+<div>
+    email: @Model.EmailAddress
+</div>
+<div>
+    photo: @Model.ProfileImage
+</div>
 
 <form method="POST">
     <button>Logout</button>
