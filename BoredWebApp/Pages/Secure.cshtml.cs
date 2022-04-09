@@ -25,13 +25,13 @@ namespace BoredWebApp.Pages
         public string EmailAddress { get; private set; }
         public string ProfileImage { get; private set; }
         public string Message { get; set; }
-
         public async Task OnGet()
         {
+            var accessToken = await HttpContext.GetTokenAsync("access_token");
+            Console.WriteLine(accessToken);
             Name = User.Identity.Name;
-            EmailAddress = User.Claims.FirstOrDefault(c => c.Type == "email")?.Value;
-            Console.WriteLine("Email Address: ");
-            System.Console.WriteLine(EmailAddress);
+
+            EmailAddress = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
             ProfileImage = User.Claims.FirstOrDefault(c => c.Type == "picture")?.Value;
         }
         public IActionResult OnPost()
