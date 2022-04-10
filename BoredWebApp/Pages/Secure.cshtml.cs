@@ -12,6 +12,7 @@ using System.IO;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using System.Web.Helpers;
 
 namespace BoredWebApp.Pages
 {
@@ -46,12 +47,13 @@ namespace BoredWebApp.Pages
 
         public IActionResult OnPostSave()
         {
+            var photo = WebImage.GetImageFromRequest();
             var id = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
             var name = Request.Form["name"];
 
             var fileName = $"{id}_profile";
 
-            myAPIService.AddImageToDisk(Image);
+            photo.Save($"../../wwwroot/uploads/{fileName}");
 
             dBService.SaveNameAndPhoto(id, name, fileName);
             return Redirect("/Secure");
