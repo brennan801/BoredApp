@@ -27,8 +27,8 @@ namespace BoredWebApp.Pages
         public string Message { get; set; }
         public async Task OnGet()
         {
-            
-            Name = User.Identity.Name;
+
+            Name = User.Claims.FirstOrDefault(c => c.Type == "name")?.Value;
             ID = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
             dBService.AddUser(ID, Name);
         }
