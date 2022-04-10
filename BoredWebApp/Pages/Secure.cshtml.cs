@@ -21,11 +21,13 @@ namespace BoredWebApp.Pages
     {
         private readonly IDBService dBService;
         private readonly IMyAPIService myAPIService;
+        private readonly IHostingEnvironment hostingEnvironment;
 
-        public SecureModel(IDBService dBService, IMyAPIService myAPIService)
+        public SecureModel(IDBService dBService, IMyAPIService myAPIService, IHostingEnvironment hostingEnvironment)
         {
             this.dBService = dBService;
             this.myAPIService = myAPIService;
+            this.hostingEnvironment = hostingEnvironment;
         }
         public string Name { get; private set; }
         public string ID { get; private set; }
@@ -33,7 +35,7 @@ namespace BoredWebApp.Pages
         public string Message { get; set; }
 
         [BindProperty]
-        public WebImage Image { get; set; }
+        public IFormFile Image { get; set; }
 
         public async Task OnGet()
         {
@@ -52,9 +54,9 @@ namespace BoredWebApp.Pages
 
             var fileName = $"{id}_profile";
 
-            var imagePath = @"uploads\" + fileName;
-
-            Image.Save(@"~\" + fileName);
+            var path = Path.Combine(hostingEnvironment.WebRootPath, "uploads", fileName);
+            var stream = new FileStream(path, FileMode.Create);
+            Image.CopyToAsync(stream);
 
             dBService.SaveNameAndPhoto(id, name, fileName);
             return Redirect("/Secure");
