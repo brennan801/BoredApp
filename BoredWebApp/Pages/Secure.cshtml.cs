@@ -39,6 +39,10 @@ namespace BoredWebApp.Pages
 
         public void OnPostSave()
         {
+            var id = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+            var name = Request.Form["name"];
+            var picture = Request.Form["image"];
+            dBService.SaveNameAndPhoto(id, name, picture);
         }
 
         public async Task LogIn(string reuturnUrl = "/")

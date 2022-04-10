@@ -2,6 +2,7 @@
 using BoredWebApp.Models;
 using Dapper;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Primitives;
 using Npgsql;
 using System;
 using System.Collections.Generic;
@@ -227,6 +228,34 @@ namespace BoredWebApp.Services
                         "INSERT INTO UserFavorites (ID) " +
                         "VALUES (@ID) " +
                         "ON CONFLICT (ID) DO NOTHING; ",
+                        parameters
+                        );
+                }
+            }
+            catch (Npgsql.PostgresException e)
+            {
+                throw new Exception("Error Saving UserFavorites: " + e.Message);
+            }
+        }
+
+        public void SaveNameAndPhoto(string id, string name, string picture)
+        {
+            var connection = new NpgsqlConnection(config.GetValue<string>("psqldb"));
+            var dictionary = new Dictionary<string, object>
+            {
+                { "@ID", id },
+                { "@Name", name },
+                { "@Picture", picture }
+            };
+            var parameters = new DynamicParameters(dictionary);
+            try
+            {
+                using (connection)
+                {
+                    connection.Execute(
+                        "UPDATE UserFavorites " +
+                        "SET name = @Name, photo = @Picture " +
+                        "Where ID = @ID;",
                         parameters
                         );
                 }
