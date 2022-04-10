@@ -43,7 +43,7 @@ namespace BoredWebApp.Pages
             var name = Request.Form["name"];
             var picture = Request.Form["image"];
             dBService.SaveNameAndPhoto(id, name, picture);
-            return Page();
+            return Redirect("/Secure");
         }
 
         public async Task LogIn(string reuturnUrl = "/")
