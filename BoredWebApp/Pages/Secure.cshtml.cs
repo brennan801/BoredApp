@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Extensions.Hosting.Internal;
 using System;
 using System.IO;
 using System.Linq;
@@ -20,12 +19,12 @@ namespace BoredWebApp.Pages
     public class SecureModel : PageModel
     {
         private readonly IDBService dBService;
-        private readonly IWebHostEnvironment hostEnvironment;
+        private readonly IMyAPIService myAPIService;
 
-        public SecureModel(IDBService dBService, IWebHostEnvironment hostEnvironment)
+        public SecureModel(IDBService dBService, IMyAPIService myAPIService)
         {
             this.dBService = dBService;
-            this.hostEnvironment = hostEnvironment;
+            this.myAPIService = myAPIService;
         }
         public string Name { get; private set; }
         public string ID { get; private set; }
@@ -51,9 +50,8 @@ namespace BoredWebApp.Pages
             var name = Request.Form["name"];
 
             var fileName = $"{id}_profile";
-            var uploads = Path.Combine(hostEnvironment.WebRootPath, "uploads");
-            var filePath = Path.Combine(uploads, fileName);
-            this.Image.CopyTo(new FileStream(filePath, FileMode.Create));
+
+            myAPIService.AddImageToDisk(Image);
 
             dBService.SaveNameAndPhoto(id, name, fileName);
             return Redirect("/Secure");

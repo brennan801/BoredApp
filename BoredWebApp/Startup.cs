@@ -33,6 +33,7 @@ namespace BoredWebApp
             services.AddMvc();
             services.AddSingleton<IBoredAPIService, BoredAPIService>();
             services.AddSingleton<IDBService, DbService>();
+            services.AddSingleton<IMyAPIService, MyAPIService>();
             services.AddDistributedMemoryCache();
             services.AddAuth0WebAppAuthentication(options => {
                  options.Domain = Configuration["Auth0:Domain"];
