@@ -211,13 +211,12 @@ namespace BoredWebApp.Services
         }
 
 
-        public void AddUser(string ID, string Name)
+        public void AddUser(string ID)
         {
             var connection = new NpgsqlConnection(config.GetValue<string>("psqldb"));
             var dictionary = new Dictionary<string, object>
             {
-                { "@ID", ID },
-                { "@Name", Name }
+                { "@ID", ID }
             };
             var parameters = new DynamicParameters(dictionary);
             try
@@ -225,8 +224,8 @@ namespace BoredWebApp.Services
                 using (connection)
                 {
                     connection.Execute(
-                        "INSERT INTO UserFavorites (ID, name) " +
-                        "VALUES (@ID, @Name) " +
+                        "INSERT INTO UserFavorites (ID) " +
+                        "VALUES (@ID) " +
                         "ON CONFLICT (ID) DO NOTHING; ",
                         parameters
                         );

@@ -15,13 +15,14 @@
 </form>
 
 <form asp-page-handler="save" method="POST">
-    <label for="hobbie">What is your favorite hobby?</label>
-    <input name="hobbie" type="text" />
-    <label for="groupSize">What is your preferred group size?</label>
-    <input name="groupSize" type="number" />
-    <label for="birthday">What is your birthday?</label>
-    <input name="birthday" type="date"/>
-    <label for="animal">What is your favorite animal?</label>
-    <input name="animal" type="text"/>
+    <div>
+        <label for="name">What is your prefered name?</label>
+        <input name="name" type="text" />
+    </div>
+    
+    <div>
+        <label for="image">User Profile Pic</label>
+        <input name="image" type="file"/>
+    </div>
     <button>Save</button>
 </form>

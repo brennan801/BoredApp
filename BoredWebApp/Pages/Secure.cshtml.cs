@@ -30,7 +30,7 @@ namespace BoredWebApp.Pages
 
             Name = User.Claims.FirstOrDefault(c => c.Type == "name")?.Value;
             ID = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
-            dBService.AddUser(ID, Name);
+            dBService.AddUser(ID);
         }
         public IActionResult OnPost()
         {
