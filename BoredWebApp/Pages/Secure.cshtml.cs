@@ -3,6 +3,7 @@ using BoredWebApp.Services;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -19,10 +20,12 @@ namespace BoredWebApp.Pages
     public class SecureModel : PageModel
     {
         private readonly IDBService dBService;
+        private readonly IWebHostEnvironment hostEnvironment;
 
-        public SecureModel(IDBService dBService)
+        public SecureModel(IDBService dBService, IWebHostEnvironment hostEnvironment)
         {
             this.dBService = dBService;
+            this.hostEnvironment = hostEnvironment;
         }
         public string Name { get; private set; }
         public string ID { get; private set; }
@@ -42,17 +45,15 @@ namespace BoredWebApp.Pages
             return Redirect("/account/logout");
         }
 
-        public async Task<IActionResult> OnPostSave()
+        public IActionResult OnPostSave()
         {
             var id = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
             var name = Request.Form["name"];
 
             var fileName = $"{id}_profile";
-
-            using (var stream = System.IO.File.Create($"/uploads/{fileName}"))
-            {
-                await Image.CopyToAsync(stream);
-            }
+            var uploads = Path.Combine(hostEnvironment.WebRootPath, "uploads");
+            var filePath = Path.Combine(uploads, fileName);
+            this.Image.CopyTo(new FileStream(filePath, FileMode.Create));
 
             dBService.SaveNameAndPhoto(id, name, fileName);
             return Redirect("/Secure");
