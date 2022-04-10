@@ -40,11 +40,9 @@ namespace BoredWebApp.Services
                     );
                 connection.Execute(
                    "CREATE TABLE IF NOT EXISTS UserFavorites(" +
-                   "username VARCHAR(128) PRIMARY KEY," +
-                   "hobbie VARCHAR(64)," +
-                   "groupSize INTEGER," +
-                   "birthday VARCHAR(64)," +
-                   "animal VARCHAR(64));"
+                   "ID VARCHAR(128) PRIMARY KEY," +
+                   "name VARCHAR(128)," +
+                   "photo VARCHAR(256);" 
                    );
             }
 
@@ -212,16 +210,14 @@ namespace BoredWebApp.Services
             }
         }
 
-        public void SaveFavorites(UserFavorites userFavorites)
+
+        public void AddUser(string ID, string Name)
         {
             var connection = new NpgsqlConnection(config.GetValue<string>("psqldb"));
             var dictionary = new Dictionary<string, object>
             {
-                { "@UserName", userFavorites.UserName.Value },
-                { "@Hobbie",  userFavorites.Hobbie },
-                { "@GroupSize",  userFavorites.GroupSize },
-                { "@Birthday",  userFavorites.Birthday },
-                { "@FaveAnimal",  userFavorites.FaveAnimal },
+                { "@ID", ID },
+                { "@Name", Name }
             };
             var parameters = new DynamicParameters(dictionary);
             try
@@ -229,10 +225,9 @@ namespace BoredWebApp.Services
                 using (connection)
                 {
                     connection.Execute(
-                        "INSERT INTO UserFavorites " +
-                        "VALUES (@UserName, @Hobbie, @GroupSize, @Birthday, @FaveAnimal) " +
-                        "ON CONFLICT (username) DO UPDATE " +
-                        "SET hobbie = Excluded.hobbie, groupsize = Excluded.groupsize, birthday = Excluded.birthday, animal = Excluded.animal;",
+                        "INSERT INTO UserFavorites (ID, Name) " +
+                        "VALUES (@ID, Name) " +
+                        "ON CONFLICT (ID) DO NOTHING; ",
                         parameters
                         );
                 }

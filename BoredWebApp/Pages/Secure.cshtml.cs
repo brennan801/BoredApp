@@ -22,16 +22,15 @@ namespace BoredWebApp.Pages
             this.dBService = dBService;
         }
         public string Name { get; private set; }
-        public string EmailAddress { get; private set; }
+        public string ID { get; private set; }
         public string ProfileImage { get; private set; }
         public string Message { get; set; }
         public async Task OnGet()
         {
+            
             Name = User.Identity.Name;
-            EmailAddress = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
-            ProfileImage = User.Claims.FirstOrDefault(c => c.Type == "picture")?.Value;
-
-
+            ID = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+            dBService.AddUser(ID, Name);
         }
         public IActionResult OnPost()
         {
