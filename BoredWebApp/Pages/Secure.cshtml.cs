@@ -3,9 +3,12 @@ using BoredWebApp.Services;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.Hosting.Internal;
 using System;
+using System.IO;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -25,10 +28,12 @@ namespace BoredWebApp.Pages
         public string ID { get; private set; }
         public string ProfileImage { get; private set; }
         public string Message { get; set; }
+
+        [BindProperty]
+        public IFormFile Image { get; set; }
+
         public async Task OnGet()
         {
-
-            Name = User.Claims.FirstOrDefault(c => c.Type == "name")?.Value;
             ID = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
             dBService.AddUser(ID);
         }
@@ -37,12 +42,19 @@ namespace BoredWebApp.Pages
             return Redirect("/account/logout");
         }
 
-        public IActionResult OnPostSave()
+        public async Task<IActionResult> OnPostSave()
         {
             var id = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
             var name = Request.Form["name"];
-            var picture = Request.Form["image"];
-            dBService.SaveNameAndPhoto(id, name, picture);
+
+            var fileName = $"{id}_profile";
+
+            using (var stream = System.IO.File.Create($"/uploads/{fileName}"))
+            {
+                await Image.CopyToAsync(stream);
+            }
+
+            dBService.SaveNameAndPhoto(id, name, fileName);
             return Redirect("/Secure");
         }
 

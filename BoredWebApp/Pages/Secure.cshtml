@@ -4,9 +4,6 @@
 }
 <h1>Welcome @Model.Name</h1>
 <div>
-    email: @Model.ID
-</div>
-<div>
     <img src="@Model.ProfileImage"/>
 </div>
 
@@ -22,7 +19,7 @@
     
     <div>
         <label for="image">User Profile Pic</label>
-        <input name="image" type="file"/>
+        <input name="image" type="file" asp-for="Image"/>
     </div>
-    <button>Save</button>
+    <button type="submit">Save</button>
 </form>
