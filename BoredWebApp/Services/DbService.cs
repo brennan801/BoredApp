@@ -225,8 +225,8 @@ namespace BoredWebApp.Services
                 using (connection)
                 {
                     connection.Execute(
-                        "INSERT INTO UserFavorites (ID, Name) " +
-                        "VALUES (@ID, Name) " +
+                        "INSERT INTO UserFavorites (ID, name) " +
+                        "VALUES (@ID, @Name) " +
                         "ON CONFLICT (ID) DO NOTHING; ",
                         parameters
                         );
