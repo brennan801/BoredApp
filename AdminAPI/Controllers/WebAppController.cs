@@ -15,7 +15,7 @@ namespace AdminAPI.Controllers
             {
                 StartInfo = new()
                 {
-                    FileName = "mkdir",
+                    FileName = "echo",
                     Arguments = "BrennanUploads",
                     RedirectStandardOutput = true,
                     RedirectStandardError = true,
