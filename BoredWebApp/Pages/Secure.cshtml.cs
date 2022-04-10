@@ -53,7 +53,9 @@ namespace BoredWebApp.Pages
 
             var fileName = $"{id}_profile";
 
-            photo.Save($"../../wwwroot/uploads/{fileName}");
+            var imagePath = @"uploads\" + fileName;
+
+            photo.Save(@"~\" + fileName);
 
             dBService.SaveNameAndPhoto(id, name, fileName);
             return Redirect("/Secure");
