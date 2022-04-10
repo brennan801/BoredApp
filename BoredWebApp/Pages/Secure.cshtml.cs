@@ -33,7 +33,7 @@ namespace BoredWebApp.Pages
         public string Message { get; set; }
 
         [BindProperty]
-        public IFormFile Image { get; set; }
+        public WebImage Image { get; set; }
 
         public async Task OnGet()
         {
@@ -47,7 +47,6 @@ namespace BoredWebApp.Pages
 
         public IActionResult OnPostSave()
         {
-            var photo = WebImage.GetImageFromRequest();
             var id = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
             var name = Request.Form["name"];
 
@@ -55,7 +54,7 @@ namespace BoredWebApp.Pages
 
             var imagePath = @"uploads\" + fileName;
 
-            photo.Save(@"~\" + fileName);
+            Image.Save(@"~\" + fileName);
 
             dBService.SaveNameAndPhoto(id, name, fileName);
             return Redirect("/Secure");
