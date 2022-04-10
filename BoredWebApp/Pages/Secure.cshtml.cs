@@ -37,12 +37,13 @@ namespace BoredWebApp.Pages
             return Redirect("/account/logout");
         }
 
-        public void OnPostSave()
+        public IActionResult OnPostSave()
         {
             var id = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
             var name = Request.Form["name"];
             var picture = Request.Form["image"];
             dBService.SaveNameAndPhoto(id, name, picture);
+            return Page();
         }
 
         public async Task LogIn(string reuturnUrl = "/")
