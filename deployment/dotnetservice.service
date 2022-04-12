@@ -5,7 +5,7 @@ Description=Service in .NET
 Type=simple
 Environment=ASPNETCORE_URLS=http://0.0.0.0:5000 
 EnvironmentFile=/home/github/actions-runner/_work/BoredApp/BoredApp/AdminAPI/.env
-ExecStart=dotnet /home/github/actions-runner/_work/BoredApp/BoredApp/AdminAPI/bin/Debug/net5.0/AdminAPI.dll
+ExecStart=dotnet /home/github/actions-runner/_work/BoredApp/BoredApp/AdminAPI/bin/Debug/net6.0/AdminAPI.dll
 User=github
 
 [Install]
