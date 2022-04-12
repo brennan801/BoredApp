@@ -7,5 +7,6 @@
     }
   },
   "AllowedHosts": "*",
-  "HostUrl":  "http://*:80"
+  "HostUrl":  "http://*:80",
+  "Urls":  "http://*:80"
 }
