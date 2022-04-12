@@ -21,6 +21,9 @@ services:
         restart: always
 
     admin_site:
+        environment:
+            - HostUrl=http://*:80
+            - DOTNET_RUNNING_IN_CONTAINER=true
         build:
             context: ..
             dockerfile: BoredWebAppAdmin/Dockerfile
