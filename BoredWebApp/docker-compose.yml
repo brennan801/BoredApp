@@ -22,7 +22,7 @@ services:
 
     admin_site:
         environment:
-            - ASPNETCORE_URLS=http://*:80
+            - ASPNETCORE_URLS=http://0.0.0.0:5000
             - DOTNET_RUNNING_IN_CONTAINER=true
         build:
             context: ..
