@@ -40,5 +40,5 @@ ENV ASPNETCORE_URLS=http://+:80 \
     DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=true
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "BoredWebAppAdmin.dll"]
+ENTRYPOINT ["dotnet", "--server.urls", "http://*80", "BoredWebAppAdmin.dll"]
 
