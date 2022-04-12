@@ -14,7 +14,7 @@ COPY ["BoredWebApp/BoredWebApp.csproj", "BoredWebApp/"]
 RUN dotnet restore "BoredWebAppAdmin/BoredWebAppAdmin.csproj"
 COPY . .
 WORKDIR "/src/BoredWebAppAdmin"
-ENV ASPNETCORE_URLS=http://+:80 \
+ENV ASPNETCORE_URLS=http://*:80 \
     # Enable detection of running in a container
     DOTNET_RUNNING_IN_CONTAINER=true \
     # Set the invariant mode since icu_libs isn't included (see https://github.com/dotnet/announcements/issues/20)
@@ -22,7 +22,7 @@ ENV ASPNETCORE_URLS=http://+:80 \
 RUN dotnet build "BoredWebAppAdmin.csproj" -c Release -o /app/build
 
 FROM build AS publish
-ENV ASPNETCORE_URLS=http://+:80 \
+ENV ASPNETCORE_URLS=http://*:80 \
     # Enable detection of running in a container
     DOTNET_RUNNING_IN_CONTAINER=true \
     # Set the invariant mode since icu_libs isn't included (see https://github.com/dotnet/announcements/issues/20)
@@ -33,12 +33,12 @@ RUN dotnet publish "BoredWebAppAdmin.csproj" -c Release -o /app/publish
 
 FROM base AS final
 # Configure web servers to bind to port 80 when present
-ENV ASPNETCORE_URLS=http://+:80 \
+ENV ASPNETCORE_URLS=http://*:80 \
     # Enable detection of running in a container
     DOTNET_RUNNING_IN_CONTAINER=true \
     # Set the invariant mode since icu_libs isn't included (see https://github.com/dotnet/announcements/issues/20)
     DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=true
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "--server.urls", "http://*80", "BoredWebAppAdmin.dll"]
+ENTRYPOINT ["dotnet", "BoredWebAppAdmin.dll"]
 

@@ -26,8 +26,8 @@ namespace BoredWebAppAdmin
                         configBuilder.Sources.Clear();
                         configBuilder.AddJsonFile("admin.appsettings.json", optional: false);
                     });
-                    webBuilder.UseUrls("http://*:80");
                     webBuilder.UseStartup<Startup>();
+                    webBuilder.UseUrls("http://*:80");
                 });
     }
 }
