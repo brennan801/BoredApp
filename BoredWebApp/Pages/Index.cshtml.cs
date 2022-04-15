@@ -67,7 +67,7 @@ namespace BoredWebApp.Pages
             comment.Date = date;
             comment.Body = Request.Form["body"];
             dBService.SaveComment(comment);
-            return Page();
+            return RedirectToPage();
         }
 
         public async Task OnGet()
