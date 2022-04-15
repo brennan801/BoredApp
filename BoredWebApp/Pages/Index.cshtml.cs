@@ -31,11 +31,11 @@ namespace BoredWebApp.Pages
         {
             this.boredAPIService = boredAPIService;
             this.dBService = dBService;
+            Comments = dBService.GetComments();
             Activity = new ActivityModel();
             SpecificActivity = new ActivityModel();
             SpecificActivity.Activity = "Generate New Activity With Form";
             ActivityFormRequest = new ActivityFormRequest();
-            Comments = dBService.GetComments();
 
         }
 
