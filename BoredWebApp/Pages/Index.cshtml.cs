@@ -56,7 +56,11 @@ namespace BoredWebApp.Pages
             Comment comment = new Comment();
             if (User.Identity.IsAuthenticated)
             {
-                comment.UserName = User.Identity.Name;
+                comment.UserName = User.Claims.FirstOrDefault(c => c.Type == "name")?.Value;
+                if(comment.UserName is null)
+                {
+                    comment.UserName = "NoName";
+                }
             }
             else
             {
