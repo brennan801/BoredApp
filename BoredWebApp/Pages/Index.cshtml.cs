@@ -20,6 +20,8 @@ namespace BoredWebApp.Pages
 
         public ActivityModel Activity { get; set; }
         public ActivityModel SpecificActivity { get; set; }
+
+        [BindProperty]
         public List<Comment> Comments { get; set; }
 
         [BindProperty]
@@ -33,7 +35,8 @@ namespace BoredWebApp.Pages
             SpecificActivity = new ActivityModel();
             SpecificActivity.Activity = "Generate New Activity With Form";
             ActivityFormRequest = new ActivityFormRequest();
-            
+            Comments = dBService.GetComments();
+
         }
 
         public void OnPostSave()
