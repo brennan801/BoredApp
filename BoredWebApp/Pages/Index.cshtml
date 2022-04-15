@@ -80,14 +80,14 @@
                     <h4>Type: @Model.SpecificActivity.Type</h4>
                     <h4>Number of participants: @Model.SpecificActivity.Participants</h4>
                     <h4>Price: @Model.SpecificActivity.Price</h4>
-                    @*<h4>Accessibility: @Model.SpecificActivity.Accessibility</h4>*@
+                    <h4>Accessibility: @Model.SpecificActivity.Accessibility</h4>
                 </div>
             </div>
         </div>
     </div>
     <div>
         <h5>Comments:</h5>
-        <div>
+        @*<div>
             @foreach(Comment comment in Model.Comments)
             {
                 <div class="my-2 row">
@@ -96,7 +96,7 @@
                     <p class="col-8">@comment.Body</p>
                 </div>
             }
-        </div>
+        </div>*@
         <div class="row">
             <h5>Post New Comment</h5>
             <form method="post" asp-page-handler="comment">
