@@ -48,6 +48,7 @@ namespace BoredWebApp.Pages
 
         public void OnPostComment()
         {
+            Console.WriteLine("Hi!");
             Comment comment = new Comment();
             if (User.Identity.IsAuthenticated)
             {
