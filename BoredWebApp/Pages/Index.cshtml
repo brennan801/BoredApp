@@ -90,7 +90,7 @@
         <div>
             @foreach(Comment comment in Model.Comments)
             {
-                <div class="my-2 row border" style="background-color: darkgray">
+                <div class="my-2 row border" style="background-color: #1D1D1D">
                     <p class="col-2">Author: @comment.UserName</p>
                     <p class="col-2">Date: @comment.Date</p>
                     <p class="col-8">@comment.Body</p>
@@ -100,8 +100,12 @@
         <div>
             <h5>Post New Comment</h5>
         <form method="post" asp-page-handler="comment">
-            <textarea rows="5" cols="50" name="body"></textarea>
-            <button class="main-button p-2"></button>
+            <div class="row">
+                <textarea rows="3" cols="100" name="body"></textarea>
+            </div>
+            <div class="row">
+                <button class="main-button p-2"></button>
+            </div>
         </form>
         </div>
         
