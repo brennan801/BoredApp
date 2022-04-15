@@ -50,14 +50,15 @@ namespace BoredWebApp.Pages
         {
             Console.WriteLine("Hi!");
             Comment comment = new Comment();
-            if (User.Identity.IsAuthenticated)
+            /*if (User.Identity.IsAuthenticated)
             {
                 comment.User = User.Identity.Name;
             }
             else
             {
                 comment.User = "Guest";
-            }
+            }*/
+            comment.User = "Guest";
             comment.Date = DateTime.Now.Date.ToString();
             comment.Body = Request.Form["body"];
             dBService.SaveComment(comment);
