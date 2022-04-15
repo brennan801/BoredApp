@@ -47,7 +47,7 @@ namespace BoredWebApp.Services
                    );
                 connection.Execute(
                     "CREATE TABLE IF NOT EXISTS Comments(" +
-                    "\"user\" VARCHAR(32)," +
+                    "userName VARCHAR(32)," +
                     "date VARCHAR(128)," +
                     "body TEXT);"
                     );
@@ -289,7 +289,7 @@ namespace BoredWebApp.Services
             var connection = new NpgsqlConnection(config.GetValue<string>("psqldb"));
             var dictionary = new Dictionary<string, object>
             {
-                { "@User", comment.User },
+                { "@User", comment.UserName },
                 { "@Date", comment.Date },
                 { "@Body", comment.Body }
             };

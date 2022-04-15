@@ -63,7 +63,7 @@ namespace BoredWebApp.Pages
             {
                 comment.User = "Guest";
             }*/
-            comment.User = user;
+            comment.UserName = user;
             comment.Date = date;
             comment.Body = Request.Form["body"];
             dBService.SaveComment(comment);
@@ -74,7 +74,7 @@ namespace BoredWebApp.Pages
         {
             Activity = await boredAPIService.GetRandomActivity();
             Comments = dBService.GetComments();
-            Console.WriteLine(Comments[0].User);
+            Console.WriteLine(Comments[0].UserName);
         }
 
         public async Task OnPost()

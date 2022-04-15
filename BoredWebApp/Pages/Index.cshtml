@@ -91,7 +91,7 @@
             @foreach(Comment comment in Model.Comments)
             {
                 <div class="my-2 row border">
-                    <p class="col-2">Author: @comment.User</p>
+                    <p class="col-2">Author: @comment.UserName</p>
                     <p class="col-2">Date: @comment.Date</p>
                     <p class="col-8">@comment.Body</p>
                 </div>
