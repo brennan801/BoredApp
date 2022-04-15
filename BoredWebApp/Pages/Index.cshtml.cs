@@ -73,11 +73,11 @@ namespace BoredWebApp.Pages
         {
             Activity = await boredAPIService.GetRandomActivity();
             Comments = dBService.GetComments();
+            Console.WriteLine(Comments[0].User);
         }
 
         public async Task OnPost()
         {
-            Console.WriteLine("Shouldn't hit this");
             var minandMaxPrice = computeMinAndMaxPrice(ActivityFormRequest.Price);
             var minPrice = minandMaxPrice[0];
             var maxPrice = minandMaxPrice[1];
