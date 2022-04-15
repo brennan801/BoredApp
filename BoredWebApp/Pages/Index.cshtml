@@ -84,21 +84,20 @@
                 </div>
             </div>
         </div>
-        <div class="spacer-400"></div>
-
+    </div>
+    <div>
+        <h5>Comments:</h5>
         <div>
-            <h5>Comments:</h5>
-            <div>
-                @foreach(Comment comment in Model.Comments)
-                {
-
-                    <div class="my-2">
-                        <p>Author: @comment.User</p>
-                        <p>Date: @comment.Date</p>
-                        <p>@comment.Body</p>
-                    </div>
-                }
-            </div>
+            @foreach(Comment comment in Model.Comments)
+            {
+                <div class="my-2 row">
+                    <p class="col-2">Author: @comment.User</p>
+                    <p class="col-2">Date: @comment.Date</p>
+                    <p class="col-8">@comment.Body</p>
+                </div>
+            }
+        </div>
+        <div class="row">
             <h5>Post New Comment</h5>
             <form method="post" asp-page-handler="comment">
                 <textarea rows="5" cols="50" name="body"></textarea>
