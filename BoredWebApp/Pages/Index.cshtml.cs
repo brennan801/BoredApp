@@ -49,7 +49,7 @@ namespace BoredWebApp.Pages
             return Redirect("/account/login");
         }
 
-        public void OnPostComment()
+        public IActionResult OnPostComment()
         {
             Console.WriteLine("Hi!");
             var date = DateTime.Now.Date.ToString();
@@ -67,6 +67,7 @@ namespace BoredWebApp.Pages
             comment.Date = date;
             comment.Body = Request.Form["body"];
             dBService.SaveComment(comment);
+            return Page();
         }
 
         public async Task OnGet()
