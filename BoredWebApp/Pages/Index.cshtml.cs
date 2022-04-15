@@ -52,18 +52,16 @@ namespace BoredWebApp.Pages
         public IActionResult OnPostComment()
         {
             Console.WriteLine("Hi!");
-            var date = DateTime.Now.Date.ToString();
+            var date = DateTime.Now.ToString();
             Comment comment = new Comment();
-            var user = "Guest";
-            /*if (User.Identity.IsAuthenticated)
+            if (User.Identity.IsAuthenticated)
             {
-                comment.User = User.Identity.Name;
+                comment.UserName = User.Identity.Name;
             }
             else
             {
-                comment.User = "Guest";
-            }*/
-            comment.UserName = user;
+                comment.UserName = "Guest";
+            }
             comment.Date = date;
             comment.Body = Request.Form["body"];
             dBService.SaveComment(comment);
