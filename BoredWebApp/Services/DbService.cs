@@ -309,5 +309,31 @@ namespace BoredWebApp.Services
                 throw new Exception("Error Saving UserFavorites: " + e.Message);
             }
         }
+
+        public string GetUserName(string id)
+        {
+            var connection = new NpgsqlConnection(config.GetValue<string>("psqldb"));
+
+            var dictionary = new Dictionary<string, object>
+            {
+                { "@ID", id }
+            };
+            var parameters = new DynamicParameters(dictionary);
+
+            try
+            {
+                using (connection)
+                {
+                    var userName = connection.QuerySingle<string>(
+                        "SELECT UserName FROM UserFavorites WHERE ID = @ID;",
+                        parameters);
+                    return userName;
+                }
+            }
+            catch (InvalidOperationException e)
+            {
+                throw new InvalidOperationException(e.Message);
+            }
+        }
     }
 }

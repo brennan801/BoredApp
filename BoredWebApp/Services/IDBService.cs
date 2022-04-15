@@ -21,5 +21,6 @@ namespace BoredWebApp.Services
         void SaveNameAndPhoto(string id, string name);
         List<Comment> GetComments();
         void SaveComment(Comment comment);
+        string GetUserName(string id);
     }
 }

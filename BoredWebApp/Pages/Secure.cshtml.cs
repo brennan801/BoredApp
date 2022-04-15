@@ -40,6 +40,7 @@ namespace BoredWebApp.Pages
         public async Task OnGet()
         {
             ID = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+            Name = dBService.GetUserName(ID);
             dBService.AddUser(ID);
         }
         public IActionResult OnPost()
