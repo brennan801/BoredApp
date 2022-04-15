@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace BoredWebApp.Pages
@@ -56,7 +57,8 @@ namespace BoredWebApp.Pages
             Comment comment = new Comment();
             if (User.Identity.IsAuthenticated)
             {
-                comment.UserName = User.Claims.FirstOrDefault(c => c.Type == "name")?.Value;
+                var ID = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+                comment.UserName = dBService.GetUserName(ID);
                 if(comment.UserName is null)
                 {
                     comment.UserName = "NoName";
