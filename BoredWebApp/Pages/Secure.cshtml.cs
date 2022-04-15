@@ -54,11 +54,7 @@ namespace BoredWebApp.Pages
 
             var fileName = $"{id}_profile";
 
-            var path = Path.Combine(hostingEnvironment.WebRootPath, "uploads", fileName);
-            var stream = new FileStream(path, FileMode.Create);
-            Image.CopyToAsync(stream);
-
-            dBService.SaveNameAndPhoto(id, name, fileName);
+            dBService.SaveNameAndPhoto(id, name);
             return Redirect("/Secure");
         }
 

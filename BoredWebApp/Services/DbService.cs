@@ -244,14 +244,13 @@ namespace BoredWebApp.Services
             }
         }
 
-        public void SaveNameAndPhoto(string id, string name, string picture)
+        public void SaveNameAndPhoto(string id, string name)
         {
             var connection = new NpgsqlConnection(config.GetValue<string>("psqldb"));
             var dictionary = new Dictionary<string, object>
             {
                 { "@ID", id },
-                { "@Name", name },
-                { "@Picture", picture }
+                { "@Name", name }
             };
             var parameters = new DynamicParameters(dictionary);
             try
@@ -260,7 +259,7 @@ namespace BoredWebApp.Services
                 {
                     connection.Execute(
                         "UPDATE UserFavorites " +
-                        "SET name = @Name, photo = @Picture " +
+                        "SET name = @Name " +
                         "Where ID = @ID;",
                         parameters
                         );
@@ -268,7 +267,7 @@ namespace BoredWebApp.Services
             }
             catch (Npgsql.PostgresException e)
             {
-                throw new Exception("Error Saving UserFavorites: " + e.Message);
+                throw new Exception("Error Saving name and photo: " + e.Message);
             }
         }
 
