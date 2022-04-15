@@ -74,7 +74,6 @@ namespace BoredWebApp.Pages
         {
             Activity = await boredAPIService.GetRandomActivity();
             Comments = dBService.GetComments();
-            Console.WriteLine(Comments[0].UserName);
         }
 
         public async Task OnPost()
