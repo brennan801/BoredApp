@@ -47,9 +47,9 @@ namespace BoredWebApp.Services
                    );
                 connection.Execute(
                     "CREATE TABLE IF NOT EXISTS Comments(" +
-                    "userName VARCHAR(32)," +
-                    "date VARCHAR(128)," +
-                    "body TEXT);"
+                    "UserName VARCHAR(32)," +
+                    "Date VARCHAR(128)," +
+                    "Body TEXT);"
                     );
             }
 
