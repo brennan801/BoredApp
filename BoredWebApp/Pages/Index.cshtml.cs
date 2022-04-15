@@ -72,6 +72,7 @@ namespace BoredWebApp.Pages
 
         public async Task OnPost()
         {
+            Console.WriteLine("Shouldn't hit this");
             var minandMaxPrice = computeMinAndMaxPrice(ActivityFormRequest.Price);
             var minPrice = minandMaxPrice[0];
             var maxPrice = minandMaxPrice[1];
