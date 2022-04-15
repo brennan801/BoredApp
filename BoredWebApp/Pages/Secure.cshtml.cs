@@ -37,7 +37,7 @@ namespace BoredWebApp.Pages
         [BindProperty]
         public IFormFile Image { get; set; }
 
-        public async Task OnGet()
+        public void OnGet()
         {
             ID = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
             Name = dBService.GetUserName(ID);
