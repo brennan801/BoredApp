@@ -19,5 +19,7 @@ namespace BoredWebApp.Services
         void RemoveCookie(string userName);
         void AddUser(string ID);
         void SaveNameAndPhoto(string id, string name, string picture);
+        List<Comment> GetComments();
+        void SaveComment(Comment comment);
     }
 }

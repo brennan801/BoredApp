@@ -45,6 +45,12 @@ namespace BoredWebApp.Services
                    "name VARCHAR(128)," +
                    "photo VARCHAR(256));" 
                    );
+                connection.Execute(
+                    "CREATE TABLE IF NOT EXITS Comments(" +
+                    "user VARCHAR(32)" +
+                    "submitDate VARCHAR(128)" +
+                    "body TEXT);"
+                    );
             }
 
             this.config = config;
@@ -256,6 +262,45 @@ namespace BoredWebApp.Services
                         "UPDATE UserFavorites " +
                         "SET name = @Name, photo = @Picture " +
                         "Where ID = @ID;",
+                        parameters
+                        );
+                }
+            }
+            catch (Npgsql.PostgresException e)
+            {
+                throw new Exception("Error Saving UserFavorites: " + e.Message);
+            }
+        }
+
+        public List<Comment> GetComments()
+        {
+            var connection = new NpgsqlConnection(config.GetValue<string>("psqldb"));
+            using (connection)
+            {
+                var comments = connection.Query<Comment>(
+                    "SELECT * FROM Comments;"
+                    );
+                return (List<Comment>)comments;
+            }
+        }
+
+        public void SaveComment(Comment comment)
+        {
+            var connection = new NpgsqlConnection(config.GetValue<string>("psqldb"));
+            var dictionary = new Dictionary<string, object>
+            {
+                { "@User", comment.User },
+                { "@Date", comment.Date },
+                { "@Body", comment.Body }
+            };
+            var parameters = new DynamicParameters(dictionary);
+            try
+            {
+                using (connection)
+                {
+                    connection.Execute(
+                        "INSERT INTO Comments " +
+                        "VALUES (@User, @Date, @Body);",
                         parameters
                         );
                 }

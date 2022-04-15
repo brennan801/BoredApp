@@ -1,4 +1,5 @@
 ﻿@page
+@using BoredWebApp.Models
 @addTagHelper *,Microsoft.AspNetCore.Mvc.TagHelpers
 @model IndexModel
 @{
@@ -84,5 +85,24 @@
             </div>
         </div>
         <div class="spacer-400"></div>
+
+        <div>
+            <h5>Comments:</h5>
+            <div>
+                @foreach(Comment comment in Model.Comments)
+                {
+                    <div>
+                        <p>Author: @comment.User</p>
+                        <p>Date: @comment.Date</p>
+                        <p>@comment.Body</p>
+                    </div>
+                }
+            </div>
+            <h5>Post New Comment</h5>
+            <form method="post" asp-page-handler="comment">
+                <textarea rows="5" cols="50" name="body"></textarea>
+                <button class="main-button p-2"></button>
+            </form>
+        </div>
     </div>
 </div>

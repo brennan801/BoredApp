@@ -1,4 +1,5 @@
 ﻿using BoredShared.Models;
+using BoredWebApp.Models;
 using BoredWebApp.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -19,6 +20,7 @@ namespace BoredWebApp.Pages
 
         public ActivityModel Activity { get; set; }
         public ActivityModel SpecificActivity { get; set; }
+        public List<Comment> Comments { get; set; }
 
         [BindProperty]
         public ActivityFormRequest ActivityFormRequest { get; set; }
@@ -31,6 +33,7 @@ namespace BoredWebApp.Pages
             SpecificActivity = new ActivityModel();
             SpecificActivity.Activity = "Generate New Activity With Form";
             ActivityFormRequest = new ActivityFormRequest();
+            
         }
 
         public void OnPostSave()
@@ -43,9 +46,26 @@ namespace BoredWebApp.Pages
             return Redirect("/account/login");
         }
 
+        public void OnPostComment()
+        {
+            Comment comment = new Comment();
+            if (User.Identity.IsAuthenticated)
+            {
+                comment.User = User.Identity.Name;
+            }
+            else
+            {
+                comment.User = "Guest";
+            }
+            comment.Date = DateTime.Now.Date.ToString();
+            comment.Body = Request.Form["body"];
+            dBService.SaveComment(comment);
+        }
+
         public async Task OnGet()
         {
             Activity = await boredAPIService.GetRandomActivity();
+            Comments = dBService.GetComments();
         }
 
         public async Task OnPost()
