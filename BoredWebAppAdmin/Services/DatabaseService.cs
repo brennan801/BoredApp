@@ -13,10 +13,14 @@ namespace BoredWebAppAdmin.Services
     public class DatabaseService : IDatabaseService
     {
         private readonly IConfiguration config;
+        public string psqlString { get; set; }
+
 
         public DatabaseService(IConfiguration config)
         {
-            var connection = new NpgsqlConnection(config.GetValue<string>("psqldb"));
+            psqlString = Environment.GetEnvironmentVariable("psqldb");
+
+            var connection = new NpgsqlConnection(psqlString);
             using (connection)
             {
                 connection.Execute(
