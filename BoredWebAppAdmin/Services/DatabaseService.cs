@@ -113,43 +113,16 @@ namespace BoredWebAppAdmin.Services
             }
         }
 
-        public void SaveNewUser(User newUser)
-        {
-            var connection = new NpgsqlConnection(config.GetValue<string>("wgadmin"));
-            var dictionary = new Dictionary<string, object>
-            {
-                { "@UserName", newUser.UserName.Value },
-                { "@Salt",  newUser.Salt },
-                { "@Hash", newUser.Hash }
-            };
-            var parameters = new DynamicParameters(dictionary);
-            try
-            {
-                using (connection)
-                {
-                    connection.Execute(
-                        "INSERT INTO Users " +
-                        "VALUES (@UserName, @Salt, @Hash);",
-                        parameters
-                        );
-                }
-            }
-            catch (Npgsql.PostgresException e)
-            {
-                throw new Exception("Error Saving Client Info: " + e.Message);
-            }
-        }
-
-        public List<BoredShared.Models.User> GetUsers()
+        public List<User> GetUsers()
         {
 
             var connection = new NpgsqlConnection(psqlString);
             using (connection)
             {
-                var savedActivities = connection.Query<BoredShared.Models.User>(
+                var savedActivities = connection.Query<User>(
                     "SELECT * FROM SavedActivities"
                     );
-                return (List<BoredShared.Models.User>)savedActivities;
+                return (List<User>)savedActivities;
             }
         }
     }

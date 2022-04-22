@@ -11,8 +11,7 @@ namespace BoredWebAppAdmin.Services
     {
         public void SaveClientInformation(ClientInformation clientInformation);
         public int GetLargestId();
-        public void SaveNewUser(User newUser);
         ClientInformation GetClient(StringValues clientID);
-        List<BoredShared.Models.User> GetUsers();
+        List<User> GetUsers();
     }
 }
