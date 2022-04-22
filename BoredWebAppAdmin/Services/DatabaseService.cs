@@ -144,8 +144,6 @@ namespace BoredWebAppAdmin.Services
         {
 
             var connection = new NpgsqlConnection(psqlString);
-
-            //List<ActivityModel> savedActivities = new();
             using (connection)
             {
                 var savedActivities = connection.Query<BoredShared.Models.User>(
