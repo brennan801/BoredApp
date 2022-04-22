@@ -21,4 +21,6 @@
     <ProjectReference Include="..\BoredWebApp\BoredWebApp.csproj" />
   </ItemGroup>
 
+  <Import Project="..\BoredShared\BoredShared.projitems" Label="Shared" />
+
 </Project>
