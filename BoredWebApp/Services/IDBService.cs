@@ -12,8 +12,6 @@ namespace BoredWebApp.Services
     {
         void SaveActivity(ActivityModel activity);
         List<ActivityModel> getSavedActivities();
-        byte[] GetSalt(string userName);
-        string GetHash(string userName);
         void SaveCookie(UserCookie cookie);
         string GetCookieValue(string userName);
         void RemoveCookie(string userName);

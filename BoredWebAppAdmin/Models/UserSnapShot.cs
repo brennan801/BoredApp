@@ -2,14 +2,14 @@
 
 namespace BoredWebAppAdmin.Models
 {
-    public class NewUserSnapShot
+    public class UserSnapShot
     {
         private readonly Id ID;
         private readonly UserName UserName;
         private readonly byte[] Salt;
         private readonly string Hash;
 
-        public NewUserSnapShot(Id id, UserName userName, byte[] salt, string hash)
+        public UserSnapShot(Id id, UserName userName, byte[] salt, string hash)
         {
             ID = id;
             UserName = userName;

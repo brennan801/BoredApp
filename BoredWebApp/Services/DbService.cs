@@ -40,10 +40,11 @@ namespace BoredWebApp.Services
                     "cookie VARCHAR(32));"
                     );
                 connection.Execute(
-                   "CREATE TABLE IF NOT EXISTS UserFavorites(" +
+                   "CREATE TABLE IF NOT EXISTS Users(" +
                    "ID VARCHAR(128) PRIMARY KEY," +
                    "name VARCHAR(128)," +
-                   "photo VARCHAR(256));" 
+                   "photo VARCHAR(256)," +
+                   "status VARCHAR(32));" 
                    );
                 connection.Execute(
                     "CREATE TABLE IF NOT EXISTS Comments(" +
@@ -72,58 +73,6 @@ namespace BoredWebApp.Services
                         "SELECT cookie FROM UserCookies WHERE userName = @UserName;",
                         parameters);
                     return cookie;
-                }
-            }
-            catch (InvalidOperationException e)
-            {
-                throw new InvalidOperationException(e.Message);
-            }
-        }
-
-        public string GetHash(string userName)
-        {
-            var connection = new NpgsqlConnection(config.GetValue<string>("psqldb"));
-
-            var dictionary = new Dictionary<string, object>
-            {
-                { "@UserName", userName }
-            };
-            var parameters = new DynamicParameters(dictionary);
-
-            try
-            {
-                using (connection)
-                {
-                    var hash = connection.QuerySingle<string>(
-                        "SELECT hash FROM Users WHERE userName = @UserName;",
-                        parameters);
-                    return hash;
-                }
-            }
-            catch (InvalidOperationException e)
-            {
-                throw new InvalidOperationException(e.Message);
-            }
-        }
-
-        public byte[] GetSalt(string userName)
-        {
-            var connection = new NpgsqlConnection(config.GetValue<string>("psqldb"));
-
-            var dictionary = new Dictionary<string, object>
-            {
-                { "@UserName", userName }
-            };
-            var parameters = new DynamicParameters(dictionary);
-
-            try
-            {
-                using (connection)
-                {
-                    var salt = connection.QuerySingle<byte[]>(
-                        "SELECT salt FROM Users WHERE userName = @UserName;",
-                        parameters);
-                    return salt;
                 }
             }
             catch (InvalidOperationException e)
@@ -231,8 +180,8 @@ namespace BoredWebApp.Services
                 using (connection)
                 {
                     connection.Execute(
-                        "INSERT INTO UserFavorites (ID) " +
-                        "VALUES (@ID) " +
+                        "INSERT INTO Users (ID, status) " +
+                        "VALUES (@ID, 'New') " +
                         "ON CONFLICT (ID) DO NOTHING; ",
                         parameters
                         );
@@ -240,7 +189,7 @@ namespace BoredWebApp.Services
             }
             catch (Npgsql.PostgresException e)
             {
-                throw new Exception("Error Saving UserFavorites: " + e.Message);
+                throw new Exception("Error Saving Users: " + e.Message);
             }
         }
 
@@ -258,7 +207,7 @@ namespace BoredWebApp.Services
                 using (connection)
                 {
                     connection.Execute(
-                        "UPDATE UserFavorites " +
+                        "UPDATE Users " +
                         "SET name = @Name " +
                         "Where ID = @ID;",
                         parameters
@@ -306,7 +255,7 @@ namespace BoredWebApp.Services
             }
             catch (Npgsql.PostgresException e)
             {
-                throw new Exception("Error Saving UserFavorites: " + e.Message);
+                throw new Exception("Error Saving Users: " + e.Message);
             }
         }
 
@@ -325,7 +274,7 @@ namespace BoredWebApp.Services
                 using (connection)
                 {
                     var userName = connection.QuerySingle<string>(
-                        "SELECT name FROM UserFavorites WHERE ID = @ID;",
+                        "SELECT name FROM Users WHERE ID = @ID;",
                         parameters);
                     return userName;
                 }

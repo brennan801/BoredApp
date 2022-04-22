@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace BoredWebAppAdmin.Models
 {
-    public class NewUser
+    public class User
     {
         public UserName UserName { get; private set; }
         public byte[] Salt { get; private set; }
         public string Hash { get; private set; }
 
-        public NewUser(string userName, byte[] salt, string hash)
+        public User(string userName, byte[] salt, string hash)
         {
             UserName = new(userName);
             Salt = salt;

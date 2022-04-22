@@ -113,7 +113,7 @@ namespace BoredWebAppAdmin.Services
             }
         }
 
-        public void SaveNewUser(NewUser newUser)
+        public void SaveNewUser(User newUser)
         {
             var connection = new NpgsqlConnection(config.GetValue<string>("wgadmin"));
             var dictionary = new Dictionary<string, object>
@@ -137,6 +137,21 @@ namespace BoredWebAppAdmin.Services
             catch (Npgsql.PostgresException e)
             {
                 throw new Exception("Error Saving Client Info: " + e.Message);
+            }
+        }
+
+        public List<BoredShared.Models.User> GetUsers()
+        {
+           
+            var connection = new NpgsqlConnection(config.GetValue<string>("psqldb"));
+
+            //List<ActivityModel> savedActivities = new();
+            using (connection)
+            {
+                var savedActivities = connection.Query<BoredShared.Models.User>(
+                    "SELECT * FROM SavedActivities"
+                    );
+                return (List<BoredShared.Models.User>)savedActivities;
             }
         }
     }

@@ -1,0 +1,25 @@
+﻿@page
+@model BoredWebAppAdmin.Pages.UsersModel
+@{
+}
+
+<h1>Users</h1>
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>UserName</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(BoredShared.Models.User user in Model.Users)
+        {
+            <tr>
+                <td>@user.Id</td>
+                <td>@user.UserName</td>
+                <td>@user.Status</td>
+            </tr>
+        }
+    </tbody>
+</table>
