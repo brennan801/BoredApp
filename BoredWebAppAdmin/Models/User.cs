@@ -17,10 +17,10 @@ namespace BoredWebAppAdmin.Models
             Id = id;
             Photo = photo;
         }
-        public User(string id, string userName, string photo, string status)
+        public User(string id, string name, string photo, string status)
         {
             Id = id;
-            UserName = new(userName);
+            UserName = new(name);
             photo = photo;
             switch (status)
             {
