@@ -22,6 +22,7 @@ EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		BoredShared\BoredShared.projitems*{0f87bc94-63ff-40f7-897a-339511693af1}*SharedItemsImports = 13
+		BoredShared\BoredShared.projitems*{b2205888-8c7d-4f72-8533-163b297aefe1}*SharedItemsImports = 5
 		BoredShared\BoredShared.projitems*{bd6ff23d-7894-471b-bfe7-67ceced22fb4}*SharedItemsImports = 5
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
