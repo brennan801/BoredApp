@@ -9,7 +9,7 @@ namespace BoredWebAppAdmin.Pages
     public class UsersModel : PageModel
     {
         private readonly IDatabaseService databaseService;
-        public List<User> Users;
+        public List<BoredShared.Models.User> Users;
 
         public UsersModel(IDatabaseService databaseService)
         {

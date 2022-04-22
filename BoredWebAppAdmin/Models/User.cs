@@ -9,29 +9,25 @@ namespace BoredWebAppAdmin.Models
 {
     public class User
     {
-        public User(string id, string userName, string photo)
-        {
-            this.UserName = new(userName);
-            this.Status = UserStatus.New;
-            Id = id;
-            Photo = photo;
-        }
         public UserName UserName { get; private set; }
-        public UserStatus Status { get; private set; }
-        public string Id { get; }
-        public string Photo { get; }
+        public byte[] Salt { get; private set; }
+        public string Hash { get; private set; }
 
-        public void Request()
+        public User(string userName, byte[] salt, string hash)
         {
-            Status = UserStatus.Requested;
+            UserName = new(userName);
+            Salt = salt;
+            Hash = hash;
         }
-        public void Accept()
+
+        public void ChangeUserName(UserName newUserName)
         {
-            Status = UserStatus.Accepted;
+            UserName = newUserName;
         }
-        public void Deny()
+        public void ChangePassword(byte[] newSalt, string newHash)
         {
-            Status = UserStatus.Denied;
+            Salt = newSalt;
+            Hash = newHash;
         }
     } 
 }
