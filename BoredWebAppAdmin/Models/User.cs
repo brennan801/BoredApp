@@ -20,7 +20,7 @@ namespace BoredWebAppAdmin.Models
         public User(string id, string name, string photo, string status)
         {
             Id = id;
-            UserName = new(name);
+            UserName = name;
             photo = photo;
             switch (status)
             {
@@ -40,7 +40,7 @@ namespace BoredWebAppAdmin.Models
                     break;
             }
         }
-        public UserName UserName { get; private set; }
+        public string UserName { get; private set; }
         public UserStatus Status { get; private set; }
         public string Id { get; }
         public string Photo { get; }
