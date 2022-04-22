@@ -17,6 +17,29 @@ namespace BoredWebAppAdmin.Models
             Id = id;
             Photo = photo;
         }
+        public User(string id, string userName, string photo, string status)
+        {
+            Id = id;
+            UserName = new(userName);
+            photo = photo;
+            switch (status)
+            {
+                case "New":
+                    Status = UserStatus.New;
+                    break;
+                case "Requested":
+                    Status = UserStatus.Requested;
+                    break;
+                case "Accepted":
+                    Status = UserStatus.Accepted;
+                    break;
+                case "Denied":
+                    Status = UserStatus.Denied;
+                    break;
+                default: Status = UserStatus.New;
+                    break;
+            }
+        }
         public UserName UserName { get; private set; }
         public UserStatus Status { get; private set; }
         public string Id { get; }
