@@ -274,7 +274,7 @@ namespace BoredWebApp.Services
                 using (connection)
                 {
                     var userName = connection.QuerySingle<string>(
-                        "SELECT name FROM Users WHERE ID = @ID;",
+                        "SELECT name FROM users WHERE ID = @ID;",
                         parameters);
                     return userName;
                 }
