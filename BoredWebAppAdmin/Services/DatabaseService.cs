@@ -33,13 +33,6 @@ namespace BoredWebAppAdmin.Services
                     "clientPublicKey VARCHAR(128)," +
                     "clientPrivateKey VARCHAR(128));"
                     );
-
-                connection.Execute(
-                    "CREATE TABLE IF NOT EXISTS Users(" +
-                    "userName VARCHAR(32)," +
-                    "salt bytea," +
-                    "hash VARCHAR(128));"
-                    );
             }
 
             this.config = config;
@@ -120,7 +113,7 @@ namespace BoredWebAppAdmin.Services
             using (connection)
             {
                 var savedActivities = connection.Query<User>(
-                    "SELECT * FROM SavedActivities"
+                    "SELECT * FROM Users;"
                     );
                 return (List<User>)savedActivities;
             }
