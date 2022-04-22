@@ -40,8 +40,9 @@ namespace BoredWebApp.Pages
         public void OnGet()
         {
             ID = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
-            Name = dBService.GetUserName(ID);
+
             dBService.AddUser(ID);
+            Name = dBService.GetUserName(ID);
         }
         public IActionResult OnPost()
         {
