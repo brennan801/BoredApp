@@ -53,8 +53,9 @@ namespace BoredWebApp.Pages
 
         public IActionResult OnPostRequest()
         {
-            dBService.RequestAdminAccess(ID);
-            Console.WriteLine("am I hitting this method?");
+            var id = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+
+            dBService.RequestAdminAccess(id);
 
             return Redirect("/Secure");
         }
