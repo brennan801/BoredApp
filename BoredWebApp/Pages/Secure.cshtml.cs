@@ -33,6 +33,7 @@ namespace BoredWebApp.Pages
         public string ID { get; private set; }
         public string ProfileImage { get; private set; }
         public string Message { get; set; }
+        public string Status { get; set; }
 
         [BindProperty]
         public IFormFile Image { get; set; }
@@ -43,10 +44,18 @@ namespace BoredWebApp.Pages
 
             dBService.AddUser(ID);
             Name = dBService.GetUserName(ID);
+            Status = dBService.GetStatus(ID);
         }
         public IActionResult OnPost()
         {
             return Redirect("/account/logout");
+        }
+
+        public IActionResult OnPostRequest()
+        {
+            dBService.RequestAdminAccess(ID);
+
+            return Redirect("/Secure");
         }
 
         public IActionResult OnPostSave()

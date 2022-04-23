@@ -284,5 +284,57 @@ namespace BoredWebApp.Services
                 throw new InvalidOperationException(e.Message);
             }
         }
+
+        public string GetStatus(string id)
+        {
+            var connection = new NpgsqlConnection(config.GetValue<string>("psqldb"));
+
+            var dictionary = new Dictionary<string, object>
+            {
+                { "@ID", id }
+            };
+            var parameters = new DynamicParameters(dictionary);
+
+            try
+            {
+                using (connection)
+                {
+                    var userName = connection.QuerySingle<string>(
+                        "SELECT status FROM users WHERE ID = @ID;",
+                        parameters);
+                    return userName;
+                }
+            }
+            catch (InvalidOperationException e)
+            {
+                throw new InvalidOperationException(e.Message);
+            }
+        }
+
+        public void RequestAdminAccess(string id)
+        {
+            var connection = new NpgsqlConnection(config.GetValue<string>("psqldb"));
+            var dictionary = new Dictionary<string, object>
+            {
+                { "@ID", id }
+            };
+            var parameters = new DynamicParameters(dictionary);
+            try
+            {
+                using (connection)
+                {
+                    connection.Execute(
+                        "UPDATE Users " +
+                        "SET status = 'Requested' " +
+                        "Where ID = @ID;",
+                        parameters
+                        );
+                }
+            }
+            catch (Npgsql.PostgresException e)
+            {
+                throw new Exception("Error updating user status: " + e.Message);
+            }
+        }
     }
 }

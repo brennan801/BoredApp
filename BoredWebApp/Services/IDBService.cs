@@ -20,5 +20,7 @@ namespace BoredWebApp.Services
         List<Comment> GetComments();
         void SaveComment(Comment comment);
         string GetUserName(string id);
+        string GetStatus(string iD);
+        void RequestAdminAccess(string iD);
     }
 }

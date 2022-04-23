@@ -3,6 +3,20 @@
 @{
 }
 <h1>Welcome @Model.Name</h1>
+
+<div>
+    <h3>Status: @Model.Status</h3>
+    @if(Model.Status == "New")
+    {
+        <form method="post" asp-page-handler="request">
+            <button>Request Admin Access</button>
+        </form>
+    }else if(Model.Status == "Accepted")
+    {
+        <p>You have been approved!</p>
+    }
+</div>
+
 <div>
     <img src="@Model.ProfileImage"/>
 </div>
