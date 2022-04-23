@@ -317,7 +317,8 @@ namespace BoredWebApp.Services
             var connection = new NpgsqlConnection(config.GetValue<string>("psqldb"));
             var dictionary = new Dictionary<string, object>
             {
-                { "@ID", id }
+                { "@ID", id },
+                { "@Status", "Requested" }
             };
             var parameters = new DynamicParameters(dictionary);
             try
@@ -326,7 +327,7 @@ namespace BoredWebApp.Services
                 {
                     connection.Execute(
                         "UPDATE Users " +
-                        "SET status = 'Requested' " +
+                        "SET status = @Status " +
                         "Where ID = @ID;",
                         parameters
                         );
