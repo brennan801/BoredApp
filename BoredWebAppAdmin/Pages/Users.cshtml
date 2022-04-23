@@ -24,7 +24,8 @@
                 <td>
                     @if(user.Status == Models.User.UserStatus.Requested)
                     {
-                        <form>
+                        <form method="post">
+                            <input type="hidden" value="@user.Id" name="id">
                             <button>Accept</button>
                         </form>
                     }

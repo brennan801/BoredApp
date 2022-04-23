@@ -118,5 +118,32 @@ namespace BoredWebAppAdmin.Services
                 return (List<User>)savedActivities;
             }
         }
+
+        public void AcceptClient(string id)
+        {
+            var connection = new NpgsqlConnection(config.GetValue<string>("psqldb"));
+            var dictionary = new Dictionary<string, object>
+            {
+                { "@ID", id },
+                { "@Status", "Accepted" }
+            };
+            var parameters = new DynamicParameters(dictionary);
+            try
+            {
+                using (connection)
+                {
+                    connection.Execute(
+                        "UPDATE users " +
+                        "SET status = @Status " +
+                        "Where ID = @ID;",
+                        parameters
+                        );
+                }
+            }
+            catch (Npgsql.PostgresException e)
+            {
+                throw new Exception("Error updating user status: " + e.Message);
+            }
+        }
     }
 }

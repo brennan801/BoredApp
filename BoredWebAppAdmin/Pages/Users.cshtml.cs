@@ -19,5 +19,10 @@ namespace BoredWebAppAdmin.Pages
         {
             Users = databaseService.GetUsers();
         }
+        public void OnPost()
+        {
+            var id = Request.Form["id"];
+            databaseService.AcceptClient(id);
+        }
     }
 }

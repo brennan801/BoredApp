@@ -13,5 +13,6 @@ namespace BoredWebAppAdmin.Services
         public int GetLargestId();
         ClientInformation GetClient(StringValues clientID);
         List<User> GetUsers();
+        void AcceptClient(string id);
     }
 }
