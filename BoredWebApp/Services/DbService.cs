@@ -313,6 +313,7 @@ namespace BoredWebApp.Services
 
         public void RequestAdminAccess(string id)
         {
+            Console.WriteLine("am I getting to the database method?");
             var connection = new NpgsqlConnection(config.GetValue<string>("psqldb"));
             var dictionary = new Dictionary<string, object>
             {
