@@ -313,7 +313,7 @@ namespace BoredWebApp.Services
 
         public void RequestAdminAccess(string id)
         {
-            Console.WriteLine("am I getting to the database method?");
+            Console.WriteLine($"ID: {id}");
             var connection = new NpgsqlConnection(config.GetValue<string>("psqldb"));
             var dictionary = new Dictionary<string, object>
             {
@@ -326,7 +326,7 @@ namespace BoredWebApp.Services
                 using (connection)
                 {
                     connection.Execute(
-                        "UPDATE Users " +
+                        "UPDATE users " +
                         "SET status = @Status " +
                         "Where ID = @ID;",
                         parameters
