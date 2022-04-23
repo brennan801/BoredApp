@@ -17,6 +17,7 @@ jobs:
           cd BoredWebApp
           echo "psqldb=${{secrets.PSQLDB}}" > .env
           echo "wgadmin=${{secrets.WGADMIN}}" >> .env
+          echo "auth0=${{secrets.AUTH0}}" >> .env
           docker-compose up --build -d
 
       - name: build api

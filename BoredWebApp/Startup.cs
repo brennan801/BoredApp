@@ -38,7 +38,7 @@ namespace BoredWebApp
             services.AddAuth0WebAppAuthentication(options => {
                  options.Domain = Configuration["Auth0:Domain"];
                  options.ClientId = Configuration["Auth0:ClientId"];
-                options.ClientSecret = Configuration["Auth0:Secret"];
+                options.ClientSecret = Environment.GetEnvironmentVariable("auth0");
              }).WithAccessToken(options =>
              {
                  options.Audience = Configuration["Auth0:Audience"];
