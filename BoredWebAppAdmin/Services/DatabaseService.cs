@@ -121,7 +121,7 @@ namespace BoredWebAppAdmin.Services
 
         public void AcceptClient(string id)
         {
-            var connection = new NpgsqlConnection(config.GetValue<string>("psqldb"));
+            var connection = new NpgsqlConnection(psqlString);
             var dictionary = new Dictionary<string, object>
             {
                 { "@ID", id },
